@@ -21,7 +21,9 @@ namespace BRC
 
         private NIHighFrequencyCutting nIHighFrequencyCutting;
         private ZaberMotion zaberMotion;
-
+        private bool need_scan = false;
+        private Logger logger = new Logger("BRC_Cutting_Log");
+        private Logger logger_Motion = new Logger("Motion_Log");
 
         public Form1()
         {
@@ -49,9 +51,7 @@ namespace BRC
         string Andor_Error_Meaasge;
         string Protocal_name;
         string Process_Nmae_File_Address;
-        bool need_scan = false;
-        Logger logger = new Logger("BRC_Cutting_Log");
-        Logger logger_Motion = new Logger("Motion_Log");
+ 
         int motion_move_Z = 0;
         bool move_z_Step_ok = true;
         #endregion
