@@ -2577,6 +2577,33 @@ namespace BRC
 
         }
 
+
+        private void btn_Set_MoveSpeed_Click(object sender, EventArgs e)
+        {
+            try {
+                double X_Speed = Convert.ToInt32(textBox_Step_Speed_X.Text) * Movement_Ratio;
+                double Y_Speed = Convert.ToInt32(textBox_Step_Speed_Y.Text) * Movement_Ratio;
+                double Z_Speed = Convert.ToInt32(textBox_Step_Speed_Z.Text) * Movement_Ratio;
+
+                bool scX = SetSpeed(comboBox_Axis_Num_X.SelectedIndex + 1, X_Speed / 4, X_Speed, 200);
+                bool scY = SetSpeed(comboBox_Axis_Num_Y.SelectedIndex + 1, Y_Speed / 4, Y_Speed, 200);
+                bool scZ = SetSpeed(comboBox_Axis_Num_Z.SelectedIndex + 1, Z_Speed / 4, Z_Speed, 200);
+
+                if (!scX || !scY || !scZ)
+                    throw new Exception($"Set Speed Fail  :X {scX },  Y {scY} , Z {scZ}"  );
+
+
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+
+                throw;
+            }
+
+
+
+        }
+
         private void Cal_Data()
         {
             double Z_Down = Convert.ToDouble(textBox_Z_Down.Text);
