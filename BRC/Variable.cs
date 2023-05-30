@@ -175,13 +175,13 @@ namespace BRC
                                 Micro_Z = Convert.ToDouble(Third_Node_Each_XmlElement.InnerText);
 
                             else if (Third_Node_Data_1 == "CVfirstDelaytime")
-                                CVfirstDelaytime = Convert.ToInt32(Third_Node_Each_XmlElement.InnerText);
+                                CVfirstDelaytime = Convert.ToDouble(Third_Node_Each_XmlElement.InnerText);
                             else if (Third_Node_Data_1 == "CVsecondDelaytime")
-                                CVsecondDelaytime = Convert.ToInt32(Third_Node_Each_XmlElement.InnerText);
+                                CVsecondDelaytime = Convert.ToDouble(Third_Node_Each_XmlElement.InnerText);
                             else if (Third_Node_Data_1 == "CVfirstVelocity")
-                                CVfirstVelocity = Convert.ToInt32(Third_Node_Each_XmlElement.InnerText);
+                                CVfirstVelocity = Convert.ToDouble(Third_Node_Each_XmlElement.InnerText);
                             else if (Third_Node_Data_1 == "CVsecondVelocity")
-                                CVsecondVelocity = Convert.ToInt32(Third_Node_Each_XmlElement.InnerText);
+                                CVsecondVelocity = Convert.ToDouble(Third_Node_Each_XmlElement.InnerText);
                             else if (Third_Node_Data_1 == "CVZaberComPort")
                                 CVZaberComPort = Convert.ToString(Third_Node_Each_XmlElement.InnerText);
                         }
