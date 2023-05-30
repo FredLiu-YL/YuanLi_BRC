@@ -192,7 +192,6 @@
             this.textBox_FrequencyMinV = new System.Windows.Forms.TextBox();
             this.btn_Stop_3 = new System.Windows.Forms.Button();
             this.panel_Motion = new System.Windows.Forms.Panel();
-            this.btn_Set_MoveSpeed = new System.Windows.Forms.Button();
             this.button_Move_Pos_Z = new System.Windows.Forms.Button();
             this.button_Move_Pos_Y = new System.Windows.Forms.Button();
             this.button_Move_Pos_X = new System.Windows.Forms.Button();
@@ -2188,7 +2187,6 @@
             // 
             // panel_Motion
             // 
-            this.panel_Motion.Controls.Add(this.btn_Set_MoveSpeed);
             this.panel_Motion.Controls.Add(this.button_Move_Pos_Z);
             this.panel_Motion.Controls.Add(this.button_Move_Pos_Y);
             this.panel_Motion.Controls.Add(this.button_Move_Pos_X);
@@ -2225,17 +2223,6 @@
             this.panel_Motion.Name = "panel_Motion";
             this.panel_Motion.Size = new System.Drawing.Size(341, 258);
             this.panel_Motion.TabIndex = 133;
-            // 
-            // btn_Set_MoveSpeed
-            // 
-            this.btn_Set_MoveSpeed.Location = new System.Drawing.Point(8, 89);
-            this.btn_Set_MoveSpeed.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_Set_MoveSpeed.Name = "btn_Set_MoveSpeed";
-            this.btn_Set_MoveSpeed.Size = new System.Drawing.Size(66, 40);
-            this.btn_Set_MoveSpeed.TabIndex = 164;
-            this.btn_Set_MoveSpeed.Text = "設定移動速度";
-            this.btn_Set_MoveSpeed.UseVisualStyleBackColor = true;
-            this.btn_Set_MoveSpeed.Visible = false;
             // 
             // button_Move_Pos_Z
             // 
@@ -3681,7 +3668,6 @@
         private System.Windows.Forms.TextBox textBox_FrequencyMinV;
         private System.Windows.Forms.Button btn_CVstart;
         private System.Windows.Forms.Button btn_CVstop;
-        private System.Windows.Forms.Button btn_Set_MoveSpeed;
     }
 }
 
