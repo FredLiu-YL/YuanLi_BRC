@@ -108,6 +108,8 @@
             this.btn_Stop_2 = new System.Windows.Forms.Button();
             this.panel_Parameter = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btn_CVstop = new System.Windows.Forms.Button();
+            this.btn_CVstart = new System.Windows.Forms.Button();
             this.textBox_ZaberComPort = new System.Windows.Forms.TextBox();
             this.label86 = new System.Windows.Forms.Label();
             this.btn_CVRun = new System.Windows.Forms.Button();
@@ -190,6 +192,7 @@
             this.textBox_FrequencyMinV = new System.Windows.Forms.TextBox();
             this.btn_Stop_3 = new System.Windows.Forms.Button();
             this.panel_Motion = new System.Windows.Forms.Panel();
+            this.btn_Set_MoveSpeed = new System.Windows.Forms.Button();
             this.button_Move_Pos_Z = new System.Windows.Forms.Button();
             this.button_Move_Pos_Y = new System.Windows.Forms.Button();
             this.button_Move_Pos_X = new System.Windows.Forms.Button();
@@ -1331,6 +1334,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btn_CVstop);
+            this.groupBox2.Controls.Add(this.btn_CVstart);
             this.groupBox2.Controls.Add(this.textBox_ZaberComPort);
             this.groupBox2.Controls.Add(this.label86);
             this.groupBox2.Controls.Add(this.btn_CVRun);
@@ -1349,11 +1354,31 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "輸送帶參數";
             // 
+            // btn_CVstop
+            // 
+            this.btn_CVstop.Location = new System.Drawing.Point(296, 12);
+            this.btn_CVstop.Name = "btn_CVstop";
+            this.btn_CVstop.Size = new System.Drawing.Size(75, 28);
+            this.btn_CVstop.TabIndex = 12;
+            this.btn_CVstop.Text = "STOP";
+            this.btn_CVstop.UseVisualStyleBackColor = true;
+            this.btn_CVstop.Click += new System.EventHandler(this.btn_CVstop_Click);
+            // 
+            // btn_CVstart
+            // 
+            this.btn_CVstart.Location = new System.Drawing.Point(215, 12);
+            this.btn_CVstart.Name = "btn_CVstart";
+            this.btn_CVstart.Size = new System.Drawing.Size(75, 29);
+            this.btn_CVstart.TabIndex = 11;
+            this.btn_CVstart.Text = "Start";
+            this.btn_CVstart.UseVisualStyleBackColor = true;
+            this.btn_CVstart.Click += new System.EventHandler(this.btn_CVstart_Click);
+            // 
             // textBox_ZaberComPort
             // 
             this.textBox_ZaberComPort.Location = new System.Drawing.Point(95, 21);
             this.textBox_ZaberComPort.Name = "textBox_ZaberComPort";
-            this.textBox_ZaberComPort.Size = new System.Drawing.Size(100, 22);
+            this.textBox_ZaberComPort.Size = new System.Drawing.Size(99, 22);
             this.textBox_ZaberComPort.TabIndex = 10;
             this.textBox_ZaberComPort.Text = "COM3";
             // 
@@ -1368,11 +1393,11 @@
             // 
             // btn_CVRun
             // 
-            this.btn_CVRun.Location = new System.Drawing.Point(408, 32);
+            this.btn_CVRun.Location = new System.Drawing.Point(387, 44);
             this.btn_CVRun.Name = "btn_CVRun";
-            this.btn_CVRun.Size = new System.Drawing.Size(75, 36);
+            this.btn_CVRun.Size = new System.Drawing.Size(94, 36);
             this.btn_CVRun.TabIndex = 8;
-            this.btn_CVRun.Text = "Run";
+            this.btn_CVRun.Text = "Process Run";
             this.btn_CVRun.UseVisualStyleBackColor = true;
             this.btn_CVRun.Click += new System.EventHandler(this.btn_CVRun_Click);
             // 
@@ -1403,7 +1428,7 @@
             // 
             // textBox_CVsecondDelaytime
             // 
-            this.textBox_CVsecondDelaytime.Location = new System.Drawing.Point(94, 66);
+            this.textBox_CVsecondDelaytime.Location = new System.Drawing.Point(94, 67);
             this.textBox_CVsecondDelaytime.Name = "textBox_CVsecondDelaytime";
             this.textBox_CVsecondDelaytime.Size = new System.Drawing.Size(100, 22);
             this.textBox_CVsecondDelaytime.TabIndex = 4;
@@ -1419,7 +1444,7 @@
             // 
             // textBox_CVfirstVelocity
             // 
-            this.textBox_CVfirstVelocity.Location = new System.Drawing.Point(276, 42);
+            this.textBox_CVfirstVelocity.Location = new System.Drawing.Point(275, 42);
             this.textBox_CVfirstVelocity.Name = "textBox_CVfirstVelocity";
             this.textBox_CVfirstVelocity.Size = new System.Drawing.Size(100, 22);
             this.textBox_CVfirstVelocity.TabIndex = 2;
@@ -1435,7 +1460,7 @@
             // 
             // textBox_CVfirstDelaytime
             // 
-            this.textBox_CVfirstDelaytime.Location = new System.Drawing.Point(94, 42);
+            this.textBox_CVfirstDelaytime.Location = new System.Drawing.Point(94, 44);
             this.textBox_CVfirstDelaytime.Name = "textBox_CVfirstDelaytime";
             this.textBox_CVfirstDelaytime.Size = new System.Drawing.Size(100, 22);
             this.textBox_CVfirstDelaytime.TabIndex = 0;
@@ -2162,6 +2187,7 @@
             // 
             // panel_Motion
             // 
+            this.panel_Motion.Controls.Add(this.btn_Set_MoveSpeed);
             this.panel_Motion.Controls.Add(this.button_Move_Pos_Z);
             this.panel_Motion.Controls.Add(this.button_Move_Pos_Y);
             this.panel_Motion.Controls.Add(this.button_Move_Pos_X);
@@ -2198,6 +2224,17 @@
             this.panel_Motion.Name = "panel_Motion";
             this.panel_Motion.Size = new System.Drawing.Size(341, 258);
             this.panel_Motion.TabIndex = 133;
+            // 
+            // btn_Set_MoveSpeed
+            // 
+            this.btn_Set_MoveSpeed.Location = new System.Drawing.Point(8, 89);
+            this.btn_Set_MoveSpeed.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_Set_MoveSpeed.Name = "btn_Set_MoveSpeed";
+            this.btn_Set_MoveSpeed.Size = new System.Drawing.Size(66, 40);
+            this.btn_Set_MoveSpeed.TabIndex = 164;
+            this.btn_Set_MoveSpeed.Text = "設定移動速度";
+            this.btn_Set_MoveSpeed.UseVisualStyleBackColor = true;
+            this.btn_Set_MoveSpeed.Click += new System.EventHandler(this.btn_Set_MoveSpeed_Click);
             // 
             // button_Move_Pos_Z
             // 
@@ -2317,12 +2354,12 @@
             // 
             // button_Set_Speed
             // 
-            this.button_Set_Speed.Location = new System.Drawing.Point(9, 85);
+            this.button_Set_Speed.Location = new System.Drawing.Point(8, 41);
             this.button_Set_Speed.Margin = new System.Windows.Forms.Padding(2);
             this.button_Set_Speed.Name = "button_Set_Speed";
-            this.button_Set_Speed.Size = new System.Drawing.Size(56, 47);
+            this.button_Set_Speed.Size = new System.Drawing.Size(66, 40);
             this.button_Set_Speed.TabIndex = 131;
-            this.button_Set_Speed.Text = "設定速度";
+            this.button_Set_Speed.Text = "設定JOG速度";
             this.button_Set_Speed.UseVisualStyleBackColor = true;
             this.button_Set_Speed.Click += new System.EventHandler(this.button_Set_Speed_Click);
             // 
@@ -2674,7 +2711,7 @@
             this.button_Close_Hz.Name = "button_Close_Hz";
             this.button_Close_Hz.Size = new System.Drawing.Size(112, 50);
             this.button_Close_Hz.TabIndex = 125;
-            this.button_Close_Hz.Text = "12. 關閉震動刀";
+            this.button_Close_Hz.Text = "12. 關閉震動刀&&輸送帶流程";
             this.button_Close_Hz.UseVisualStyleBackColor = true;
             this.button_Close_Hz.Click += new System.EventHandler(this.button_Close_Hz_Click);
             // 
@@ -2702,12 +2739,12 @@
             // 
             // button_Start_Hz
             // 
-            this.button_Start_Hz.Location = new System.Drawing.Point(126, 21);
+            this.button_Start_Hz.Location = new System.Drawing.Point(126, 23);
             this.button_Start_Hz.Margin = new System.Windows.Forms.Padding(2);
             this.button_Start_Hz.Name = "button_Start_Hz";
             this.button_Start_Hz.Size = new System.Drawing.Size(112, 50);
             this.button_Start_Hz.TabIndex = 122;
-            this.button_Start_Hz.Text = "10. 開啟震動刀";
+            this.button_Start_Hz.Text = "10. 開啟震動刀 &&  輸送帶";
             this.button_Start_Hz.UseVisualStyleBackColor = true;
             this.button_Start_Hz.Click += new System.EventHandler(this.button_Start_Hz_Click);
             // 
@@ -3318,7 +3355,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = " BRC-20230517";
+            this.Text = " BRC-20230524-1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -3641,6 +3678,9 @@
         private System.Windows.Forms.TextBox textBox_FrequencyMaxV;
         private System.Windows.Forms.Label label91;
         private System.Windows.Forms.TextBox textBox_FrequencyMinV;
+        private System.Windows.Forms.Button btn_CVstart;
+        private System.Windows.Forms.Button btn_CVstop;
+        private System.Windows.Forms.Button btn_Set_MoveSpeed;
     }
 }
 
