@@ -2236,7 +2236,7 @@
             this.btn_Set_MoveSpeed.Text = "設定移動速度";
             this.btn_Set_MoveSpeed.UseVisualStyleBackColor = true;
             this.btn_Set_MoveSpeed.Visible = false;
-            this.btn_Set_MoveSpeed.Click += new System.EventHandler(this.btn_Set_MoveSpeed_Click);
+        //    this.btn_Set_MoveSpeed.Click += new System.EventHandler(this.btn_Set_MoveSpeed_Click);
             // 
             // button_Move_Pos_Z
             // 
