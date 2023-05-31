@@ -916,8 +916,8 @@ namespace BRC
         private void button_Z_ORG_Click(object sender, EventArgs e)
         {
             try {
-                SetMotionSpeed(1000, 1000, 1000);
-            //    bool sc = SetSpeed(comboBox_Axis_Num_Z.SelectedIndex + 1, 2000 / 4, 2000, 200);
+                SetHomeMotionSpeed(20000, 20000, 5000);
+                //    bool sc = SetSpeed(comboBox_Axis_Num_Z.SelectedIndex + 1, 2000 / 4, 2000, 200);
 
                 string[] Data = new string[3];
                 Data[0] = "";
@@ -940,8 +940,8 @@ namespace BRC
             try {
                 //            Move_Back1mm();
                 //        SetSpeed(comboBox_Axis_Num_X.SelectedIndex + 1, 2000 / 4, 2000, 200);
-                //    SetMotionSpeed(1000, 1000, 1000);
-
+               
+                SetHomeMotionSpeed(20000, 20000, 5000);
 
                 string[] Data = new string[3];
                 Data[0] = "";
@@ -962,7 +962,7 @@ namespace BRC
         private void button_Y_ORG_Click(object sender, EventArgs e)
         {
             try {
-                SetMotionSpeed(Convert.ToInt32(textBox_Move_Speed_X.Text) / 2, Convert.ToInt32(textBox_Move_Speed_Y.Text) / 2, Convert.ToInt32(textBox_Move_Speed_Z.Text) / 2);
+                SetHomeMotionSpeed(20000,20000, 5000);
                 string[] Data = new string[3];
                 Data[0] = "";
                 Data[1] = "";
@@ -1072,8 +1072,11 @@ namespace BRC
             }
         }
 
-        private void SetMotionSpeed(double xSpeed, double ySpeed, double zSpeed)
+        private void SetHomeMotionSpeed(double xSpeed, double ySpeed, double zSpeed)
         {
+            // B:5,10000,100000,200,50000   Setting start-up speed by 0.1[mm/s], Maximum speed by 1[mm/s],
+            // Acceleration / deceleration time by 200[m] and Intermediate speed
+            //    by 0.5[mm / s] to slave unit No5. 
 
             int X_Speed = Convert.ToInt32(xSpeed * Movement_Ratio);
             int Y_Speed = Convert.ToInt32(ySpeed * Movement_Ratio);
@@ -1081,24 +1084,30 @@ namespace BRC
             string Write_Data = "";
             //X
             Write_Data =
-                "D:" +
-                Convert.ToString(comboBox_Axis_Num_X.SelectedIndex) +
-                "," + Convert.ToString(X_Speed / 4) +
-                "," + Convert.ToString(X_Speed) + ",500";
+                "B:" +
+                Convert.ToString(comboBox_Axis_Num_X.SelectedIndex) +  //第幾支軸 0-7
+                "," + Convert.ToString(X_Speed / 4) +             //起始速度 um/s
+                "," + Convert.ToString(X_Speed) +                 //最高速度 um/s
+                ",800" +                                          //加減速度  1-1000ms  Acceleration/deceleration time range of setting:
+                 "," + Convert.ToString(X_Speed / 2);             //中間速度  
             Write_Motion(Write_Data);
             //Y
             Write_Data =
-                "D:" +
-                Convert.ToString(comboBox_Axis_Num_Y.SelectedIndex) +
-                "," + Convert.ToString(Y_Speed / 4) +
-                "," + Convert.ToString(Y_Speed) + ",500";
+                  "B:" +
+                  Convert.ToString(comboBox_Axis_Num_Y.SelectedIndex) +
+                  "," + Convert.ToString(Y_Speed / 4) +
+                  "," + Convert.ToString(Y_Speed) +
+                  ",800" +
+                   "," + Convert.ToString(Y_Speed / 2);
             Write_Motion(Write_Data);
             //Z
             Write_Data =
-                "D:" +
+                "B:" +
                 Convert.ToString(comboBox_Axis_Num_Z.SelectedIndex) +
                 "," + Convert.ToString(Z_Speed / 4) +
-                "," + Convert.ToString(Z_Speed) + ",500";
+                "," + Convert.ToString(Z_Speed) +
+                ",800" +
+                "," + Convert.ToString(Z_Speed / 2);
             Write_Motion(Write_Data);
 
         }
@@ -1556,16 +1565,15 @@ namespace BRC
                         wait_delay >= wait_second &&
                         !X_Busy && !Y_Busy && !Z_Busy) {
                         wait_delay = 0;
-                     //   button_Z_ORG_Click(sender, e);//Z軸原點復歸
+                        //   button_Z_ORG_Click(sender, e);//Z軸原點復歸
                         button_Move_Safe_High_Click(sender, e);
                         now_step = 11;
                     }
                     else if (now_step == 11 &&
                         wait_delay >= wait_second &&
-                        !Z_Busy 
+                        !Z_Busy
                         //&& (Convert.ToDouble(textBox_Now_Position_Z.Text) == 0 || Convert.ToDouble(textBox_Now_Position_Z.Text) == Convert.ToDouble(textBox_Safety_Hight.Text))
-                        ) 
-                    {
+                        ) {
                         button_Move_Safe_High_Click(sender, e);
                         now_step = 12;
                     }
@@ -1690,7 +1698,7 @@ namespace BRC
                         !X_Busy && !Y_Busy) {
 
                         wait_delay = 0;
-                     //   button_Z_ORG_Click(sender, e);
+                        //   button_Z_ORG_Click(sender, e);
                         button_Move_Safe_High_Click(sender, e);
                         now_step = 23;
                     }
@@ -1699,8 +1707,7 @@ namespace BRC
                         !Z_Busy
                         //  &&Convert.ToDouble(textBox_Now_Position_Z.Text) <= (0 + Position_Range) &&
                         //   Convert.ToDouble(textBox_Now_Position_Z.Text) >= (0 - Position_Range)
-                        )
-                    {
+                        ) {
                         wait_delay = 0;
                         //   button_Close_Hz_Click(sender, e);
                         now_step = 11;
@@ -2557,13 +2564,13 @@ namespace BRC
                 double X_Speed = Convert.ToInt32(textBox_Step_Speed_X.Text) * Movement_Ratio;
                 double Y_Speed = Convert.ToInt32(textBox_Step_Speed_Y.Text) * Movement_Ratio;
                 double Z_Speed = Convert.ToInt32(textBox_Step_Speed_Z.Text) * Movement_Ratio;
-                SetMotionSpeed(X_Speed, Y_Speed, Z_Speed);
-         //       bool scX = SetSpeed(comboBox_Axis_Num_X.SelectedIndex + 1, X_Speed / 4, X_Speed, 200);
-         //       bool scY = SetSpeed(comboBox_Axis_Num_Y.SelectedIndex + 1, Y_Speed / 4, Y_Speed, 200);
-         //       bool scZ = SetSpeed(comboBox_Axis_Num_Z.SelectedIndex + 1, Z_Speed / 4, Z_Speed, 200);
+                //        SetMotionSpeed(X_Speed, Y_Speed, Z_Speed);
+                //       bool scX = SetSpeed(comboBox_Axis_Num_X.SelectedIndex + 1, X_Speed / 4, X_Speed, 200);
+                //       bool scY = SetSpeed(comboBox_Axis_Num_Y.SelectedIndex + 1, Y_Speed / 4, Y_Speed, 200);
+                //       bool scZ = SetSpeed(comboBox_Axis_Num_Z.SelectedIndex + 1, Z_Speed / 4, Z_Speed, 200);
 
-        //        if (!scX || !scY || !scZ)
-        //            throw new Exception($"Set Speed Fail  :X {scX },  Y {scY} , Z {scZ}"  );
+                //        if (!scX || !scY || !scZ)
+                //            throw new Exception($"Set Speed Fail  :X {scX },  Y {scY} , Z {scZ}"  );
 
 
             }
@@ -2648,10 +2655,10 @@ namespace BRC
                     buf = buf + (axisId).ToString() + "," + speed[0] + "," + speed[1] + "," + speed[2];
                     Motion_sp.WriteLine(buf);     // Send D command
                     System.Threading.Thread.Sleep(50);
-                 /*   buf2 = Motion_sp.ReadLine();  // Recive
-                    if ((buf2.ToUpper()).IndexOf("OK") < 0)
-                        throw new Exception();
-                    System.Threading.Thread.Sleep(50);*/
+                    /*   buf2 = Motion_sp.ReadLine();  // Recive
+                       if ((buf2.ToUpper()).IndexOf("OK") < 0)
+                           throw new Exception();
+                       System.Threading.Thread.Sleep(50);*/
                     buf = "D:";
 
 
@@ -2665,7 +2672,7 @@ namespace BRC
             return true;
         }
 
-     
+
 
         private void CVStart(double firstSpeed)
         {
