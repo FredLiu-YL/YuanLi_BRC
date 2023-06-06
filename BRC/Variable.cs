@@ -14,6 +14,7 @@ namespace BRC
         public bool X_Inverse, Y_Inverse, Z_Inverse, XY_Inverse;
         public int X_Number, Y_Number, Z_Number;
         public double Motion_Ratio;
+        public double Motion_RatioZ;
         public double Cut_Start_X, Cut_Start_Y, Cut_Start_Z;
         public double Cut_End_X, Cut_End_Y;
         public double Cut_Speed_X, Cut_Speed_Y;
@@ -88,6 +89,9 @@ namespace BRC
                                 Z_Number = Convert.ToInt32(Third_Node_Each_XmlElement.InnerText);
                             else if (Third_Node_Data_1 == "Ratio")
                                 Motion_Ratio = Convert.ToDouble(Third_Node_Each_XmlElement.InnerText);
+                            else if (Third_Node_Data_1 == "RatioZ")
+                                Motion_RatioZ = Convert.ToDouble(Third_Node_Each_XmlElement.InnerText);
+                            
                         }
                         else if (Second_Node_Data == "Cut_Data")
                         {

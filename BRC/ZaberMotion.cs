@@ -15,14 +15,23 @@ namespace BRC
         private Axis axis;
         public ZaberMotion(string comPort)
         {
-               Zaber.Motion.Library.SetDeviceDbSource(DeviceDbSourceType.File, "C:\\ZaberDataBase\\devices-public.sqlite");
-            //  Zaber.Motion.Library.SetDeviceDbSource(DeviceDbSourceType.File, "path_to_the_folder/devices-public.sqlite");
-            connection = Connection.OpenSerialPort(comPort);
-            connection.EnableAlerts();
-            Devices = connection.DetectDevices();
+            try
+            {
 
-            axis = Devices[0].GetAxis(1);  //第一個裝置的第一支軸
 
+                Zaber.Motion.Library.SetDeviceDbSource(DeviceDbSourceType.File, "C:\\ZaberDataBase\\devices-public.sqlite");
+                //  Zaber.Motion.Library.SetDeviceDbSource(DeviceDbSourceType.File, "path_to_the_folder/devices-public.sqlite");
+                connection = Connection.OpenSerialPort(comPort);
+                connection.EnableAlerts();
+                Devices = connection.DetectDevices();
+
+                axis = Devices[0].GetAxis(1);  //第一個裝置的第一支軸
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"輸送帶初始化 失敗  :{ex}");
+            }
         }
         public ZaberMotion()
         {
@@ -41,7 +50,8 @@ namespace BRC
 
         public void Home()
         {
-            if (!axis.IsHomed()) {
+            if (!axis.IsHomed())
+            {
                 axis.Home();
             }
 
@@ -61,7 +71,7 @@ namespace BRC
 
               Velocity = firstSpeed;//改回初始速度
               Stop();
-            });
+          });
         }
         public void MoveMax()
         {
@@ -85,7 +95,7 @@ namespace BRC
         }
         public double GetSpeed()
         {
-            double vec = axis.Settings.Get("maxspeed", Units.AngularVelocity_DegreesPerSecond); 
+            double vec = axis.Settings.Get("maxspeed", Units.AngularVelocity_DegreesPerSecond);
             return vec;
         }
         public void Stop()
@@ -97,7 +107,8 @@ namespace BRC
         public void test()
         {
 
-            using (var connection = Connection.OpenSerialPort("COM4")) {
+            using (var connection = Connection.OpenSerialPort("COM4"))
+            {
                 connection.EnableAlerts();
 
                 var deviceList = connection.DetectDevices();
@@ -106,7 +117,8 @@ namespace BRC
                 var device = deviceList[0];
 
                 var axis = device.GetAxis(1);
-                if (!axis.IsHomed()) {
+                if (!axis.IsHomed())
+                {
                     axis.Home();
                 }
 
