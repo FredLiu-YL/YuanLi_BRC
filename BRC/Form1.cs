@@ -1829,10 +1829,30 @@ namespace BRC
                     {
                         button_Start_Click(sender, e);
                         textBox_Now_layer.Text = "0";
-                        now_step = 10;
+                        now_step = 34;
                         wait_delay = 0;
+                       
                         logger.Write_Logger("Scan Finish");
                         MessageBox.Show("掃描完畢!");
+                    }
+                    else if(now_step == 34)
+                    {
+
+
+                        button_Move_To_Standby_All.Enabled = true;
+                        comboBox_Process_Name.Enabled = true;
+                        button_Move_Micro.Enabled = true;
+                        button_Load_Andor.Enabled = true;
+
+                        panel_Motion.Enabled = true;
+                        //panel_Parameter.Enabled = true;
+                        button_Step_Reset.Enabled = true;
+                        button_Start.Text = "掃  描  開  始";
+                        button_Start.BackColor = Color.LightGreen;
+                        button_Auto.Enabled = true;
+                        panel_Set_Scan_Data.Enabled = true;
+                        need_scan = false;
+                        now_step = 10;
                     }
                 }
                 else
@@ -1962,18 +1982,22 @@ namespace BRC
                         
 
                         logger.Write_Logger("Stop Process");
-                        button_Move_To_Standby_All.Enabled = true;
-                        comboBox_Process_Name.Enabled = true;
-                        button_Move_Micro.Enabled = true;
-                        button_Load_Andor.Enabled = true;
-                        need_scan = false;
-                        panel_Motion.Enabled = true;
-                        panel_Parameter.Enabled = true;
-                        button_Step_Reset.Enabled = true;
-                        button_Start.Text = "掃  描  開  始";
-                        button_Start.BackColor = Color.LightGreen;
-                        button_Auto.Enabled = true;
-                        panel_Set_Scan_Data.Enabled = true;
+                        now_step = 30;
+
+                        //button_Move_To_Standby_All.Enabled = true;
+                        //comboBox_Process_Name.Enabled = true;
+                        //button_Move_Micro.Enabled = true;
+                        //button_Load_Andor.Enabled = true;
+                      
+                        //panel_Motion.Enabled = true;
+                        ////panel_Parameter.Enabled = true;
+                        //button_Step_Reset.Enabled = true;
+                        //button_Start.Text = "掃  描  開  始";
+                        //button_Start.BackColor = Color.LightGreen;
+                        //button_Auto.Enabled = true;
+                        //panel_Set_Scan_Data.Enabled = true;
+
+                       // need_scan = false;
                     }
                     else
                     {
