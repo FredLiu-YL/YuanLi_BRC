@@ -1112,7 +1112,11 @@ namespace BRC
         {
             try
             {
-                int X_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_X.Text) * Movement_Ratio);
+              //  Move_Back1mm();
+                button_Move_XY_Cut_Start_Click(sender, e);
+                Task.Delay(500).Wait();
+                Move_Safe_High();
+              /*  int X_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_X.Text) * Movement_Ratio);
                 int Y_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_Y.Text) * Movement_Ratio);
                 int Z_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_Z.Text) * Movement_RatioZ);
                 string Write_Data = "";
@@ -1146,7 +1150,7 @@ namespace BRC
                 Data[comboBox_Axis_Num_Z.SelectedIndex] = Convert.ToString(Safety_Hight);
                 Write_Data = "A:" + Data[0] + "," + Data[1] + "," + Data[2];
                 logger.Write_Logger("Move Safe High : " + Write_Data);
-                Write_Motion(Write_Data);
+                Write_Motion(Write_Data);*/
 
             }
             catch (Exception error)
@@ -1154,6 +1158,46 @@ namespace BRC
                 logger.Write_Error_Logger("Move Safe High Error " + Convert.ToString(error));
                 MessageBox.Show("Move Error!\n" + Convert.ToString(error));
             }
+        }
+
+        private void Move_Safe_High()
+        {
+            int X_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_X.Text) * Movement_Ratio);
+            int Y_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_Y.Text) * Movement_Ratio);
+            int Z_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_Z.Text) * Movement_RatioZ);
+            string Write_Data = "";
+            //X
+            Write_Data =
+                "D:" +
+                Convert.ToString(comboBox_Axis_Num_X.SelectedIndex) +
+                "," + Convert.ToString(X_Speed / 4) +
+                "," + Convert.ToString(X_Speed) + ",500";
+            Write_Motion(Write_Data);
+            //Y
+            Write_Data =
+                "D:" +
+                Convert.ToString(comboBox_Axis_Num_Y.SelectedIndex) +
+                "," + Convert.ToString(Y_Speed / 4) +
+                "," + Convert.ToString(Y_Speed) + ",500";
+            Write_Motion(Write_Data);
+            //Z
+            Write_Data =
+                "D:" +
+                Convert.ToString(comboBox_Axis_Num_Z.SelectedIndex) +
+                "," + Convert.ToString(Z_Speed / 4) +
+                "," + Convert.ToString(Z_Speed) + ",500";
+            Write_Motion(Write_Data);
+            //
+            string[] Data = new string[3];
+            Data[0] = "";
+            Data[1] = "";
+            Data[2] = "";
+            int Safety_Hight = Convert.ToInt32(Convert.ToInt32(textBox_Safety_Hight.Text) * Movement_RatioZ);
+            Data[comboBox_Axis_Num_Z.SelectedIndex] = Convert.ToString(Safety_Hight);
+            Write_Data = "A:" + Data[0] + "," + Data[1] + "," + Data[2];
+            logger.Write_Logger("Move Safe High : " + Write_Data);
+            Write_Motion(Write_Data);
+
         }
 
 
@@ -1324,24 +1368,35 @@ namespace BRC
         }
         private void button_Start_Hz_Click(object sender, EventArgs e)
         {
-            logger.Write_Logger("Start Hz");
-            //Start Hz
-            /* timerPulseCtrl_Frequency.ChannelStart = 0;
-             timerPulseCtrl_Frequency.ChannelCount = 1;
-             timerPulseCtrl_Frequency.Frequency = Convert.ToInt32(numericUpDown_Cut_Frequency.Value);*/
+            try
+            {
+                logger.Write_Logger("Start Hz");
+                //Start Hz
+                /* timerPulseCtrl_Frequency.ChannelStart = 0;
+                 timerPulseCtrl_Frequency.ChannelCount = 1;
+                 timerPulseCtrl_Frequency.Frequency = Convert.ToInt32(numericUpDown_Cut_Frequency.Value);*/
 
+                if (zaberMotion == null)//如果輸送帶沒有初始化過 ， 就連線
+                    zaberMotion = new ZaberMotion(textBox_ZaberComPort.Text);
 
-            double minV = Convert.ToDouble(textBox_FrequencyMinV.Text);
-            double maxV = Convert.ToDouble(textBox_FrequencyMaxV.Text);
-            double outputV = Convert.ToDouble(textBox_FrequencyOutputV.Text);
-            //nIHighFrequencyCutting.Run(outputV, minV, maxV);
+                double minV = Convert.ToDouble(textBox_FrequencyMinV.Text);
+                double maxV = Convert.ToDouble(textBox_FrequencyMaxV.Text);
+                double outputV = Convert.ToDouble(textBox_FrequencyOutputV.Text);
+                //nIHighFrequencyCutting.Run(outputV, minV, maxV);
 
-            nIHighFrequencyCutting.On();
+                nIHighFrequencyCutting.On();
 
-            //    timerPulseCtrl_Frequency.Enabled = true;
+                //    timerPulseCtrl_Frequency.Enabled = true;
 
-            zaberMotion.Velocity = Convert.ToDouble(textBox_CVfirstVelocity.Text);  //輸送帶第一段速度
-            zaberMotion.MoveMax();
+                zaberMotion.Velocity = Convert.ToDouble(textBox_CVfirstVelocity.Text);  //輸送帶第一段速度
+                zaberMotion.MoveMax();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+            
         }
         private void button_Move_Z_Cut_Click(object sender, EventArgs e)
         {
@@ -1403,7 +1458,7 @@ namespace BRC
 
                 }
                 else
-                    button_Move_Safe_High_Click(sender, e);
+                    Move_Safe_High();
             }
             catch (Exception error)
             {
@@ -1602,7 +1657,7 @@ namespace BRC
                     Convert.ToDouble(textBox_Now_Position_X.Text) >= (0 - Position_Range))
                 {
                     wait_delay = 0;
-                    button_Move_Safe_High_Click(sender, e);
+                    Move_Safe_High();
                     now_step = 5;
                 }
                 else if (now_step == 5 &&
@@ -1640,7 +1695,7 @@ namespace BRC
                     {
                         wait_delay = 0;
                         //   button_Z_ORG_Click(sender, e);//Z軸原點復歸
-                        button_Move_Safe_High_Click(sender, e);
+                        Move_Safe_High();
                         now_step = 11;
                     }
                     else if (now_step == 11 &&
@@ -1649,7 +1704,7 @@ namespace BRC
                         //&& (Convert.ToDouble(textBox_Now_Position_Z.Text) == 0 || Convert.ToDouble(textBox_Now_Position_Z.Text) == Convert.ToDouble(textBox_Safety_Hight.Text))
                         )
                     {
-                        button_Move_Safe_High_Click(sender, e);
+                        Move_Safe_High();
                         now_step = 12;
                     }
                     else if (now_step == 12 &&
@@ -1691,7 +1746,7 @@ namespace BRC
                         pictureBox_Scanning.Image = Properties.Resources.Red;
                         IO_Can_Cut = false;
                         wait_delay = 0;
-                        button_Move_Safe_High_Click(sender, e);
+                        Move_Safe_High();
                         if (Convert.ToInt32(textBox_Now_layer.Text) >= Convert.ToInt32(textBox_Cut_Layer.Text))
                             now_step = 32;
                         else
@@ -1780,7 +1835,7 @@ namespace BRC
 
                         wait_delay = 0;
                         //   button_Z_ORG_Click(sender, e);
-                        button_Move_Safe_High_Click(sender, e);
+                        Move_Safe_High();
                         now_step = 23;
                     }
                     else if (now_step == 23 &&
@@ -1806,7 +1861,7 @@ namespace BRC
                         wait_delay >= wait_second / 2)
                     {
                         wait_delay = 0;
-                        button_Move_Safe_High_Click(sender, e);
+                        Move_Safe_High();
                         now_step = 32;
                     }
                     else if (now_step == 32 &&
@@ -1827,7 +1882,7 @@ namespace BRC
                         Convert.ToDouble(textBox_Now_Position_Y.Text) <= (Convert.ToInt32(textBox_Standby_Y.Text) + Position_Range) &&
                         Convert.ToDouble(textBox_Now_Position_Y.Text) >= (Convert.ToInt32(textBox_Standby_Y.Text) - Position_Range))
                     {
-                        button_Start_Click(sender, e);
+                     //   button_Start_Click(sender, e);
                         textBox_Now_layer.Text = "0";
                         now_step = 34;
                         wait_delay = 0;
@@ -1839,19 +1894,19 @@ namespace BRC
                     {
 
 
-                        button_Move_To_Standby_All.Enabled = true;
-                        comboBox_Process_Name.Enabled = true;
-                        button_Move_Micro.Enabled = true;
-                        button_Load_Andor.Enabled = true;
+                        //button_Move_To_Standby_All.Enabled = true;
+                        //comboBox_Process_Name.Enabled = true;
+                        //button_Move_Micro.Enabled = true;
+                        //button_Load_Andor.Enabled = true;
 
-                        panel_Motion.Enabled = true;
-                        //panel_Parameter.Enabled = true;
-                        button_Step_Reset.Enabled = true;
-                        button_Start.Text = "掃  描  開  始";
-                        button_Start.BackColor = Color.LightGreen;
-                        button_Auto.Enabled = true;
-                        panel_Set_Scan_Data.Enabled = true;
-                        need_scan = false;
+                        //panel_Motion.Enabled = true;
+                        ////panel_Parameter.Enabled = true;
+                        //button_Step_Reset.Enabled = true;
+                        //button_Start.Text = "掃  描  開  始";
+                        //button_Start.BackColor = Color.LightGreen;
+                        //button_Auto.Enabled = true;
+                        //panel_Set_Scan_Data.Enabled = true;
+                        //need_scan = false;
                         now_step = 10;
                     }
                 }
@@ -1863,7 +1918,7 @@ namespace BRC
                     {
                         wait_delay = 0;
                         now_step = 51;
-                        button_Move_Safe_High_Click(sender, e);
+                        Move_Safe_High();
 
                     }
                     else if (now_step == 51 &&
@@ -1892,7 +1947,7 @@ namespace BRC
                         !X_Busy && !Y_Busy && !Z_Busy)
                     {
                         wait_delay = 0;
-                        button_Move_Safe_High_Click(sender, e);
+                        Move_Safe_High();
                         now_step = 61;
 
                     }
@@ -1982,22 +2037,22 @@ namespace BRC
                         
 
                         logger.Write_Logger("Stop Process");
-                        now_step = 30;
+                        //   now_step = 30;
 
-                        //button_Move_To_Standby_All.Enabled = true;
-                        //comboBox_Process_Name.Enabled = true;
-                        //button_Move_Micro.Enabled = true;
-                        //button_Load_Andor.Enabled = true;
-                      
-                        //panel_Motion.Enabled = true;
-                        ////panel_Parameter.Enabled = true;
-                        //button_Step_Reset.Enabled = true;
-                        //button_Start.Text = "掃  描  開  始";
-                        //button_Start.BackColor = Color.LightGreen;
-                        //button_Auto.Enabled = true;
-                        //panel_Set_Scan_Data.Enabled = true;
+                        button_Move_To_Standby_All.Enabled = true;
+                        comboBox_Process_Name.Enabled = true;
+                        button_Move_Micro.Enabled = true;
+                        button_Load_Andor.Enabled = true;
 
-                       // need_scan = false;
+                        panel_Motion.Enabled = true;
+                        //panel_Parameter.Enabled = true;
+                        button_Step_Reset.Enabled = true;
+                        button_Start.Text = "掃  描  開  始";
+                        button_Start.BackColor = Color.LightGreen;
+                        button_Auto.Enabled = true;
+                        panel_Set_Scan_Data.Enabled = true;
+
+                        need_scan = false;
                     }
                     else
                     {
@@ -2719,6 +2774,7 @@ namespace BRC
         private void btn_CVstop_Click(object sender, EventArgs e)
         {
             zaberMotion.Stop();
+            zaberMotion.Cancel();
         }
         private void textBox_Cut_Speed_X_TextChanged(object sender, EventArgs e)
         {

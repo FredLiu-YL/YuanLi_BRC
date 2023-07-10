@@ -13,6 +13,10 @@ namespace BRC
     {
         private Connection connection;
         private Axis axis;
+        private CancellationTokenSource cancel;
+   
+
+
         public ZaberMotion(string comPort)
         {
             try
@@ -60,18 +64,34 @@ namespace BRC
 
         public Task CVRun(double firstSpeed, double firstDelayTime, double secondSpeed, double secondDelayTime)
         {
-            return Task.Run(() =>
-          {
-              Velocity = firstSpeed;
-              int firstdelay = (int)firstDelayTime * 1000;
-              Task.Delay(firstdelay).Wait();
-              Velocity = secondSpeed;
-              int seconddelay = (int)secondDelayTime * 1000;
-              Task.Delay(seconddelay).Wait();
+            try
+            {
+                cancel = new CancellationTokenSource();
+                return Task.Run(() =>
+                {
+                    Velocity = firstSpeed;
+                    int firstdelay = (int)firstDelayTime * 1000;
+                    Task.Delay(firstdelay,cancel.Token).Wait();
+                    Velocity = secondSpeed;
+                    int seconddelay = (int)secondDelayTime * 1000;
+                    Task.Delay(seconddelay, cancel.Token).Wait();
 
-              Velocity = firstSpeed;//改回初始速度
-              Stop();
-          });
+                    Velocity = firstSpeed;//改回初始速度
+
+                    Stop();
+
+
+                });
+            }
+            catch (Exception ex)
+            {
+                Velocity = firstSpeed;//改回初始速度
+            
+                throw ex;
+               
+            }
+            
+         
         }
         public void MoveMax()
         {
@@ -101,8 +121,16 @@ namespace BRC
         public void Stop()
         {
             axis.Stop();
-        }
+       
 
+        }
+        public void Cancel()
+        {
+            if(cancel!=null)
+            cancel.Cancel();
+
+            // cancel.Dispose();
+        }
 
         public void test()
         {
