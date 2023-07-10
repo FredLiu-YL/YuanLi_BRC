@@ -14,8 +14,8 @@ namespace BRC
         private Connection connection;
         private Axis axis;
         private CancellationTokenSource cancel;
-   
 
+        public event Action<Exception> ExMessage;
 
         public ZaberMotion(string comPort)
         {
@@ -64,34 +64,35 @@ namespace BRC
 
         public Task CVRun(double firstSpeed, double firstDelayTime, double secondSpeed, double secondDelayTime)
         {
-            try
+
+            cancel = new CancellationTokenSource();
+            return Task.Run(async () =>
             {
-                cancel = new CancellationTokenSource();
-                return Task.Run(() =>
+                try
                 {
                     Velocity = firstSpeed;
                     int firstdelay = (int)firstDelayTime * 1000;
-                    Task.Delay(firstdelay,cancel.Token).Wait();
+                    await Task.Delay(firstdelay, cancel.Token);
                     Velocity = secondSpeed;
                     int seconddelay = (int)secondDelayTime * 1000;
-                    Task.Delay(seconddelay, cancel.Token).Wait();
+                    await Task.Delay(seconddelay, cancel.Token);
 
                     Velocity = firstSpeed;//改回初始速度
 
                     Stop();
+                }
+                catch (Exception ex)
+                {
+                    Velocity = firstSpeed;//改回初始速度
+                    ExMessage?.Invoke(ex.InnerException);
+                    throw ex.InnerException;
+
+                }
+
+            });
 
 
-                });
-            }
-            catch (Exception ex)
-            {
-                Velocity = firstSpeed;//改回初始速度
-            
-                throw ex;
-               
-            }
-            
-         
+
         }
         public void MoveMax()
         {
@@ -121,13 +122,13 @@ namespace BRC
         public void Stop()
         {
             axis.Stop();
-       
+
 
         }
         public void Cancel()
         {
-            if(cancel!=null)
-            cancel.Cancel();
+            if (cancel != null)
+                cancel.Cancel();
 
             // cancel.Dispose();
         }
