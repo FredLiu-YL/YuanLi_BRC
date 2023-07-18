@@ -27,6 +27,8 @@ namespace BRC
         private double Movement_Ratio;
         private double Movement_RatioZ;
 
+        private bool IsAutoRun = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -1112,45 +1114,46 @@ namespace BRC
         {
             try
             {
-              //  Move_Back1mm();
-                button_Move_XY_Cut_Start_Click(sender, e);
+                Move_Back10mm();
+                //  Move_Back1mm();
+                //button_Move_XY_Cut_Start_Click(sender, e);
                 Task.Delay(500).Wait();
                 Move_Safe_High();
-              /*  int X_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_X.Text) * Movement_Ratio);
-                int Y_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_Y.Text) * Movement_Ratio);
-                int Z_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_Z.Text) * Movement_RatioZ);
-                string Write_Data = "";
-                //X
-                Write_Data =
-                    "D:" +
-                    Convert.ToString(comboBox_Axis_Num_X.SelectedIndex) +
-                    "," + Convert.ToString(X_Speed / 4) +
-                    "," + Convert.ToString(X_Speed) + ",500";
-                Write_Motion(Write_Data);
-                //Y
-                Write_Data =
-                    "D:" +
-                    Convert.ToString(comboBox_Axis_Num_Y.SelectedIndex) +
-                    "," + Convert.ToString(Y_Speed / 4) +
-                    "," + Convert.ToString(Y_Speed) + ",500";
-                Write_Motion(Write_Data);
-                //Z
-                Write_Data =
-                    "D:" +
-                    Convert.ToString(comboBox_Axis_Num_Z.SelectedIndex) +
-                    "," + Convert.ToString(Z_Speed / 4) +
-                    "," + Convert.ToString(Z_Speed) + ",500";
-                Write_Motion(Write_Data);
-                //
-                string[] Data = new string[3];
-                Data[0] = "";
-                Data[1] = "";
-                Data[2] = "";
-                int Safety_Hight = Convert.ToInt32(Convert.ToInt32(textBox_Safety_Hight.Text) * Movement_RatioZ);
-                Data[comboBox_Axis_Num_Z.SelectedIndex] = Convert.ToString(Safety_Hight);
-                Write_Data = "A:" + Data[0] + "," + Data[1] + "," + Data[2];
-                logger.Write_Logger("Move Safe High : " + Write_Data);
-                Write_Motion(Write_Data);*/
+                /*  int X_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_X.Text) * Movement_Ratio);
+                  int Y_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_Y.Text) * Movement_Ratio);
+                  int Z_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_Z.Text) * Movement_RatioZ);
+                  string Write_Data = "";
+                  //X
+                  Write_Data =
+                      "D:" +
+                      Convert.ToString(comboBox_Axis_Num_X.SelectedIndex) +
+                      "," + Convert.ToString(X_Speed / 4) +
+                      "," + Convert.ToString(X_Speed) + ",500";
+                  Write_Motion(Write_Data);
+                  //Y
+                  Write_Data =
+                      "D:" +
+                      Convert.ToString(comboBox_Axis_Num_Y.SelectedIndex) +
+                      "," + Convert.ToString(Y_Speed / 4) +
+                      "," + Convert.ToString(Y_Speed) + ",500";
+                  Write_Motion(Write_Data);
+                  //Z
+                  Write_Data =
+                      "D:" +
+                      Convert.ToString(comboBox_Axis_Num_Z.SelectedIndex) +
+                      "," + Convert.ToString(Z_Speed / 4) +
+                      "," + Convert.ToString(Z_Speed) + ",500";
+                  Write_Motion(Write_Data);
+                  //
+                  string[] Data = new string[3];
+                  Data[0] = "";
+                  Data[1] = "";
+                  Data[2] = "";
+                  int Safety_Hight = Convert.ToInt32(Convert.ToInt32(textBox_Safety_Hight.Text) * Movement_RatioZ);
+                  Data[comboBox_Axis_Num_Z.SelectedIndex] = Convert.ToString(Safety_Hight);
+                  Write_Data = "A:" + Data[0] + "," + Data[1] + "," + Data[2];
+                  logger.Write_Logger("Move Safe High : " + Write_Data);
+                  Write_Motion(Write_Data);*/
 
             }
             catch (Exception error)
@@ -1396,7 +1399,7 @@ namespace BRC
 
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
         private void button_Move_Z_Cut_Click(object sender, EventArgs e)
         {
@@ -1548,7 +1551,7 @@ namespace BRC
             catch (Exception ex)
             {
 
-              throw ex;
+                throw ex;
             }
 
         }
@@ -1689,6 +1692,7 @@ namespace BRC
             {
                 if (need_scan)
                 {
+                    IsAutoRun = true;
                     if (now_step == 10 &&
                         wait_delay >= wait_second &&
                         !X_Busy && !Y_Busy && !Z_Busy)
@@ -1814,7 +1818,7 @@ namespace BRC
                         wait_delay = 0;
                         pictureBox_Cut.Image = Properties.Resources.Red;
                         //button_Move_Safe_High_Click(sender, e);
-                 //       button_Close_Hz_Click(sender, e);
+                        //       button_Close_Hz_Click(sender, e);
                         Close_Hz();
 
 
@@ -1853,7 +1857,7 @@ namespace BRC
                         wait_delay >= wait_second / 2)
                     {
                         wait_delay = 0;
-                      //  button_Close_Hz_Click(sender, e);
+                        //  button_Close_Hz_Click(sender, e);
                         Close_Hz();
                         now_step = 31;
                     }
@@ -1882,15 +1886,15 @@ namespace BRC
                         Convert.ToDouble(textBox_Now_Position_Y.Text) <= (Convert.ToInt32(textBox_Standby_Y.Text) + Position_Range) &&
                         Convert.ToDouble(textBox_Now_Position_Y.Text) >= (Convert.ToInt32(textBox_Standby_Y.Text) - Position_Range))
                     {
-                     //   button_Start_Click(sender, e);
+                        //   button_Start_Click(sender, e);
                         textBox_Now_layer.Text = "0";
                         now_step = 34;
                         wait_delay = 0;
-                       
+
                         logger.Write_Logger("Scan Finish");
                         MessageBox.Show("掃描完畢!");
                     }
-                    else if(now_step == 34)
+                    else if (now_step == 34)
                     {
 
 
@@ -1909,11 +1913,13 @@ namespace BRC
                         //need_scan = false;
                         now_step = 10;
                     }
+                    IsAutoRun = false;
                 }
-                else
+                else//停下來的動作
                 {
                     if (now_step == 50 &&
                         wait_delay >= wait_second &&
+                        IO_Can_Cut && Andor_Error_Meaasge.IndexOf("success") >= 0 &&
                         !X_Busy && !Y_Busy && !Z_Busy)
                     {
                         wait_delay = 0;
@@ -1944,6 +1950,7 @@ namespace BRC
                     }
                     else if (now_step == 60 &&
                         wait_delay >= wait_second / 2 &&
+                        IO_Can_Cut && Andor_Error_Meaasge.IndexOf("success") >= 0 &&
                         !X_Busy && !Y_Busy && !Z_Busy)
                     {
                         wait_delay = 0;
@@ -1982,6 +1989,39 @@ namespace BRC
                         wait_delay = 0;
                         now_step = 10;
                     }
+
+
+
+                    else if (now_step == 70 &&
+                        wait_delay >= wait_second / 2 &&
+                        IO_Can_Cut && Andor_Error_Meaasge.IndexOf("success") >= 0 &&
+                        !X_Busy && !Y_Busy && !Z_Busy)
+                    {
+                        wait_delay = 0;
+                        //  button_Close_Hz_Click(sender, e);
+                        Close_Hz();
+                        now_step = 71;
+                    }
+                    else if (now_step == 71 &&
+                        wait_delay >= wait_second / 2)
+                    {
+                        wait_delay = 0;
+                        Move_Safe_High();
+                        now_step = 72;
+                    }
+                    else if (now_step == 72 &&
+                        wait_delay >= wait_second &&
+                        !Z_Busy &&
+                        Convert.ToDouble(textBox_Now_Position_Z.Text) <= (Convert.ToInt32(textBox_Safety_Hight.Text) + Position_Range) &&
+                        Convert.ToDouble(textBox_Now_Position_Z.Text) >= (Convert.ToInt32(textBox_Safety_Hight.Text) - Position_Range))
+                    {
+                        wait_delay = 0;
+                        now_step = 10;
+                    }
+
+
+
+
                 }
             }
             #endregion
@@ -2034,7 +2074,19 @@ namespace BRC
                 {
                     if (need_scan)
                     {
-                        
+                        need_scan = false;
+                        while (IsAutoRun == true)
+                        { }
+                        if (now_step <= 17)//預留暫停layer不減一
+                        {
+                            now_step = 70;
+                            textBox_Now_layer.Text = "0";
+                        }
+                        else if (now_step < 30)//預留暫停layer減一
+                        {
+                            now_step = 70;
+                            textBox_Now_layer.Text = "0";
+                        }
 
                         logger.Write_Logger("Stop Process");
                         //   now_step = 30;
@@ -2051,8 +2103,6 @@ namespace BRC
                         button_Start.BackColor = Color.LightGreen;
                         button_Auto.Enabled = true;
                         panel_Set_Scan_Data.Enabled = true;
-
-                        need_scan = false;
                     }
                     else
                     {
@@ -2085,12 +2135,12 @@ namespace BRC
                     }
                 }
             }
-            catch (Exception  ex)
+            catch (Exception ex)
             {
 
                 MessageBox.Show(ex.Message);
             }
-         
+
         }
         private void comboBox_Process_Name_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2917,16 +2967,55 @@ namespace BRC
                 Data[comboBox_Axis_Num_Y.SelectedIndex] = Convert.ToString(Cut_End_Y);
                 Write_Data = "A:" + Data[0] + "," + Data[1] + "," + Data[2];
                 Write_Motion(Write_Data);
-                logger.Write_Logger("Move Cut End XY : " + Write_Data);
+                logger.Write_Logger("Move Back1mm : " + Write_Data);
             }
             catch (Exception error)
             {
-                logger.Write_Error_Logger("Move Cut End XY error " + Convert.ToString(error));
-                MessageBox.Show("Move Error!\n" + Convert.ToString(error));
+                logger.Write_Error_Logger("Move Back1mm End XY error " + Convert.ToString(error));
+                MessageBox.Show("Move Back1mm Error!\n" + Convert.ToString(error));
             }
         }
 
-
+        private void Move_Back10mm()
+        {
+            try
+            {
+                int X_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_X.Text) * Movement_Ratio);
+                int Y_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_Y.Text) * Movement_Ratio);
+                string Write_Data = "";
+                //X
+                Write_Data =
+                    "D:" +
+                    Convert.ToString(comboBox_Axis_Num_X.SelectedIndex) +
+                    "," + Convert.ToString(X_Speed / 4) +
+                    "," + Convert.ToString(X_Speed) + ",500";
+                Write_Motion(Write_Data);
+                //Y
+                Write_Data =
+                    "D:" +
+                    Convert.ToString(comboBox_Axis_Num_Y.SelectedIndex) +
+                    "," + Convert.ToString(Y_Speed / 4) +
+                    "," + Convert.ToString(Y_Speed) + ",500";
+                Write_Motion(Write_Data);
+                //
+                string[] Data = new string[3];
+                Data[0] = "";
+                Data[1] = "";
+                Data[2] = "";
+                int Cut_End_X = Convert.ToInt32((Convert.ToInt32(textBox_Now_Position_X.Text) + 100000) * Movement_Ratio);
+                int Cut_End_Y = Convert.ToInt32(Convert.ToInt32(textBox_Now_Position_Y.Text) * Movement_Ratio);
+                Data[comboBox_Axis_Num_X.SelectedIndex] = Convert.ToString(Cut_End_X);
+                Data[comboBox_Axis_Num_Y.SelectedIndex] = Convert.ToString(Cut_End_Y);
+                Write_Data = "A:" + Data[0] + "," + Data[1] + "," + Data[2];
+                Write_Motion(Write_Data);
+                logger.Write_Logger("Move Back10mm End XY : " + Write_Data);
+            }
+            catch (Exception error)
+            {
+                logger.Write_Error_Logger("Move Back10mm End XY error " + Convert.ToString(error));
+                MessageBox.Show("Move Back10mm Error!\n" + Convert.ToString(error));
+            }
+        }
         //private void btn_Set_MoveSpeed_Click(object sender, EventArgs e)
         //{
         //    try {
