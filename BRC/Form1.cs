@@ -28,6 +28,8 @@ namespace BRC
         private double Movement_RatioZ;
 
         private bool IsAutoRun = false;
+        private bool IsPauseRun = false;
+        private bool IsAutoRunGetPauseRun = false;
 
         public Form1()
         {
@@ -1851,6 +1853,10 @@ namespace BRC
                     {
                         wait_delay = 0;
                         //   button_Close_Hz_Click(sender, e);
+                        if (IsPauseRun == true)
+                        {
+                            IsAutoRunGetPauseRun = true;
+                        }
                         now_step = 11;
                     }
                     else if (now_step == 30 &&
@@ -1914,6 +1920,11 @@ namespace BRC
                         now_step = 10;
                     }
                     IsAutoRun = false;
+                    if (IsAutoRunGetPauseRun == true && need_scan == true)
+                    {
+                        Pause();
+                        logger.Write_Logger("Pause Process");
+                    }
                 }
                 else//停下來的動作
                 {
@@ -2074,35 +2085,8 @@ namespace BRC
                 {
                     if (need_scan)
                     {
-                        need_scan = false;
-                        while (IsAutoRun == true)
-                        { }
-                        if (now_step <= 17)//預留暫停layer不減一
-                        {
-                            now_step = 70;
-                            textBox_Now_layer.Text = "0";
-                        }
-                        else if (now_step < 30)//預留暫停layer減一
-                        {
-                            now_step = 70;
-                            textBox_Now_layer.Text = "0";
-                        }
-
+                        Pause();
                         logger.Write_Logger("Stop Process");
-                        //   now_step = 30;
-
-                        button_Move_To_Standby_All.Enabled = true;
-                        comboBox_Process_Name.Enabled = true;
-                        button_Move_Micro.Enabled = true;
-                        button_Load_Andor.Enabled = true;
-
-                        panel_Motion.Enabled = true;
-                        //panel_Parameter.Enabled = true;
-                        button_Step_Reset.Enabled = true;
-                        button_Start.Text = "掃  描  開  始";
-                        button_Start.BackColor = Color.LightGreen;
-                        button_Auto.Enabled = true;
-                        panel_Set_Scan_Data.Enabled = true;
                     }
                     else
                     {
@@ -2142,6 +2126,68 @@ namespace BRC
             }
 
         }
+        private void Pause()
+        {
+            try
+            {
+                need_scan = false;
+                while (IsAutoRun == true)
+                { }
+                if (IsAutoRunGetPauseRun == true)
+                {
+                    IsAutoRunGetPauseRun = false;
+                    IsPauseRun = false;
+                    if (now_step <= 17)//預留暫停layer不減一
+                    {
+                        now_step = 70;
+                    }
+                    else if (now_step < 30)//預留暫停layer減一
+                    {
+                        now_step = 70;
+                        int now_layer = Convert.ToInt32(textBox_Now_layer.Text);
+                        if (now_layer <= 1)
+                        {
+                            textBox_Now_layer.Text = "0";
+                        }
+                        else
+                        {
+                            textBox_Now_layer.Text = Convert.ToString(now_layer + 1);
+                        }
+                    }
+                }
+                else
+                {
+                    if (now_step < 30)
+                    {
+                        now_step = 70;
+                        textBox_Now_layer.Text = "0";
+                    }
+                }
+              
+                //   now_step = 30;
+                button_Move_To_Standby_All.Enabled = true;
+                comboBox_Process_Name.Enabled = true;
+                button_Move_Micro.Enabled = true;
+                button_Load_Andor.Enabled = true;
+
+                panel_Motion.Enabled = true;
+                //panel_Parameter.Enabled = true;
+                button_Step_Reset.Enabled = true;
+                button_Start.Text = "掃  描  開  始";
+                button_Start.BackColor = Color.LightGreen;
+                button_Auto.Enabled = true;
+                panel_Set_Scan_Data.Enabled = true;
+            }
+            catch (Exception error)
+            {
+                throw error;
+            }
+        }
+
+
+
+
+
         private void comboBox_Process_Name_SelectedIndexChanged(object sender, EventArgs e)
         {
             logger.Write_Logger("Load Parameter " + comboBox_Process_Name.Text);
