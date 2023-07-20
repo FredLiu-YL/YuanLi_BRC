@@ -1119,7 +1119,8 @@ namespace BRC
                 Move_Back10mm();
                 //  Move_Back1mm();
                 //button_Move_XY_Cut_Start_Click(sender, e);
-                Task.Delay(500).Wait();
+                
+                Task.Delay(2500).Wait();
                 Move_Safe_High();
                 /*  int X_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_X.Text) * Movement_Ratio);
                   int Y_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_Y.Text) * Movement_Ratio);
@@ -2131,38 +2132,39 @@ namespace BRC
             try
             {
                 need_scan = false;
-                while (IsAutoRun == true)
-                { }
-                if (IsAutoRunGetPauseRun == true)
-                {
-                    IsAutoRunGetPauseRun = false;
-                    IsPauseRun = false;
-                    if (now_step <= 17)//預留暫停layer不減一
-                    {
-                        now_step = 70;
-                    }
-                    else if (now_step < 30)//預留暫停layer減一
-                    {
-                        now_step = 70;
-                        int now_layer = Convert.ToInt32(textBox_Now_layer.Text);
-                        if (now_layer <= 1)
-                        {
-                            textBox_Now_layer.Text = "0";
-                        }
-                        else
-                        {
-                            textBox_Now_layer.Text = Convert.ToString(now_layer + 1);
-                        }
-                    }
-                }
-                else
-                {
-                    if (now_step < 30)
-                    {
-                        now_step = 70;
-                        textBox_Now_layer.Text = "0";
-                    }
-                }
+
+                //while (IsAutoRun == true)
+                //{ }
+                //if (IsAutoRunGetPauseRun == true)
+                //{
+                //    IsAutoRunGetPauseRun = false;
+                //    IsPauseRun = false;
+                //    if (now_step <= 17)//預留暫停layer不減一
+                //    {
+                //        now_step = 70;
+                //    }
+                //    else if (now_step < 30)//預留暫停layer減一
+                //    {
+                //        now_step = 70;
+                //        int now_layer = Convert.ToInt32(textBox_Now_layer.Text);
+                //        if (now_layer <= 1)
+                //        {
+                //            textBox_Now_layer.Text = "0";
+                //        }
+                //        else
+                //        {
+                //            textBox_Now_layer.Text = Convert.ToString(now_layer + 1);
+                //        }
+                //    }
+                //}
+                //else
+                //{
+                //    if (now_step < 30)
+                //    {
+                //        now_step = 70;
+                //        textBox_Now_layer.Text = "0";
+                //    }
+                //}
               
                 //   now_step = 30;
                 button_Move_To_Standby_All.Enabled = true;
@@ -3055,6 +3057,10 @@ namespace BRC
                 Write_Data = "A:" + Data[0] + "," + Data[1] + "," + Data[2];
                 Write_Motion(Write_Data);
                 logger.Write_Logger("Move Back10mm End XY : " + Write_Data);
+
+                //while (!X_Busy && !Y_Busy && !Z_Busy)
+                //{ 
+                //}
             }
             catch (Exception error)
             {
