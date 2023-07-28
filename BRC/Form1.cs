@@ -1171,11 +1171,11 @@ namespace BRC
         {
             try
             {
-                Move_Back5mm();
+                Move_BackNow5mm();
                 //  Move_Back1mm();
                 //button_Move_XY_Cut_Start_Click(sender, e);
 
-                Task.Delay(2000).Wait();
+                Task.Delay(3000).Wait();
                 Move_Safe_High();
                 /*  int X_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_X.Text) * Movement_Ratio);
                   int Y_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_Y.Text) * Movement_Ratio);
@@ -1974,6 +1974,8 @@ namespace BRC
                         //button_Auto.Enabled = true;
                         //panel_Set_Scan_Data.Enabled = true;
                         //need_scan = false;
+                        IsAutoRun = false;
+                        Pause();
                         now_step = 10;
                     }
                     IsAutoRun = false;
@@ -1987,13 +1989,11 @@ namespace BRC
                 {
                     if (now_step == 50 &&
                         wait_delay >= wait_second &&
-                        IO_Can_Cut && Andor_Error_Meaasge.IndexOf("success") >= 0 &&
                         !X_Busy && !Y_Busy && !Z_Busy)
                     {
                         wait_delay = 0;
                         now_step = 51;
                         Move_Safe_High();
-
                     }
                     else if (now_step == 51 &&
                         wait_delay >= wait_second / 2 &&
@@ -2017,14 +2017,12 @@ namespace BRC
                         now_step = 10;
                     }
                     else if (now_step == 60 &&
-                        wait_delay >= wait_second / 2 &&
-                        IO_Can_Cut && Andor_Error_Meaasge.IndexOf("success") >= 0 &&
+                        wait_delay >= wait_second / 2  &&
                         !X_Busy && !Y_Busy && !Z_Busy)
                     {
                         wait_delay = 0;
                         Move_Safe_High();
                         now_step = 61;
-
                     }
                     else if (now_step == 61 &&
                         wait_delay >= wait_second / 2 &&
@@ -2059,14 +2057,16 @@ namespace BRC
                     }
 
 
-
+                    //else if (now_step == 70 &&
+                    //   wait_delay >= wait_second / 2 &&
+                    //   !X_Busy && !Y_Busy && !Z_Busy)
                     else if (now_step == 70 &&
-                        wait_delay >= wait_second / 2 &&
-                        IO_Can_Cut && Andor_Error_Meaasge.IndexOf("success") >= 0 &&
                         !X_Busy && !Y_Busy && !Z_Busy)
                     {
                         wait_delay = 0;
-                        //  button_Close_Hz_Click(sender, e);
+                        AxisStop(comboBox_Axis_Num_X.SelectedIndex);
+                        AxisStop(comboBox_Axis_Num_Y.SelectedIndex);
+                        AxisStop(comboBox_Axis_Num_Z.SelectedIndex);
                         Close_Hz();
                         now_step = 71;
                     }
@@ -2152,23 +2152,7 @@ namespace BRC
                         {
                             if (zaberMotion == null)
                                 zaberMotion = new ZaberMotion(textBox_ZaberComPort.Text);
-                            logger.Write_Logger("Start Process");
-                            //textBox_Scan_Start_Z.Text = textBox_Z_Down.Text;
-                            need_scan = true;
-                            button_Move_To_Standby_All.Enabled = false;
-                            comboBox_Process_Name.Enabled = false;
-                            button_Move_Micro.Enabled = false;
-                            button_Load_Andor.Enabled = false;
-                            panel_Motion.Enabled = false;
-                            panel_Parameter.Enabled = false;
-                            button_Step_Reset.Enabled = false;
-                            StreamWriter sw_ = new StreamWriter(System.Windows.Forms.Application.StartupPath + "\\Setup\\Last_Process_Name.txt");
-                            sw_.WriteLine(comboBox_Process_Name.Text);
-                            sw_.Close();
-                            button_Start.Text = "掃  描  停  止";
-                            button_Start.BackColor = Color.Red;
-                            button_Auto.Enabled = false;
-                            panel_Set_Scan_Data.Enabled = false;
+                            Resum();
                         }
                         else
                         {
@@ -2190,39 +2174,40 @@ namespace BRC
             {
                 need_scan = false;
 
-                //while (IsAutoRun == true)
-                //{ }
-                //if (IsAutoRunGetPauseRun == true)
-                //{
-                //    IsAutoRunGetPauseRun = false;
-                //    IsPauseRun = false;
-                //    if (now_step <= 17)//預留暫停layer不減一
-                //    {
-                //        now_step = 70;
-                //    }
-                //    else if (now_step < 30)//預留暫停layer減一
-                //    {
-                //        now_step = 70;
-                //        int now_layer = Convert.ToInt32(textBox_Now_layer.Text);
-                //        if (now_layer <= 1)
-                //        {
-                //            textBox_Now_layer.Text = "0";
-                //        }
-                //        else
-                //        {
-                //            textBox_Now_layer.Text = Convert.ToString(now_layer + 1);
-                //        }
-                //    }
-                //}
-                //else
-                //{
-                //    if (now_step < 30)
-                //    {
-                //        now_step = 70;
-                //        textBox_Now_layer.Text = "0";
-                //    }
-                //}
-              
+                while (IsAutoRun == true)
+                { }
+                if (IsAutoRunGetPauseRun == true)
+                {
+                    IsAutoRunGetPauseRun = false;
+                    IsPauseRun = false;
+                    if (now_step <= 17)//預留暫停layer不減一
+                    {
+                        now_step = 70;
+                    }
+                    else if (now_step < 30)//預留暫停layer減一
+                    {
+                        now_step = 70;
+                        int now_layer = Convert.ToInt32(textBox_Now_layer.Text);
+                        if (now_layer <= 1)
+                        {
+                            textBox_Now_layer.Text = "0";
+                        }
+                        else
+                        {
+                            textBox_Now_layer.Text = Convert.ToString(now_layer + 1);
+                        }
+                    }
+                }
+                else
+                {
+                    if (now_step < 30)
+                    {
+                        now_step = 70;
+                        textBox_Now_layer.Text = "0";
+                    }
+                }
+
+
                 //   now_step = 30;
                 button_Move_To_Standby_All.Enabled = true;
                 comboBox_Process_Name.Enabled = true;
@@ -2230,7 +2215,7 @@ namespace BRC
                 button_Load_Andor.Enabled = true;
 
                 panel_Motion.Enabled = true;
-                //panel_Parameter.Enabled = true;
+                panel_Parameter.Enabled = true;
                 button_Step_Reset.Enabled = true;
                 button_Start.Text = "掃  描  開  始";
                 button_Start.BackColor = Color.LightGreen;
@@ -2243,11 +2228,43 @@ namespace BRC
             }
         }
 
+        private void Resum()
+        {
+            try
+            {
+                if (now_step < 50)
+                {
+                    logger.Write_Logger("Start Process");
+                    //textBox_Scan_Start_Z.Text = textBox_Z_Down.Text;
+                    need_scan = true;
+                    button_Move_To_Standby_All.Enabled = false;
+                    comboBox_Process_Name.Enabled = false;
+                    button_Move_Micro.Enabled = false;
+                    button_Load_Andor.Enabled = false;
+                    panel_Motion.Enabled = false;
+                    panel_Parameter.Enabled = false;
+                    button_Step_Reset.Enabled = false;
+                    StreamWriter sw_ = new StreamWriter(System.Windows.Forms.Application.StartupPath + "\\Setup\\Last_Process_Name.txt");
+                    sw_.WriteLine(comboBox_Process_Name.Text);
+                    sw_.Close();
+                    button_Start.Text = "掃  描  停  止";
+                    button_Start.BackColor = Color.Red;
+                    button_Auto.Enabled = false;
+                    panel_Set_Scan_Data.Enabled = false;
+                }
+              
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }        
+        }
 
 
 
 
-        private void comboBox_Process_Name_SelectedIndexChanged(object sender, EventArgs e)
+            private void comboBox_Process_Name_SelectedIndexChanged(object sender, EventArgs e)
         {
             logger.Write_Logger("Load Parameter " + comboBox_Process_Name.Text);
             Form_Value_Initial(System.Windows.Forms.Application.StartupPath + "\\Setup\\Process\\" + comboBox_Process_Name.Text + ".xml");
@@ -3066,7 +3083,7 @@ namespace BRC
                 Data[0] = "";
                 Data[1] = "";
                 Data[2] = "";
-                int Cut_End_X = Convert.ToInt32((Convert.ToInt32(textBox_Cut_End_X.Text) + 50000) * Movement_Ratio);
+                int Cut_End_X = Convert.ToInt32((Convert.ToInt32(textBox_Cut_End_X.Text) + 40000) * Movement_Ratio);
                 int Cut_End_Y = Convert.ToInt32(Convert.ToInt32(textBox_Cut_End_Y.Text) * Movement_Ratio);
                 Data[comboBox_Axis_Num_X.SelectedIndex] = Convert.ToString(Cut_End_X);
                 Data[comboBox_Axis_Num_Y.SelectedIndex] = Convert.ToString(Cut_End_Y);
@@ -3081,7 +3098,7 @@ namespace BRC
             }
         }
 
-        private void Move_Back10mm()
+        private void Move_BackNow5mm()
         {
             try
             {
@@ -3107,7 +3124,7 @@ namespace BRC
                 Data[0] = "";
                 Data[1] = "";
                 Data[2] = "";
-                int Cut_End_X = Convert.ToInt32((Convert.ToInt32(textBox_Now_Position_X.Text) + 100000) * Movement_Ratio);
+                int Cut_End_X = Convert.ToInt32((Convert.ToInt32(textBox_Now_Position_X.Text) + 40000) * Movement_Ratio);
                 int Cut_End_Y = Convert.ToInt32(Convert.ToInt32(textBox_Now_Position_Y.Text) * Movement_Ratio);
                 Data[comboBox_Axis_Num_X.SelectedIndex] = Convert.ToString(Cut_End_X);
                 Data[comboBox_Axis_Num_Y.SelectedIndex] = Convert.ToString(Cut_End_Y);
