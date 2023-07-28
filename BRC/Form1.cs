@@ -1116,11 +1116,11 @@ namespace BRC
         {
             try
             {
-              //  Move_Back10mm();
+                //  Move_Back10mm();
                 //  Move_Back1mm();
                 //button_Move_XY_Cut_Start_Click(sender, e);
-                
-             //   Task.Delay(2500).Wait();
+
+                //   Task.Delay(2500).Wait();
                 Move_Safe_High();
                 /*  int X_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_X.Text) * Movement_Ratio);
                   int Y_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_Y.Text) * Movement_Ratio);
@@ -2017,7 +2017,7 @@ namespace BRC
                         now_step = 10;
                     }
                     else if (now_step == 60 &&
-                        wait_delay >= wait_second / 2  &&
+                        wait_delay >= wait_second / 2 &&
                         !X_Busy && !Y_Busy && !Z_Busy)
                     {
                         wait_delay = 0;
@@ -2252,13 +2252,13 @@ namespace BRC
                     button_Auto.Enabled = false;
                     panel_Set_Scan_Data.Enabled = false;
                 }
-              
+
             }
             catch (Exception)
             {
 
                 throw;
-            }        
+            }
         }
 
 
