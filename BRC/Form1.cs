@@ -31,6 +31,15 @@ namespace BRC
         private bool IsAutoRun = false;
         private bool IsPauseRun = false;
         private bool IsAutoRunGetPauseRun = false;
+        private readonly MachineType BRCMachineType = MachineType.NewFusion;
+
+
+        public enum MachineType
+        {
+            OldNoFusion = 0,
+            NewFusion = 1
+        }
+
 
         public Form1()
         {
@@ -149,12 +158,15 @@ namespace BRC
             //初始化震動刀功能
             nIHighFrequencyCutting = new NIHighFrequencyCutting();
 
-            m_Rest_Fusion = new Rest_Fusion("localhost");
-            await m_Rest_Fusion.Initial();
-
-            if (backgroundWorker_FusionRest.IsBusy == false)
+            if (BRCMachineType == MachineType.NewFusion)
             {
-                backgroundWorker_FusionRest.RunWorkerAsync();
+                m_Rest_Fusion = new Rest_Fusion("localhost");
+                await m_Rest_Fusion.Initial();
+
+                if (backgroundWorker_FusionRest.IsBusy == false)
+                {
+                    backgroundWorker_FusionRest.RunWorkerAsync();
+                }
             }
         }
         private void button_Save_Parameter_Click(object sender, EventArgs e)
@@ -548,10 +560,10 @@ namespace BRC
                 #endregion
 
 
-                textBox_Now_FusionPosition_X.Text =  m_Rest_Fusion.m_NowX;
+                textBox_Now_FusionPosition_X.Text = m_Rest_Fusion.m_NowX;
                 textBox_Now_FusionPosition_Y.Text = m_Rest_Fusion.m_NowY;
                 textBox_Now_FusionState.Text = m_Rest_Fusion.State;
-                textBox_Now_FusionErrorMessage.Text =  m_Rest_Fusion.ErrorMessage;
+                textBox_Now_FusionErrorMessage.Text = m_Rest_Fusion.ErrorMessage;
             }
             catch (Exception error)
             {
@@ -1416,44 +1428,54 @@ namespace BRC
         }
         private void button_Start_Scan_Click(object sender, EventArgs e)
         {
-            //IO_Can_Cut = false;
-            //Andor_Error_Meaasge = "";
-            //andor_file_address = textBox_Andor_Exe_Address.Text;
-            //backgroundWorker_Andor.RunWorkerAsync();
-
-            if (m_FusionIsFinished == true)
+            if (BRCMachineType == MachineType.NewFusion)
             {
-                Protocal_name = comboBox_Process_Name.Text;
-                int idx = Convert.ToInt32(textBox_Now_layer.Text)+1;
-                logger.Write_Logger("Start Scan");
+                if (m_FusionIsFinished == true)
+                {
+                    Protocal_name = comboBox_Process_Name.Text;
+                    int idx = Convert.ToInt32(textBox_Now_layer.Text) + 1;
+                    logger.Write_Logger("Start Scan");
 
-                m_FusionIsStarted = false;
-                m_FusionIsFinished = false;
-                m_FusionParam = Protocal_name + "," + idx;
-                nowWorkType = FusionWork.RunProtocolSwitch;
+                    m_FusionIsStarted = false;
+                    m_FusionIsFinished = false;
+                    m_FusionParam = Protocal_name + "," + idx;
+                    nowWorkType = FusionWork.RunProtocolSwitch;
+                }
             }
-            //timer_Andor.Enabled = true;
+            else
+            {
+                logger.Write_Logger("Start Scan");
+                IO_Can_Cut = false;
+                Andor_Error_Meaasge = "";
+                andor_file_address = textBox_Andor_Exe_Address.Text;
+                Protocal_name = comboBox_Process_Name.Text;
+                backgroundWorker_Andor.RunWorkerAsync();
+                timer_Andor.Enabled = true;
+            }
         }
         private void button_Move_XY_Cut_Start_Click(object sender, EventArgs e)
         {
             try
             {
                 Move_XY_Cut_Start_Click();
-                if (m_FusionIsFinished == true)
+                if (BRCMachineType == MachineType.NewFusion)
                 {
-                    try
+                    if (m_FusionIsFinished == true)
                     {
-                        m_FusionParam = Convert.ToDouble(textBox_Cut_Start_FusionX.Text).ToString("#0.0000") + "," + Convert.ToDouble(textBox_Cut_Start_FusionY.Text).ToString("#0.0000");
+                        try
+                        {
+                            m_FusionParam = Convert.ToDouble(textBox_Cut_Start_FusionX.Text).ToString("#0.0000") + "," + Convert.ToDouble(textBox_Cut_Start_FusionY.Text).ToString("#0.0000");
+                        }
+                        catch (Exception)
+                        {
+                            m_FusionParam = Convert.ToDouble("0").ToString("#0.0000") + "," + Convert.ToDouble("0").ToString("#0.0000");
+                        }
+                        m_FusionIsStarted = false;
+                        m_FusionIsFinished = false;
+                        nowWorkType = FusionWork.MoveAbsManual;
                     }
-                    catch (Exception)
-                    {
-                        m_FusionParam = Convert.ToDouble("0").ToString("#0.0000") + "," + Convert.ToDouble("0").ToString("#0.0000");
-                    }
-
-                    m_FusionIsStarted = false;
-                    m_FusionIsFinished = false;
-                    nowWorkType = FusionWork.MoveAbsManual;
                 }
+
             }
             catch (Exception error)
             {
@@ -1841,276 +1863,523 @@ namespace BRC
             #region Process Step
             else
             {
+
+
                 if (need_scan)
                 {
-                    IsAutoRun = true;
-                    if (now_step == 10 &&
-                        wait_delay >= wait_second &&
-                        !X_Busy && !Y_Busy && !Z_Busy)
+                    #region Process BRCMachineType
+                    if (BRCMachineType == MachineType.NewFusion)
                     {
-                        wait_delay = 0;
-                        //   button_Z_ORG_Click(sender, e);//Z軸原點復歸
-                        Move_Safe_High();
-                        now_step = 11;
-                    }
-                    else if (now_step == 11 &&
-                        wait_delay >= wait_second &&
-                        !Z_Busy
-                        //&& (Convert.ToDouble(textBox_Now_Position_Z.Text) == 0 || Convert.ToDouble(textBox_Now_Position_Z.Text) == Convert.ToDouble(textBox_Safety_Hight.Text))
-                        )
-                    {
-                        Move_Safe_High();
-                        now_step = 12;
-                    }
-                    else if (now_step == 12 &&
-                        wait_delay >= wait_second &&
-                        !Z_Busy &&
-                        Convert.ToDouble(textBox_Now_Position_Z.Text) <= (Convert.ToInt32(textBox_Safety_Hight.Text) + Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_Z.Text) >= (Convert.ToInt32(textBox_Safety_Hight.Text) - Position_Range))
-                    {
-                        wait_delay = 0;
-                        button_Move_XY_Micro_Click(sender, e);
-                        now_step = 13;
-                    }
-                    else if (now_step == 13 &&
-                        wait_delay >= wait_second &&
-                        !X_Busy && !Y_Busy &&
-                        Convert.ToDouble(textBox_Now_Position_X.Text) <= (Convert.ToInt32(textBox_Scan_Start_X.Text) + Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_X.Text) >= (Convert.ToInt32(textBox_Scan_Start_X.Text) - Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_Y.Text) <= (Convert.ToInt32(textBox_Scan_Start_Y.Text) + Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_Y.Text) >= (Convert.ToInt32(textBox_Scan_Start_Y.Text) - Position_Range))
-                    {
-                        wait_delay = 0;
-                        button_Move_Z_Micro_Click(sender, e);
-                        now_step = 14;
-                    }
-                    else if (now_step == 14 &&
-                        wait_delay >= wait_second * 8 &&
-                        !Z_Busy &&
-                        m_Rest_Fusion.State == "Idle" &&
-                        m_FusionIsFinished == true)
-                    {
-                        wait_delay = 0;
-                        IO_Can_Cut = false;
-                        pictureBox_Scanning.Image = Properties.Resources.Green;
-                        button_Start_Scan_Click(sender, e);
-                        now_step = 15;
-                    }
-                    else if (now_step == 15 &&
-                        wait_delay >= wait_second &&
-                        //IO_Can_Cut && Andor_Error_Meaasge.IndexOf("success") >= 0 &&
-                        m_Rest_Fusion.State == "Idle" &&
-                        m_FusionIsFinished == true
-                        )//7.移動到安全高度
-                    {
-                        pictureBox_Scanning.Image = Properties.Resources.Red;
-                        IO_Can_Cut = false;
-                        wait_delay = 0;
-                        Move_Safe_High();
-                        int totalCutLayer = 0;
-                        try
+                        #region Process NewFusion
+                        IsAutoRun = true;
+                        if (now_step == 10 &&
+                            wait_delay >= wait_second &&
+                            !X_Busy && !Y_Busy && !Z_Busy)
                         {
-                            totalCutLayer = Convert.ToInt32(textBox_Cut_Layer.Text);
+                            wait_delay = 0;
+                            //   button_Z_ORG_Click(sender, e);//Z軸原點復歸
+                            Move_Safe_High();
+                            now_step = 11;
                         }
-                        catch (Exception)
+                        else if (now_step == 11 &&
+                            wait_delay >= wait_second &&
+                            !Z_Busy
+                            //&& (Convert.ToDouble(textBox_Now_Position_Z.Text) == 0 || Convert.ToDouble(textBox_Now_Position_Z.Text) == Convert.ToDouble(textBox_Safety_Hight.Text))
+                            )
                         {
-                            totalCutLayer = 0;
+                            Move_Safe_High();
+                            now_step = 12;
                         }
-                        if (Convert.ToInt32(textBox_Now_layer.Text) >= totalCutLayer)
-                            now_step = 32;
-                        else
-                            now_step = 16;
-                    }
-                    else if (now_step == 16 && wait_delay >= wait_second && !Z_Busy &&
-                        Convert.ToDouble(textBox_Now_Position_Z.Text) <= (Convert.ToInt32(textBox_Safety_Hight.Text) + Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_Z.Text) >= (Convert.ToInt32(textBox_Safety_Hight.Text) - Position_Range) &&
-                        m_FusionIsFinished == true)//8. 移動到切割起點XY
-                    {
-                        wait_delay = 0;
-                        Move_XY_Cut_Start_Click();
-                        if (m_FusionIsFinished == true)
+                        else if (now_step == 12 &&
+                            wait_delay >= wait_second &&
+                            !Z_Busy &&
+                            Convert.ToDouble(textBox_Now_Position_Z.Text) <= (Convert.ToInt32(textBox_Safety_Hight.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Z.Text) >= (Convert.ToInt32(textBox_Safety_Hight.Text) - Position_Range))
                         {
-                            double FusionPos_X = 0;
-                            double FusionPos_Y = 0;
+                            wait_delay = 0;
+                            button_Move_XY_Micro_Click(sender, e);
+                            now_step = 13;
+                        }
+                        else if (now_step == 13 &&
+                            wait_delay >= wait_second &&
+                            !X_Busy && !Y_Busy &&
+                            Convert.ToDouble(textBox_Now_Position_X.Text) <= (Convert.ToInt32(textBox_Scan_Start_X.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_X.Text) >= (Convert.ToInt32(textBox_Scan_Start_X.Text) - Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Y.Text) <= (Convert.ToInt32(textBox_Scan_Start_Y.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Y.Text) >= (Convert.ToInt32(textBox_Scan_Start_Y.Text) - Position_Range))
+                        {
+                            wait_delay = 0;
+                            button_Move_Z_Micro_Click(sender, e);
+                            now_step = 14;
+                        }
+                        else if (now_step == 14 &&
+                            wait_delay >= wait_second * 8 &&
+                            !Z_Busy &&
+                            m_Rest_Fusion.State == "Idle" &&
+                            m_FusionIsFinished == true)
+                        {
+                            wait_delay = 0;
+                            IO_Can_Cut = false;
+                            pictureBox_Scanning.Image = Properties.Resources.Green;
+                            button_Start_Scan_Click(sender, e);
+                            now_step = 15;
+                        }
+                        else if (now_step == 15 &&
+                            wait_delay >= wait_second &&
+                            //IO_Can_Cut && Andor_Error_Meaasge.IndexOf("success") >= 0 &&
+                            m_Rest_Fusion.State == "Idle" &&
+                            m_FusionIsFinished == true
+                            )//7.移動到安全高度
+                        {
+                            pictureBox_Scanning.Image = Properties.Resources.Red;
+                            IO_Can_Cut = false;
+                            wait_delay = 0;
+                            Move_Safe_High();
+                            int totalCutLayer = 0;
                             try
                             {
-                                FusionPos_X = Convert.ToDouble(textBox_Cut_Start_FusionX.Text);
-                                FusionPos_Y = Convert.ToDouble(textBox_Cut_Start_FusionY.Text);
+                                totalCutLayer = Convert.ToInt32(textBox_Cut_Layer.Text);
                             }
                             catch (Exception)
                             {
-
-                                throw;
+                                totalCutLayer = 0;
                             }
-                            m_FusionParam = FusionPos_X.ToString("#0.0000") + "," + FusionPos_Y.ToString("#0.0000");
-                            m_FusionIsStarted = false;
-                            m_FusionIsFinished = false;
-                            nowWorkType = FusionWork.MoveAbs;
+                            if (Convert.ToInt32(textBox_Now_layer.Text) >= totalCutLayer)
+                                now_step = 32;
+                            else
+                                now_step = 16;
                         }
-                        now_step = 17;
-                    }
-                    else if (now_step == 17 &&
-                        wait_delay >= wait_second / 2 &&
-                        !X_Busy && !Y_Busy &&
-                        Convert.ToDouble(textBox_Now_Position_X.Text) <= (Convert.ToInt32(textBox_Cut_Start_X.Text) + Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_X.Text) >= (Convert.ToInt32(textBox_Cut_Start_X.Text) - Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_Y.Text) <= (Convert.ToInt32(textBox_Cut_Start_Y.Text) + Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_Y.Text) >= (Convert.ToInt32(textBox_Cut_Start_Y.Text) - Position_Range) &&
-                         m_FusionIsFinished == true)//9.移動到切割區Z
-                    {
-                        wait_delay = 0;
-                        int now_layer = Convert.ToInt32(textBox_Now_layer.Text);
-                        textBox_Now_layer.Text = Convert.ToString(now_layer + 1);
-                        button_Move_Z_Cut_Click(sender, e);
-
-                        if (zaberMotion == null)//如果輸送帶沒有初始化過 ， 就連線
-                            zaberMotion = new ZaberMotion(textBox_ZaberComPort.Text);
-                        now_step = 18;
-
-
-                    }
-                    else if (now_step == 18 &&
-                        wait_delay >= wait_second / 2 &&
-                        !Z_Busy)  //10.開啟震動刀
-                    {
-                        pictureBox_Cut.Image = Properties.Resources.Green;
-                        wait_delay = 0;
-                        button_Start_Hz_Click(sender, e);
-
-
-                        now_step = 19;
-                    }
-                    else if (now_step == 19 &&
-                        wait_delay >= wait_second * 2 &&
-                        !Z_Busy) //11.移動到切割xy終點
-                    {
-                        wait_delay = 0;
-                        if (!Cut_And_Scan_Finish)
+                        else if (now_step == 16 && wait_delay >= wait_second && !Z_Busy &&
+                            Convert.ToDouble(textBox_Now_Position_Z.Text) <= (Convert.ToInt32(textBox_Safety_Hight.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Z.Text) >= (Convert.ToInt32(textBox_Safety_Hight.Text) - Position_Range) &&
+                            m_FusionIsFinished == true)//8. 移動到切割起點XY
                         {
-                            button_Move_XY_Cut_End_Click(sender, e);
-                            now_step = 20;
+                            wait_delay = 0;
+                            Move_XY_Cut_Start_Click();
+                            if (m_FusionIsFinished == true)
+                            {
+                                double FusionPos_X = 0;
+                                double FusionPos_Y = 0;
+                                try
+                                {
+                                    FusionPos_X = Convert.ToDouble(textBox_Cut_Start_FusionX.Text);
+                                    FusionPos_Y = Convert.ToDouble(textBox_Cut_Start_FusionY.Text);
+                                }
+                                catch (Exception)
+                                {
+
+                                    throw;
+                                }
+                                m_FusionParam = FusionPos_X.ToString("#0.0000") + "," + FusionPos_Y.ToString("#0.0000");
+                                m_FusionIsStarted = false;
+                                m_FusionIsFinished = false;
+                                nowWorkType = FusionWork.MoveAbs;
+                            }
+                            now_step = 17;
                         }
-                        else
-                            now_step = 30;
-                    }
-                    else if (now_step == 20 &&
-                        wait_delay >= wait_second &&
-                        !X_Busy && !Y_Busy &&
-                        Convert.ToDouble(textBox_Now_Position_X.Text) <= (Convert.ToInt32(textBox_Cut_End_X.Text) + Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_X.Text) >= (Convert.ToInt32(textBox_Cut_End_X.Text) - Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_Y.Text) <= (Convert.ToInt32(textBox_Cut_End_Y.Text) + Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_Y.Text) >= (Convert.ToInt32(textBox_Cut_End_Y.Text) - Position_Range))//12.關閉震動刀  ， 退後 
-                    {
-                        wait_delay = 0;
-                        pictureBox_Cut.Image = Properties.Resources.Red;
-                        //button_Move_Safe_High_Click(sender, e);
-                        //       button_Close_Hz_Click(sender, e);
-                        Close_Hz();
-
-
-                        now_step = 21;
-                    }
-                    else if (now_step == 21 &&
-                       wait_delay >= wait_second &&
-                       !X_Busy && !Y_Busy)
-                    {
-                        wait_delay = 0;
-                        Move_Back5mm();
-                        now_step = 22;
-                    }
-                    else if (now_step == 22 &&
-                        wait_delay >= wait_second &&
-                        !X_Busy && !Y_Busy)
-                    {
-
-                        wait_delay = 0;
-                        //   button_Z_ORG_Click(sender, e);
-                        Move_Safe_High();
-                        now_step = 23;
-                    }
-                    else if (now_step == 23 &&
-                        wait_delay >= wait_second &&
-                        !Z_Busy
-                        //  &&Convert.ToDouble(textBox_Now_Position_Z.Text) <= (0 + Position_Range) &&
-                        //   Convert.ToDouble(textBox_Now_Position_Z.Text) >= (0 - Position_Range)
-                        )
-                    {
-                        wait_delay = 0;
-                        //   button_Close_Hz_Click(sender, e);
-                        if (IsPauseRun == true)
+                        else if (now_step == 17 &&
+                            wait_delay >= wait_second / 2 &&
+                            !X_Busy && !Y_Busy &&
+                            Convert.ToDouble(textBox_Now_Position_X.Text) <= (Convert.ToInt32(textBox_Cut_Start_X.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_X.Text) >= (Convert.ToInt32(textBox_Cut_Start_X.Text) - Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Y.Text) <= (Convert.ToInt32(textBox_Cut_Start_Y.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Y.Text) >= (Convert.ToInt32(textBox_Cut_Start_Y.Text) - Position_Range) &&
+                             m_FusionIsFinished == true)//9.移動到切割區Z
                         {
-                            IsAutoRunGetPauseRun = true;
+                            wait_delay = 0;
+                            int now_layer = Convert.ToInt32(textBox_Now_layer.Text);
+                            textBox_Now_layer.Text = Convert.ToString(now_layer + 1);
+                            button_Move_Z_Cut_Click(sender, e);
+
+                            if (zaberMotion == null)//如果輸送帶沒有初始化過 ， 就連線
+                                zaberMotion = new ZaberMotion(textBox_ZaberComPort.Text);
+                            now_step = 18;
+
+
                         }
-                        now_step = 11;
-                    }
-                    else if (now_step == 30 &&
-                        wait_delay >= wait_second / 2)
-                    {
-                        wait_delay = 0;
-                        //  button_Close_Hz_Click(sender, e);
-                        Close_Hz();
-                        now_step = 31;
-                    }
-                    else if (now_step == 31 &&
-                        wait_delay >= wait_second / 2)
-                    {
-                        wait_delay = 0;
-                        Move_Safe_High();
-                        now_step = 32;
-                    }
-                    else if (now_step == 32 &&
-                        wait_delay >= wait_second &&
-                        !Z_Busy &&
-                        Convert.ToDouble(textBox_Now_Position_Z.Text) <= (Convert.ToInt32(textBox_Safety_Hight.Text) + Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_Z.Text) >= (Convert.ToInt32(textBox_Safety_Hight.Text) - Position_Range))
-                    {
-                        wait_delay = 0;
-                        button_Move_Standby_Click(sender, e);
-                        now_step = 33;
-                    }
-                    else if (now_step == 33 &&
-                        wait_delay >= wait_second &&
-                        !X_Busy && !Y_Busy &&
-                        Convert.ToDouble(textBox_Now_Position_X.Text) <= (Convert.ToInt32(textBox_Standby_X.Text) + Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_X.Text) >= (Convert.ToInt32(textBox_Standby_X.Text) - Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_Y.Text) <= (Convert.ToInt32(textBox_Standby_Y.Text) + Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_Y.Text) >= (Convert.ToInt32(textBox_Standby_Y.Text) - Position_Range))
-                    {
-                        //   button_Start_Click(sender, e);
-                        textBox_Now_layer.Text = "0";
-                        now_step = 34;
-                        wait_delay = 0;
-
-                        logger.Write_Logger("Scan Finish");
-                        MessageBox.Show("掃描完畢!");
-                    }
-                    else if (now_step == 34)
-                    {
+                        else if (now_step == 18 &&
+                            wait_delay >= wait_second / 2 &&
+                            !Z_Busy)  //10.開啟震動刀
+                        {
+                            pictureBox_Cut.Image = Properties.Resources.Green;
+                            wait_delay = 0;
+                            button_Start_Hz_Click(sender, e);
 
 
-                        //button_Move_To_Standby_All.Enabled = true;
-                        //comboBox_Process_Name.Enabled = true;
-                        //button_Move_Micro.Enabled = true;
-                        //button_Load_Andor.Enabled = true;
+                            now_step = 19;
+                        }
+                        else if (now_step == 19 &&
+                            wait_delay >= wait_second * 2 &&
+                            !Z_Busy) //11.移動到切割xy終點
+                        {
+                            wait_delay = 0;
+                            if (!Cut_And_Scan_Finish)
+                            {
+                                button_Move_XY_Cut_End_Click(sender, e);
+                                now_step = 20;
+                            }
+                            else
+                                now_step = 30;
+                        }
+                        else if (now_step == 20 &&
+                            wait_delay >= wait_second &&
+                            !X_Busy && !Y_Busy &&
+                            Convert.ToDouble(textBox_Now_Position_X.Text) <= (Convert.ToInt32(textBox_Cut_End_X.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_X.Text) >= (Convert.ToInt32(textBox_Cut_End_X.Text) - Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Y.Text) <= (Convert.ToInt32(textBox_Cut_End_Y.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Y.Text) >= (Convert.ToInt32(textBox_Cut_End_Y.Text) - Position_Range))//12.關閉震動刀  ， 退後 
+                        {
+                            wait_delay = 0;
+                            pictureBox_Cut.Image = Properties.Resources.Red;
+                            //button_Move_Safe_High_Click(sender, e);
+                            //       button_Close_Hz_Click(sender, e);
+                            Close_Hz();
 
-                        //panel_Motion.Enabled = true;
-                        ////panel_Parameter.Enabled = true;
-                        //button_Step_Reset.Enabled = true;
-                        //button_Start.Text = "掃  描  開  始";
-                        //button_Start.BackColor = Color.LightGreen;
-                        //button_Auto.Enabled = true;
-                        //panel_Set_Scan_Data.Enabled = true;
-                        //need_scan = false;
+
+                            now_step = 21;
+                        }
+                        else if (now_step == 21 &&
+                           wait_delay >= wait_second &&
+                           !X_Busy && !Y_Busy)
+                        {
+                            wait_delay = 0;
+                            Move_Back5mm();
+                            now_step = 22;
+                        }
+                        else if (now_step == 22 &&
+                            wait_delay >= wait_second &&
+                            !X_Busy && !Y_Busy)
+                        {
+
+                            wait_delay = 0;
+                            //   button_Z_ORG_Click(sender, e);
+                            Move_Safe_High();
+                            now_step = 23;
+                        }
+                        else if (now_step == 23 &&
+                            wait_delay >= wait_second &&
+                            !Z_Busy
+                            //  &&Convert.ToDouble(textBox_Now_Position_Z.Text) <= (0 + Position_Range) &&
+                            //   Convert.ToDouble(textBox_Now_Position_Z.Text) >= (0 - Position_Range)
+                            )
+                        {
+                            wait_delay = 0;
+                            //   button_Close_Hz_Click(sender, e);
+                            if (IsPauseRun == true)
+                            {
+                                IsAutoRunGetPauseRun = true;
+                            }
+                            now_step = 11;
+                        }
+                        else if (now_step == 30 &&
+                            wait_delay >= wait_second / 2)
+                        {
+                            wait_delay = 0;
+                            //  button_Close_Hz_Click(sender, e);
+                            Close_Hz();
+                            now_step = 31;
+                        }
+                        else if (now_step == 31 &&
+                            wait_delay >= wait_second / 2)
+                        {
+                            wait_delay = 0;
+                            Move_Safe_High();
+                            now_step = 32;
+                        }
+                        else if (now_step == 32 &&
+                            wait_delay >= wait_second &&
+                            !Z_Busy &&
+                            Convert.ToDouble(textBox_Now_Position_Z.Text) <= (Convert.ToInt32(textBox_Safety_Hight.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Z.Text) >= (Convert.ToInt32(textBox_Safety_Hight.Text) - Position_Range))
+                        {
+                            wait_delay = 0;
+                            button_Move_Standby_Click(sender, e);
+                            now_step = 33;
+                        }
+                        else if (now_step == 33 &&
+                            wait_delay >= wait_second &&
+                            !X_Busy && !Y_Busy &&
+                            Convert.ToDouble(textBox_Now_Position_X.Text) <= (Convert.ToInt32(textBox_Standby_X.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_X.Text) >= (Convert.ToInt32(textBox_Standby_X.Text) - Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Y.Text) <= (Convert.ToInt32(textBox_Standby_Y.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Y.Text) >= (Convert.ToInt32(textBox_Standby_Y.Text) - Position_Range))
+                        {
+                            //   button_Start_Click(sender, e);
+                            textBox_Now_layer.Text = "0";
+                            now_step = 34;
+                            wait_delay = 0;
+
+                            logger.Write_Logger("Scan Finish");
+                            MessageBox.Show("掃描完畢!");
+                        }
+                        else if (now_step == 34)
+                        {
+
+
+                            //button_Move_To_Standby_All.Enabled = true;
+                            //comboBox_Process_Name.Enabled = true;
+                            //button_Move_Micro.Enabled = true;
+                            //button_Load_Andor.Enabled = true;
+
+                            //panel_Motion.Enabled = true;
+                            ////panel_Parameter.Enabled = true;
+                            //button_Step_Reset.Enabled = true;
+                            //button_Start.Text = "掃  描  開  始";
+                            //button_Start.BackColor = Color.LightGreen;
+                            //button_Auto.Enabled = true;
+                            //panel_Set_Scan_Data.Enabled = true;
+                            //need_scan = false;
+                            IsAutoRun = false;
+                            Pause();
+                            now_step = 10;
+                        }
                         IsAutoRun = false;
-                        Pause();
-                        now_step = 10;
+                        if (IsAutoRunGetPauseRun == true && need_scan == true)
+                        {
+                            Pause();
+                            logger.Write_Logger("Pause Process");
+                        }
+                        #endregion
                     }
-                    IsAutoRun = false;
-                    if (IsAutoRunGetPauseRun == true && need_scan == true)
+                    else
                     {
-                        Pause();
-                        logger.Write_Logger("Pause Process");
+                        #region Process OldNoFusion
+                        IsAutoRun = true;
+                        if (now_step == 10 &&
+                            wait_delay >= wait_second &&
+                            !X_Busy && !Y_Busy && !Z_Busy)
+                        {
+                            wait_delay = 0;
+                            //   button_Z_ORG_Click(sender, e);//Z軸原點復歸
+                            Move_Safe_High();
+                            now_step = 11;
+                        }
+                        else if (now_step == 11 &&
+                            wait_delay >= wait_second &&
+                            !Z_Busy
+                            //&& (Convert.ToDouble(textBox_Now_Position_Z.Text) == 0 || Convert.ToDouble(textBox_Now_Position_Z.Text) == Convert.ToDouble(textBox_Safety_Hight.Text))
+                            )
+                        {
+                            Move_Safe_High();
+                            now_step = 12;
+                        }
+                        else if (now_step == 12 &&
+                            wait_delay >= wait_second &&
+                            !Z_Busy &&
+                            Convert.ToDouble(textBox_Now_Position_Z.Text) <= (Convert.ToInt32(textBox_Safety_Hight.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Z.Text) >= (Convert.ToInt32(textBox_Safety_Hight.Text) - Position_Range))
+                        {
+                            wait_delay = 0;
+                            button_Move_XY_Micro_Click(sender, e);
+                            now_step = 13;
+                        }
+                        else if (now_step == 13 &&
+                            wait_delay >= wait_second &&
+                            !X_Busy && !Y_Busy &&
+                            Convert.ToDouble(textBox_Now_Position_X.Text) <= (Convert.ToInt32(textBox_Scan_Start_X.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_X.Text) >= (Convert.ToInt32(textBox_Scan_Start_X.Text) - Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Y.Text) <= (Convert.ToInt32(textBox_Scan_Start_Y.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Y.Text) >= (Convert.ToInt32(textBox_Scan_Start_Y.Text) - Position_Range))
+                        {
+                            wait_delay = 0;
+                            button_Move_Z_Micro_Click(sender, e);
+                            now_step = 14;
+                        }
+                        else if (now_step == 14 &&
+                            wait_delay >= wait_second * 8 &&
+                            !Z_Busy)
+                        {
+                            wait_delay = 0;
+                            IO_Can_Cut = false;
+                            pictureBox_Scanning.Image = Properties.Resources.Green;
+                            button_Start_Scan_Click(sender, e);
+                            now_step = 15;
+                        }
+                        else if (now_step == 15 &&
+                            wait_delay >= wait_second &&
+                            IO_Can_Cut && Andor_Error_Meaasge.IndexOf("success") >= 0)//7.移動到安全高度
+                        {
+                            pictureBox_Scanning.Image = Properties.Resources.Red;
+                            IO_Can_Cut = false;
+                            wait_delay = 0;
+                            Move_Safe_High();
+                            if (Convert.ToInt32(textBox_Now_layer.Text) >= Convert.ToInt32(textBox_Cut_Layer.Text))
+                                now_step = 32;
+                            else
+                                now_step = 16;
+                        }
+                        else if (now_step == 16 && wait_delay >= wait_second && !Z_Busy &&
+                            Convert.ToDouble(textBox_Now_Position_Z.Text) <= (Convert.ToInt32(textBox_Safety_Hight.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Z.Text) >= (Convert.ToInt32(textBox_Safety_Hight.Text) - Position_Range))//8. 移動到切割起點XY
+                        {
+                            wait_delay = 0;
+                            button_Move_XY_Cut_Start_Click(sender, e);
+                            now_step = 17;
+                        }
+                        else if (now_step == 17 &&
+                            wait_delay >= wait_second / 2 &&
+                            !X_Busy && !Y_Busy &&
+                            Convert.ToDouble(textBox_Now_Position_X.Text) <= (Convert.ToInt32(textBox_Cut_Start_X.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_X.Text) >= (Convert.ToInt32(textBox_Cut_Start_X.Text) - Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Y.Text) <= (Convert.ToInt32(textBox_Cut_Start_Y.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Y.Text) >= (Convert.ToInt32(textBox_Cut_Start_Y.Text) - Position_Range))//9.移動到切割區Z
+                        {
+                            wait_delay = 0;
+                            int now_layer = Convert.ToInt32(textBox_Now_layer.Text);
+                            textBox_Now_layer.Text = Convert.ToString(now_layer + 1);
+                            button_Move_Z_Cut_Click(sender, e);
+
+                            if (zaberMotion == null)//如果輸送帶沒有初始化過 ， 就連線
+                                zaberMotion = new ZaberMotion(textBox_ZaberComPort.Text);
+                            now_step = 18;
+
+
+                        }
+                        else if (now_step == 18 &&
+                            wait_delay >= wait_second / 2 &&
+                            !Z_Busy)  //10.開啟震動刀
+                        {
+                            pictureBox_Cut.Image = Properties.Resources.Green;
+                            wait_delay = 0;
+                            button_Start_Hz_Click(sender, e);
+
+
+                            now_step = 19;
+                        }
+                        else if (now_step == 19 &&
+                            wait_delay >= wait_second * 2 &&
+                            !Z_Busy) //11.移動到切割xy終點
+                        {
+                            wait_delay = 0;
+                            if (!Cut_And_Scan_Finish)
+                            {
+                                button_Move_XY_Cut_End_Click(sender, e);
+                                now_step = 20;
+                            }
+                            else
+                                now_step = 30;
+                        }
+                        else if (now_step == 20 &&
+                            wait_delay >= wait_second &&
+                            !X_Busy && !Y_Busy &&
+                            Convert.ToDouble(textBox_Now_Position_X.Text) <= (Convert.ToInt32(textBox_Cut_End_X.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_X.Text) >= (Convert.ToInt32(textBox_Cut_End_X.Text) - Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Y.Text) <= (Convert.ToInt32(textBox_Cut_End_Y.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Y.Text) >= (Convert.ToInt32(textBox_Cut_End_Y.Text) - Position_Range))//12.關閉震動刀  ， 退後 
+                        {
+                            wait_delay = 0;
+                            pictureBox_Cut.Image = Properties.Resources.Red;
+                            //button_Move_Safe_High_Click(sender, e);
+                            //       button_Close_Hz_Click(sender, e);
+                            Close_Hz();
+
+
+                            now_step = 21;
+                        }
+                        else if (now_step == 21 &&
+                           wait_delay >= wait_second &&
+                           !X_Busy && !Y_Busy)
+                        {
+                            wait_delay = 0;
+                            Move_Back5mm();
+                            now_step = 22;
+                        }
+                        else if (now_step == 22 &&
+                            wait_delay >= wait_second &&
+                            !X_Busy && !Y_Busy)
+                        {
+
+                            wait_delay = 0;
+                            //   button_Z_ORG_Click(sender, e);
+                            Move_Safe_High();
+                            now_step = 23;
+                        }
+                        else if (now_step == 23 &&
+                            wait_delay >= wait_second &&
+                            !Z_Busy
+                            //  &&Convert.ToDouble(textBox_Now_Position_Z.Text) <= (0 + Position_Range) &&
+                            //   Convert.ToDouble(textBox_Now_Position_Z.Text) >= (0 - Position_Range)
+                            )
+                        {
+                            wait_delay = 0;
+                            //   button_Close_Hz_Click(sender, e);
+                            if (IsPauseRun == true)
+                            {
+                                IsAutoRunGetPauseRun = true;
+                            }
+                            now_step = 11;
+                        }
+                        else if (now_step == 30 &&
+                            wait_delay >= wait_second / 2)
+                        {
+                            wait_delay = 0;
+                            //  button_Close_Hz_Click(sender, e);
+                            Close_Hz();
+                            now_step = 31;
+                        }
+                        else if (now_step == 31 &&
+                            wait_delay >= wait_second / 2)
+                        {
+                            wait_delay = 0;
+                            Move_Safe_High();
+                            now_step = 32;
+                        }
+                        else if (now_step == 32 &&
+                            wait_delay >= wait_second &&
+                            !Z_Busy &&
+                            Convert.ToDouble(textBox_Now_Position_Z.Text) <= (Convert.ToInt32(textBox_Safety_Hight.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Z.Text) >= (Convert.ToInt32(textBox_Safety_Hight.Text) - Position_Range))
+                        {
+                            wait_delay = 0;
+                            button_Move_Standby_Click(sender, e);
+                            now_step = 33;
+                        }
+                        else if (now_step == 33 &&
+                            wait_delay >= wait_second &&
+                            !X_Busy && !Y_Busy &&
+                            Convert.ToDouble(textBox_Now_Position_X.Text) <= (Convert.ToInt32(textBox_Standby_X.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_X.Text) >= (Convert.ToInt32(textBox_Standby_X.Text) - Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Y.Text) <= (Convert.ToInt32(textBox_Standby_Y.Text) + Position_Range) &&
+                            Convert.ToDouble(textBox_Now_Position_Y.Text) >= (Convert.ToInt32(textBox_Standby_Y.Text) - Position_Range))
+                        {
+                            //   button_Start_Click(sender, e);
+                            textBox_Now_layer.Text = "0";
+                            now_step = 34;
+                            wait_delay = 0;
+
+                            logger.Write_Logger("Scan Finish");
+                            MessageBox.Show("掃描完畢!");
+                        }
+                        else if (now_step == 34)
+                        {
+
+
+                            //button_Move_To_Standby_All.Enabled = true;
+                            //comboBox_Process_Name.Enabled = true;
+                            //button_Move_Micro.Enabled = true;
+                            //button_Load_Andor.Enabled = true;
+
+                            //panel_Motion.Enabled = true;
+                            ////panel_Parameter.Enabled = true;
+                            //button_Step_Reset.Enabled = true;
+                            //button_Start.Text = "掃  描  開  始";
+                            //button_Start.BackColor = Color.LightGreen;
+                            //button_Auto.Enabled = true;
+                            //panel_Set_Scan_Data.Enabled = true;
+                            //need_scan = false;
+                            IsAutoRun = false;
+                            Pause();
+                            now_step = 10;
+                        }
+                        IsAutoRun = false;
+                        if (IsAutoRunGetPauseRun == true && need_scan == true)
+                        {
+                            Pause();
+                            logger.Write_Logger("Pause Process");
+                        }
+                        #endregion
                     }
+                    #endregion
                 }
                 else//停下來的動作
                 {
@@ -2391,7 +2660,7 @@ namespace BRC
 
 
 
-            private void comboBox_Process_Name_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_Process_Name_SelectedIndexChanged(object sender, EventArgs e)
         {
             logger.Write_Logger("Load Parameter " + comboBox_Process_Name.Text);
             Form_Value_Initial(System.Windows.Forms.Application.StartupPath + "\\Setup\\Process\\" + comboBox_Process_Name.Text + ".xml");
@@ -3383,7 +3652,7 @@ namespace BRC
                 //}
                 try
                 {
-                    pulse = Convert.ToInt32(num_Axis_Pulse_Z.Value) ;
+                    pulse = Convert.ToInt32(num_Axis_Pulse_Z.Value);
                 }
                 catch (Exception)
                 {
