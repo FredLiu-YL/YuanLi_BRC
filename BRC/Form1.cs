@@ -2391,7 +2391,7 @@ namespace BRC
 
 
 
-        private void comboBox_Process_Name_SelectedIndexChanged(object sender, EventArgs e)
+            private void comboBox_Process_Name_SelectedIndexChanged(object sender, EventArgs e)
         {
             logger.Write_Logger("Load Parameter " + comboBox_Process_Name.Text);
             Form_Value_Initial(System.Windows.Forms.Application.StartupPath + "\\Setup\\Process\\" + comboBox_Process_Name.Text + ".xml");
