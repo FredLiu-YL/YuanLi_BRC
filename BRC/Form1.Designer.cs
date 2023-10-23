@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnMinusLayer = new System.Windows.Forms.Button();
+            this.btnAddLayer = new System.Windows.Forms.Button();
             this.btn_Stop = new System.Windows.Forms.Button();
             this.textBox_now_Step = new System.Windows.Forms.TextBox();
             this.textBox_Scan_Dis_M = new System.Windows.Forms.TextBox();
@@ -43,8 +45,6 @@
             this.label81 = new System.Windows.Forms.Label();
             this.label82 = new System.Windows.Forms.Label();
             this.panel_Set_Scan_Data = new System.Windows.Forms.Panel();
-            this.button_Move_Z_Pos_Down = new System.Windows.Forms.Button();
-            this.button_Move_Z_Pos_Up = new System.Windows.Forms.Button();
             this.textBox_Top_Bottom_Diff = new System.Windows.Forms.TextBox();
             this.label46 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -60,9 +60,7 @@
             this.label43 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.textBox_Z_Speed_M = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.label39 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
             this.label35 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.numericUpDown_Cut = new System.Windows.Forms.NumericUpDown();
@@ -81,9 +79,6 @@
             this.comboBox_Process_Name = new System.Windows.Forms.ComboBox();
             this.button_Start = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.pictureBox_Moving_Z_Main = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Moving_Y_Main = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Moving_X_Main = new System.Windows.Forms.PictureBox();
             this.label55 = new System.Windows.Forms.Label();
             this.textBox_Now_Position_Z_Main = new System.Windows.Forms.TextBox();
             this.label51 = new System.Windows.Forms.Label();
@@ -99,14 +94,11 @@
             this.label44 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.textBox_Now_layer = new System.Windows.Forms.TextBox();
-            this.pictureBox_Cut = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Scanning = new System.Windows.Forms.PictureBox();
             this.label36 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
-            this.pictureBox_Main = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btn_Stop_2 = new System.Windows.Forms.Button();
             this.panel_Parameter = new System.Windows.Forms.Panel();
+            this.btn_Stop_2 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btn_CVstop = new System.Windows.Forms.Button();
             this.btn_CVstart = new System.Windows.Forms.Button();
@@ -181,7 +173,28 @@
             this.numericUpDown_Scan_Distance_Z = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.pictureBox_Scan_Setup = new System.Windows.Forms.PictureBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label102 = new System.Windows.Forms.Label();
+            this.textBox_Now_FusionErrorMessage = new System.Windows.Forms.TextBox();
+            this.textBox_Now_FusionState = new System.Windows.Forms.TextBox();
+            this.label101 = new System.Windows.Forms.Label();
+            this.label100 = new System.Windows.Forms.Label();
+            this.btnProtocolTest = new System.Windows.Forms.Button();
+            this.button_MoveFusion_Pos_Y = new System.Windows.Forms.Button();
+            this.button_MoveFusion_Pos_X = new System.Windows.Forms.Button();
+            this.textBox_Step_FusionPos_Y = new System.Windows.Forms.TextBox();
+            this.textBox_Step_FusionPos_X = new System.Windows.Forms.TextBox();
+            this.label99 = new System.Windows.Forms.Label();
+            this.textBox_Now_FusionPosition_Y = new System.Windows.Forms.TextBox();
+            this.label93 = new System.Windows.Forms.Label();
+            this.label96 = new System.Windows.Forms.Label();
+            this.label94 = new System.Windows.Forms.Label();
+            this.label95 = new System.Windows.Forms.Label();
+            this.textBox_Cut_Start_FusionX = new System.Windows.Forms.TextBox();
+            this.textBox_Now_FusionPosition_X = new System.Windows.Forms.TextBox();
+            this.textBox_Cut_Start_FusionY = new System.Windows.Forms.TextBox();
+            this.label97 = new System.Windows.Forms.Label();
+            this.label92 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label89 = new System.Windows.Forms.Label();
@@ -192,6 +205,9 @@
             this.textBox_FrequencyMinV = new System.Windows.Forms.TextBox();
             this.btn_Stop_3 = new System.Windows.Forms.Button();
             this.panel_Motion = new System.Windows.Forms.Panel();
+            this.label103 = new System.Windows.Forms.Label();
+            this.num_Axis_Pulse_Z = new System.Windows.Forms.NumericUpDown();
+            this.label98 = new System.Windows.Forms.Label();
             this.button_Move_Pos_Z = new System.Windows.Forms.Button();
             this.button_Move_Pos_Y = new System.Windows.Forms.Button();
             this.button_Move_Pos_X = new System.Windows.Forms.Button();
@@ -200,13 +216,7 @@
             this.textBox_Step_Pos_X = new System.Windows.Forms.TextBox();
             this.label83 = new System.Windows.Forms.Label();
             this.label71 = new System.Windows.Forms.Label();
-            this.button_Move_X_P = new System.Windows.Forms.Button();
-            this.button_Move_X_N = new System.Windows.Forms.Button();
-            this.button_Move_Y_P = new System.Windows.Forms.Button();
             this.button_Set_Speed = new System.Windows.Forms.Button();
-            this.button_Move_Y_N = new System.Windows.Forms.Button();
-            this.button_Move_Z_P = new System.Windows.Forms.Button();
-            this.button_Move_Z_N = new System.Windows.Forms.Button();
             this.comboBox_COM_Port = new System.Windows.Forms.ComboBox();
             this.label66 = new System.Windows.Forms.Label();
             this.textBox_Step_Speed_Z = new System.Windows.Forms.TextBox();
@@ -261,21 +271,6 @@
             this.button_Set_Cut_Start = new System.Windows.Forms.Button();
             this.button_Set_Cut_End = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.pictureBox_Axis_Z_Alarm = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Axis_Y_Alarm = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Axis_X_Alarm = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Axis_Z_ORG = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Axis_Y_ORG = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Axis_X_ORG = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Axis_Z_Limit_N = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Axis_Y_Limit_N = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Axis_X_Limit_N = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Axis_Z_Limit_P = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Axis_Y_Limit_P = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Axis_X_Limit_P = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Axis_Z_Busy = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Axis_Y_Busy = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Axis_X_Busy = new System.Windows.Forms.PictureBox();
             this.label65 = new System.Windows.Forms.Label();
             this.label64 = new System.Windows.Forms.Label();
             this.label63 = new System.Windows.Forms.Label();
@@ -293,6 +288,42 @@
             this.timerPulseCtrl_Frequency = new Automation.BDaq.TimerPulseCtrl(this.components);
             this.backgroundWorker_Andor = new System.ComponentModel.BackgroundWorker();
             this.timer_Andor = new System.Windows.Forms.Timer(this.components);
+            this.backgroundWorker_FusionRest = new System.ComponentModel.BackgroundWorker();
+            this.button_Move_Z_Pos_Down = new System.Windows.Forms.Button();
+            this.button_Move_Z_Pos_Up = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.pictureBox_Moving_Z_Main = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Moving_Y_Main = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Moving_X_Main = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Cut = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Scanning = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Main = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Scan_Setup = new System.Windows.Forms.PictureBox();
+            this.button_Move_Pulse_ZUp = new System.Windows.Forms.Button();
+            this.button_Move_Pulse_ZDown = new System.Windows.Forms.Button();
+            this.button_Move_X_P = new System.Windows.Forms.Button();
+            this.button_Move_X_N = new System.Windows.Forms.Button();
+            this.button_Move_Y_P = new System.Windows.Forms.Button();
+            this.button_Move_Y_N = new System.Windows.Forms.Button();
+            this.button_Move_Z_P = new System.Windows.Forms.Button();
+            this.button_Move_Z_N = new System.Windows.Forms.Button();
+            this.pictureBox_Axis_Z_Alarm = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Axis_Y_Alarm = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Axis_X_Alarm = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Axis_Z_ORG = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Axis_Y_ORG = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Axis_X_ORG = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Axis_Z_Limit_N = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Axis_Y_Limit_N = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Axis_X_Limit_N = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Axis_Z_Limit_P = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Axis_Y_Limit_P = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Axis_X_Limit_P = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Axis_Z_Busy = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Axis_Y_Busy = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Axis_X_Busy = new System.Windows.Forms.PictureBox();
+            this.comboBox_Axis_Pulse_Z = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel_Set_Scan_Data.SuspendLayout();
@@ -301,12 +332,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Cut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Total_Scan_Layer)).BeginInit();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Moving_Z_Main)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Moving_Y_Main)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Moving_X_Main)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Cut)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Scanning)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Main)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.panel_Parameter.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -314,14 +339,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Total_Cut_Layer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Cut_Distance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Scan_Distance_Z)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Scan_Setup)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel_Motion.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Axis_Pulse_Z)).BeginInit();
             this.groupBox_Process_Step.SuspendLayout();
             this.groupBox_Start_Setup.SuspendLayout();
             this.groupBox_Position_Setup.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Moving_Z_Main)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Moving_Y_Main)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Moving_X_Main)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Cut)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Scanning)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Main)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Scan_Setup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Axis_Z_Alarm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Axis_Y_Alarm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Axis_X_Alarm)).BeginInit();
@@ -348,7 +381,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(2, 1);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1047, 666);
@@ -357,6 +390,8 @@
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.btnMinusLayer);
+            this.tabPage1.Controls.Add(this.btnAddLayer);
             this.tabPage1.Controls.Add(this.btn_Stop);
             this.tabPage1.Controls.Add(this.textBox_now_Step);
             this.tabPage1.Controls.Add(this.textBox_Scan_Dis_M);
@@ -388,13 +423,35 @@
             this.tabPage1.Controls.Add(this.label38);
             this.tabPage1.Controls.Add(this.pictureBox_Main);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage1.Size = new System.Drawing.Size(1039, 640);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "首頁";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnMinusLayer
+            // 
+            this.btnMinusLayer.Location = new System.Drawing.Point(688, 558);
+            this.btnMinusLayer.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMinusLayer.Name = "btnMinusLayer";
+            this.btnMinusLayer.Size = new System.Drawing.Size(80, 40);
+            this.btnMinusLayer.TabIndex = 172;
+            this.btnMinusLayer.Text = "層數-1";
+            this.btnMinusLayer.UseVisualStyleBackColor = true;
+            this.btnMinusLayer.Click += new System.EventHandler(this.btnMinusLayer_Click);
+            // 
+            // btnAddLayer
+            // 
+            this.btnAddLayer.Location = new System.Drawing.Point(848, 558);
+            this.btnAddLayer.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAddLayer.Name = "btnAddLayer";
+            this.btnAddLayer.Size = new System.Drawing.Size(80, 40);
+            this.btnAddLayer.TabIndex = 171;
+            this.btnAddLayer.Text = "層數+1";
+            this.btnAddLayer.UseVisualStyleBackColor = true;
+            this.btnAddLayer.Click += new System.EventHandler(this.btnAddLayer_Click);
             // 
             // btn_Stop
             // 
@@ -418,7 +475,7 @@
             // textBox_Scan_Dis_M
             // 
             this.textBox_Scan_Dis_M.Location = new System.Drawing.Point(932, 270);
-            this.textBox_Scan_Dis_M.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Scan_Dis_M.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Scan_Dis_M.Name = "textBox_Scan_Dis_M";
             this.textBox_Scan_Dis_M.ReadOnly = true;
             this.textBox_Scan_Dis_M.Size = new System.Drawing.Size(74, 20);
@@ -427,7 +484,7 @@
             // textBox_Cut_Dis_M
             // 
             this.textBox_Cut_Dis_M.Location = new System.Drawing.Point(932, 234);
-            this.textBox_Cut_Dis_M.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Cut_Dis_M.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Cut_Dis_M.Name = "textBox_Cut_Dis_M";
             this.textBox_Cut_Dis_M.ReadOnly = true;
             this.textBox_Cut_Dis_M.Size = new System.Drawing.Size(74, 20);
@@ -436,7 +493,7 @@
             // textBox_Cut_Feq
             // 
             this.textBox_Cut_Feq.Location = new System.Drawing.Point(932, 198);
-            this.textBox_Cut_Feq.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Cut_Feq.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Cut_Feq.Name = "textBox_Cut_Feq";
             this.textBox_Cut_Feq.ReadOnly = true;
             this.textBox_Cut_Feq.Size = new System.Drawing.Size(74, 20);
@@ -445,7 +502,7 @@
             // textBox_Total_Scan_Layer
             // 
             this.textBox_Total_Scan_Layer.Location = new System.Drawing.Point(932, 164);
-            this.textBox_Total_Scan_Layer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Total_Scan_Layer.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Total_Scan_Layer.Name = "textBox_Total_Scan_Layer";
             this.textBox_Total_Scan_Layer.ReadOnly = true;
             this.textBox_Total_Scan_Layer.Size = new System.Drawing.Size(74, 20);
@@ -529,34 +586,10 @@
             this.panel_Set_Scan_Data.Size = new System.Drawing.Size(324, 372);
             this.panel_Set_Scan_Data.TabIndex = 137;
             // 
-            // button_Move_Z_Pos_Down
-            // 
-            this.button_Move_Z_Pos_Down.BackgroundImage = global::BRC.Properties.Resources.Down;
-            this.button_Move_Z_Pos_Down.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_Move_Z_Pos_Down.Location = new System.Drawing.Point(260, 151);
-            this.button_Move_Z_Pos_Down.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button_Move_Z_Pos_Down.Name = "button_Move_Z_Pos_Down";
-            this.button_Move_Z_Pos_Down.Size = new System.Drawing.Size(57, 43);
-            this.button_Move_Z_Pos_Down.TabIndex = 160;
-            this.button_Move_Z_Pos_Down.UseVisualStyleBackColor = true;
-            this.button_Move_Z_Pos_Down.Click += new System.EventHandler(this.button_Move_Z_Pos_Down_Click);
-            // 
-            // button_Move_Z_Pos_Up
-            // 
-            this.button_Move_Z_Pos_Up.BackgroundImage = global::BRC.Properties.Resources.Up;
-            this.button_Move_Z_Pos_Up.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_Move_Z_Pos_Up.Location = new System.Drawing.Point(260, 19);
-            this.button_Move_Z_Pos_Up.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button_Move_Z_Pos_Up.Name = "button_Move_Z_Pos_Up";
-            this.button_Move_Z_Pos_Up.Size = new System.Drawing.Size(57, 43);
-            this.button_Move_Z_Pos_Up.TabIndex = 159;
-            this.button_Move_Z_Pos_Up.UseVisualStyleBackColor = true;
-            this.button_Move_Z_Pos_Up.Click += new System.EventHandler(this.button_Move_Z_Pos_Up_Click);
-            // 
             // textBox_Top_Bottom_Diff
             // 
             this.textBox_Top_Bottom_Diff.Location = new System.Drawing.Point(40, 312);
-            this.textBox_Top_Bottom_Diff.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Top_Bottom_Diff.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Top_Bottom_Diff.Name = "textBox_Top_Bottom_Diff";
             this.textBox_Top_Bottom_Diff.ReadOnly = true;
             this.textBox_Top_Bottom_Diff.Size = new System.Drawing.Size(119, 20);
@@ -586,7 +619,7 @@
             // textBox_Z_Step_M
             // 
             this.textBox_Z_Step_M.Location = new System.Drawing.Point(260, 88);
-            this.textBox_Z_Step_M.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Z_Step_M.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Z_Step_M.Name = "textBox_Z_Step_M";
             this.textBox_Z_Step_M.Size = new System.Drawing.Size(57, 20);
             this.textBox_Z_Step_M.TabIndex = 155;
@@ -595,7 +628,7 @@
             // 
             this.button_Move_Z_Down.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.button_Move_Z_Down.Location = new System.Drawing.Point(95, 114);
-            this.button_Move_Z_Down.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Move_Z_Down.Margin = new System.Windows.Forms.Padding(2);
             this.button_Move_Z_Down.Name = "button_Move_Z_Down";
             this.button_Move_Z_Down.Size = new System.Drawing.Size(87, 35);
             this.button_Move_Z_Down.TabIndex = 154;
@@ -607,7 +640,7 @@
             // 
             this.button_Move_Z_Up.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.button_Move_Z_Up.Location = new System.Drawing.Point(95, 48);
-            this.button_Move_Z_Up.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Move_Z_Up.Margin = new System.Windows.Forms.Padding(2);
             this.button_Move_Z_Up.Name = "button_Move_Z_Up";
             this.button_Move_Z_Up.Size = new System.Drawing.Size(87, 35);
             this.button_Move_Z_Up.TabIndex = 153;
@@ -618,7 +651,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(170, 285);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(89, 54);
             this.button1.TabIndex = 152;
@@ -655,7 +688,7 @@
             0,
             131072});
             this.numericUpDown_Scan_Dis_M.Location = new System.Drawing.Point(81, 270);
-            this.numericUpDown_Scan_Dis_M.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown_Scan_Dis_M.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown_Scan_Dis_M.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -690,7 +723,7 @@
             0,
             131072});
             this.numericUpDown_Cut_Dis_M.Location = new System.Drawing.Point(81, 234);
-            this.numericUpDown_Cut_Dis_M.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown_Cut_Dis_M.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown_Cut_Dis_M.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -729,25 +762,11 @@
             // textBox_Z_Speed_M
             // 
             this.textBox_Z_Speed_M.Location = new System.Drawing.Point(195, 88);
-            this.textBox_Z_Speed_M.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Z_Speed_M.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Z_Speed_M.Name = "textBox_Z_Speed_M";
             this.textBox_Z_Speed_M.Size = new System.Drawing.Size(57, 20);
             this.textBox_Z_Speed_M.TabIndex = 144;
             this.textBox_Z_Speed_M.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Z_Speed_M_KeyDown);
-            // 
-            // button3
-            // 
-            this.button3.BackgroundImage = global::BRC.Properties.Resources.Up;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button3.Location = new System.Drawing.Point(195, 19);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(57, 43);
-            this.button3.TabIndex = 138;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            this.button3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_Move_Z_P_MouseDown);
-            this.button3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Move_Z_P_MouseUp);
             // 
             // label39
             // 
@@ -758,20 +777,6 @@
             this.label39.Size = new System.Drawing.Size(55, 13);
             this.label39.TabIndex = 143;
             this.label39.Text = "移動速度";
-            // 
-            // button4
-            // 
-            this.button4.BackgroundImage = global::BRC.Properties.Resources.Down;
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button4.Location = new System.Drawing.Point(195, 151);
-            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(57, 43);
-            this.button4.TabIndex = 139;
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            this.button4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_Move_Z_N_MouseDown);
-            this.button4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Move_Z_N_MouseUp);
             // 
             // label35
             // 
@@ -796,7 +801,7 @@
             // numericUpDown_Cut
             // 
             this.numericUpDown_Cut.Location = new System.Drawing.Point(81, 198);
-            this.numericUpDown_Cut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown_Cut.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown_Cut.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -816,7 +821,7 @@
             // 
             this.button_Set_Z_Down.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.button_Set_Z_Down.Location = new System.Drawing.Point(4, 114);
-            this.button_Set_Z_Down.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Set_Z_Down.Margin = new System.Windows.Forms.Padding(2);
             this.button_Set_Z_Down.Name = "button_Set_Z_Down";
             this.button_Set_Z_Down.Size = new System.Drawing.Size(87, 35);
             this.button_Set_Z_Down.TabIndex = 139;
@@ -828,7 +833,7 @@
             // 
             this.button_Set_Z_Up.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.button_Set_Z_Up.Location = new System.Drawing.Point(4, 48);
-            this.button_Set_Z_Up.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Set_Z_Up.Margin = new System.Windows.Forms.Padding(2);
             this.button_Set_Z_Up.Name = "button_Set_Z_Up";
             this.button_Set_Z_Up.Size = new System.Drawing.Size(87, 35);
             this.button_Set_Z_Up.TabIndex = 138;
@@ -849,7 +854,7 @@
             // textBox_Z_Down
             // 
             this.textBox_Z_Down.Location = new System.Drawing.Point(59, 87);
-            this.textBox_Z_Down.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Z_Down.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Z_Down.Name = "textBox_Z_Down";
             this.textBox_Z_Down.ReadOnly = true;
             this.textBox_Z_Down.Size = new System.Drawing.Size(119, 20);
@@ -869,7 +874,7 @@
             // textBox_Z_Up
             // 
             this.textBox_Z_Up.Location = new System.Drawing.Point(59, 19);
-            this.textBox_Z_Up.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Z_Up.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Z_Up.Name = "textBox_Z_Up";
             this.textBox_Z_Up.ReadOnly = true;
             this.textBox_Z_Up.Size = new System.Drawing.Size(119, 20);
@@ -889,7 +894,7 @@
             // numericUpDown_Total_Scan_Layer
             // 
             this.numericUpDown_Total_Scan_Layer.Location = new System.Drawing.Point(81, 164);
-            this.numericUpDown_Total_Scan_Layer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown_Total_Scan_Layer.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown_Total_Scan_Layer.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -914,7 +919,7 @@
             // 
             this.button_Step_Reset.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.button_Step_Reset.Location = new System.Drawing.Point(14, 166);
-            this.button_Step_Reset.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Step_Reset.Margin = new System.Windows.Forms.Padding(2);
             this.button_Step_Reset.Name = "button_Step_Reset";
             this.button_Step_Reset.Size = new System.Drawing.Size(178, 54);
             this.button_Step_Reset.TabIndex = 136;
@@ -926,7 +931,7 @@
             // 
             this.button_Move_Micro.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.button_Move_Micro.Location = new System.Drawing.Point(14, 108);
-            this.button_Move_Micro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Move_Micro.Margin = new System.Windows.Forms.Padding(2);
             this.button_Move_Micro.Name = "button_Move_Micro";
             this.button_Move_Micro.Size = new System.Drawing.Size(178, 54);
             this.button_Move_Micro.TabIndex = 135;
@@ -938,7 +943,7 @@
             // 
             this.button_Move_To_Standby_All.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.button_Move_To_Standby_All.Location = new System.Drawing.Point(14, 50);
-            this.button_Move_To_Standby_All.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Move_To_Standby_All.Margin = new System.Windows.Forms.Padding(2);
             this.button_Move_To_Standby_All.Name = "button_Move_To_Standby_All";
             this.button_Move_To_Standby_All.Size = new System.Drawing.Size(178, 54);
             this.button_Move_To_Standby_All.TabIndex = 134;
@@ -962,7 +967,7 @@
             this.comboBox_Process_Name.Enabled = false;
             this.comboBox_Process_Name.FormattingEnabled = true;
             this.comboBox_Process_Name.Location = new System.Drawing.Point(66, 21);
-            this.comboBox_Process_Name.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox_Process_Name.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_Process_Name.Name = "comboBox_Process_Name";
             this.comboBox_Process_Name.Size = new System.Drawing.Size(126, 21);
             this.comboBox_Process_Name.TabIndex = 132;
@@ -973,7 +978,7 @@
             this.button_Start.BackColor = System.Drawing.Color.Transparent;
             this.button_Start.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.button_Start.Location = new System.Drawing.Point(688, 440);
-            this.button_Start.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Start.Margin = new System.Windows.Forms.Padding(2);
             this.button_Start.Name = "button_Start";
             this.button_Start.Size = new System.Drawing.Size(240, 105);
             this.button_Start.TabIndex = 131;
@@ -995,46 +1000,13 @@
             this.groupBox3.Controls.Add(this.label53);
             this.groupBox3.Controls.Add(this.label52);
             this.groupBox3.Location = new System.Drawing.Point(358, 432);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(326, 114);
             this.groupBox3.TabIndex = 78;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "馬達狀態";
-            // 
-            // pictureBox_Moving_Z_Main
-            // 
-            this.pictureBox_Moving_Z_Main.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Moving_Z_Main.Image")));
-            this.pictureBox_Moving_Z_Main.Location = new System.Drawing.Point(231, 80);
-            this.pictureBox_Moving_Z_Main.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Moving_Z_Main.Name = "pictureBox_Moving_Z_Main";
-            this.pictureBox_Moving_Z_Main.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Moving_Z_Main.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Moving_Z_Main.TabIndex = 80;
-            this.pictureBox_Moving_Z_Main.TabStop = false;
-            // 
-            // pictureBox_Moving_Y_Main
-            // 
-            this.pictureBox_Moving_Y_Main.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Moving_Y_Main.Image")));
-            this.pictureBox_Moving_Y_Main.Location = new System.Drawing.Point(165, 80);
-            this.pictureBox_Moving_Y_Main.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Moving_Y_Main.Name = "pictureBox_Moving_Y_Main";
-            this.pictureBox_Moving_Y_Main.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Moving_Y_Main.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Moving_Y_Main.TabIndex = 79;
-            this.pictureBox_Moving_Y_Main.TabStop = false;
-            // 
-            // pictureBox_Moving_X_Main
-            // 
-            this.pictureBox_Moving_X_Main.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Moving_X_Main.Image")));
-            this.pictureBox_Moving_X_Main.Location = new System.Drawing.Point(97, 80);
-            this.pictureBox_Moving_X_Main.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Moving_X_Main.Name = "pictureBox_Moving_X_Main";
-            this.pictureBox_Moving_X_Main.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Moving_X_Main.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Moving_X_Main.TabIndex = 78;
-            this.pictureBox_Moving_X_Main.TabStop = false;
             // 
             // label55
             // 
@@ -1049,7 +1021,7 @@
             // textBox_Now_Position_Z_Main
             // 
             this.textBox_Now_Position_Z_Main.Location = new System.Drawing.Point(214, 42);
-            this.textBox_Now_Position_Z_Main.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Now_Position_Z_Main.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Now_Position_Z_Main.Name = "textBox_Now_Position_Z_Main";
             this.textBox_Now_Position_Z_Main.ReadOnly = true;
             this.textBox_Now_Position_Z_Main.Size = new System.Drawing.Size(65, 20);
@@ -1069,7 +1041,7 @@
             // textBox_Now_Position_Y_Main
             // 
             this.textBox_Now_Position_Y_Main.Location = new System.Drawing.Point(146, 42);
-            this.textBox_Now_Position_Y_Main.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Now_Position_Y_Main.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Now_Position_Y_Main.Name = "textBox_Now_Position_Y_Main";
             this.textBox_Now_Position_Y_Main.ReadOnly = true;
             this.textBox_Now_Position_Y_Main.Size = new System.Drawing.Size(65, 20);
@@ -1089,7 +1061,7 @@
             // textBox_Now_Position_X_Main
             // 
             this.textBox_Now_Position_X_Main.Location = new System.Drawing.Point(78, 42);
-            this.textBox_Now_Position_X_Main.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Now_Position_X_Main.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Now_Position_X_Main.Name = "textBox_Now_Position_X_Main";
             this.textBox_Now_Position_X_Main.ReadOnly = true;
             this.textBox_Now_Position_X_Main.Size = new System.Drawing.Size(65, 20);
@@ -1129,7 +1101,7 @@
             // textBox_Total_Layer
             // 
             this.textBox_Total_Layer.Location = new System.Drawing.Point(359, 250);
-            this.textBox_Total_Layer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Total_Layer.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Total_Layer.Name = "textBox_Total_Layer";
             this.textBox_Total_Layer.ReadOnly = true;
             this.textBox_Total_Layer.Size = new System.Drawing.Size(74, 20);
@@ -1148,7 +1120,7 @@
             // textBox_Cut_Frequency
             // 
             this.textBox_Cut_Frequency.Location = new System.Drawing.Point(484, 36);
-            this.textBox_Cut_Frequency.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Cut_Frequency.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Cut_Frequency.Name = "textBox_Cut_Frequency";
             this.textBox_Cut_Frequency.ReadOnly = true;
             this.textBox_Cut_Frequency.Size = new System.Drawing.Size(52, 20);
@@ -1177,33 +1149,11 @@
             // textBox_Now_layer
             // 
             this.textBox_Now_layer.Location = new System.Drawing.Point(359, 192);
-            this.textBox_Now_layer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Now_layer.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Now_layer.Name = "textBox_Now_layer";
             this.textBox_Now_layer.ReadOnly = true;
             this.textBox_Now_layer.Size = new System.Drawing.Size(74, 20);
             this.textBox_Now_layer.TabIndex = 61;
-            // 
-            // pictureBox_Cut
-            // 
-            this.pictureBox_Cut.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Cut.Image")));
-            this.pictureBox_Cut.Location = new System.Drawing.Point(535, 218);
-            this.pictureBox_Cut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Cut.Name = "pictureBox_Cut";
-            this.pictureBox_Cut.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Cut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Cut.TabIndex = 55;
-            this.pictureBox_Cut.TabStop = false;
-            // 
-            // pictureBox_Scanning
-            // 
-            this.pictureBox_Scanning.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Scanning.Image")));
-            this.pictureBox_Scanning.Location = new System.Drawing.Point(762, 218);
-            this.pictureBox_Scanning.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Scanning.Name = "pictureBox_Scanning";
-            this.pictureBox_Scanning.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Scanning.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Scanning.TabIndex = 54;
-            this.pictureBox_Scanning.TabStop = false;
             // 
             // label36
             // 
@@ -1225,44 +1175,22 @@
             this.label38.TabIndex = 50;
             this.label38.Text = "掃描中";
             // 
-            // pictureBox_Main
-            // 
-            this.pictureBox_Main.Image = global::BRC.Properties.Resources.BRC;
-            this.pictureBox_Main.Location = new System.Drawing.Point(358, 50);
-            this.pictureBox_Main.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Main.Name = "pictureBox_Main";
-            this.pictureBox_Main.Size = new System.Drawing.Size(570, 374);
-            this.pictureBox_Main.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Main.TabIndex = 1;
-            this.pictureBox_Main.TabStop = false;
-            // 
             // tabPage2
             // 
             this.tabPage2.AutoScroll = true;
-            this.tabPage2.Controls.Add(this.btn_Stop_2);
             this.tabPage2.Controls.Add(this.panel_Parameter);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage2.Size = new System.Drawing.Size(1039, 640);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "掃描設定";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // btn_Stop_2
-            // 
-            this.btn_Stop_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.btn_Stop_2.Location = new System.Drawing.Point(918, 342);
-            this.btn_Stop_2.Name = "btn_Stop_2";
-            this.btn_Stop_2.Size = new System.Drawing.Size(73, 200);
-            this.btn_Stop_2.TabIndex = 161;
-            this.btn_Stop_2.Text = "Emergency Stop";
-            this.btn_Stop_2.UseVisualStyleBackColor = false;
-            this.btn_Stop_2.Click += new System.EventHandler(this.btn_Stop_Click);
-            // 
             // panel_Parameter
             // 
+            this.panel_Parameter.Controls.Add(this.btn_Stop_2);
             this.panel_Parameter.Controls.Add(this.groupBox2);
             this.panel_Parameter.Controls.Add(this.label40);
             this.panel_Parameter.Controls.Add(this.label30);
@@ -1325,11 +1253,23 @@
             this.panel_Parameter.Controls.Add(this.label15);
             this.panel_Parameter.Controls.Add(this.label13);
             this.panel_Parameter.Controls.Add(this.pictureBox_Scan_Setup);
+            this.panel_Parameter.Controls.Add(this.groupBox5);
             this.panel_Parameter.Location = new System.Drawing.Point(4, 5);
-            this.panel_Parameter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel_Parameter.Margin = new System.Windows.Forms.Padding(2);
             this.panel_Parameter.Name = "panel_Parameter";
-            this.panel_Parameter.Size = new System.Drawing.Size(865, 632);
+            this.panel_Parameter.Size = new System.Drawing.Size(1032, 632);
             this.panel_Parameter.TabIndex = 124;
+            // 
+            // btn_Stop_2
+            // 
+            this.btn_Stop_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btn_Stop_2.Location = new System.Drawing.Point(956, 426);
+            this.btn_Stop_2.Name = "btn_Stop_2";
+            this.btn_Stop_2.Size = new System.Drawing.Size(73, 200);
+            this.btn_Stop_2.TabIndex = 161;
+            this.btn_Stop_2.Text = "Emergency Stop";
+            this.btn_Stop_2.UseVisualStyleBackColor = false;
+            this.btn_Stop_2.Click += new System.EventHandler(this.btn_Stop_Click);
             // 
             // groupBox2
             // 
@@ -1508,7 +1448,7 @@
             // textBox_ProcessName
             // 
             this.textBox_ProcessName.Location = new System.Drawing.Point(62, 10);
-            this.textBox_ProcessName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_ProcessName.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_ProcessName.Name = "textBox_ProcessName";
             this.textBox_ProcessName.Size = new System.Drawing.Size(112, 20);
             this.textBox_ProcessName.TabIndex = 123;
@@ -1526,7 +1466,7 @@
             // textBox_Micro_Z
             // 
             this.textBox_Micro_Z.Location = new System.Drawing.Point(465, 499);
-            this.textBox_Micro_Z.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Micro_Z.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Micro_Z.Name = "textBox_Micro_Z";
             this.textBox_Micro_Z.Size = new System.Drawing.Size(76, 20);
             this.textBox_Micro_Z.TabIndex = 121;
@@ -1544,7 +1484,7 @@
             // textBox_Micro_Y
             // 
             this.textBox_Micro_Y.Location = new System.Drawing.Point(385, 499);
-            this.textBox_Micro_Y.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Micro_Y.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Micro_Y.Name = "textBox_Micro_Y";
             this.textBox_Micro_Y.Size = new System.Drawing.Size(76, 20);
             this.textBox_Micro_Y.TabIndex = 120;
@@ -1552,7 +1492,7 @@
             // numericUpDown_Cut_Frequency
             // 
             this.numericUpDown_Cut_Frequency.Location = new System.Drawing.Point(237, 42);
-            this.numericUpDown_Cut_Frequency.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown_Cut_Frequency.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown_Cut_Frequency.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -1571,7 +1511,7 @@
             // textBox_Micro_X
             // 
             this.textBox_Micro_X.Location = new System.Drawing.Point(305, 499);
-            this.textBox_Micro_X.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Micro_X.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Micro_X.Name = "textBox_Micro_X";
             this.textBox_Micro_X.Size = new System.Drawing.Size(76, 20);
             this.textBox_Micro_X.TabIndex = 119;
@@ -1669,7 +1609,7 @@
             // label78
             // 
             this.label78.AutoSize = true;
-            this.label78.Location = new System.Drawing.Point(729, 204);
+            this.label78.Location = new System.Drawing.Point(726, 204);
             this.label78.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label78.Name = "label78";
             this.label78.Size = new System.Drawing.Size(55, 13);
@@ -1679,7 +1619,7 @@
             // textBox_Cut_Start_X
             // 
             this.textBox_Cut_Start_X.Location = new System.Drawing.Point(33, 192);
-            this.textBox_Cut_Start_X.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Cut_Start_X.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Cut_Start_X.Name = "textBox_Cut_Start_X";
             this.textBox_Cut_Start_X.Size = new System.Drawing.Size(76, 20);
             this.textBox_Cut_Start_X.TabIndex = 10;
@@ -1687,7 +1627,7 @@
             // button_Save_Parameter
             // 
             this.button_Save_Parameter.Location = new System.Drawing.Point(639, 440);
-            this.button_Save_Parameter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Save_Parameter.Margin = new System.Windows.Forms.Padding(2);
             this.button_Save_Parameter.Name = "button_Save_Parameter";
             this.button_Save_Parameter.Size = new System.Drawing.Size(126, 54);
             this.button_Save_Parameter.TabIndex = 113;
@@ -1698,7 +1638,7 @@
             // textBox_Cut_End_X
             // 
             this.textBox_Cut_End_X.Location = new System.Drawing.Point(112, 192);
-            this.textBox_Cut_End_X.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Cut_End_X.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Cut_End_X.Name = "textBox_Cut_End_X";
             this.textBox_Cut_End_X.Size = new System.Drawing.Size(76, 20);
             this.textBox_Cut_End_X.TabIndex = 11;
@@ -1706,7 +1646,7 @@
             // textBox_Standby_Z
             // 
             this.textBox_Standby_Z.Location = new System.Drawing.Point(465, 472);
-            this.textBox_Standby_Z.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Standby_Z.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Standby_Z.Name = "textBox_Standby_Z";
             this.textBox_Standby_Z.ReadOnly = true;
             this.textBox_Standby_Z.Size = new System.Drawing.Size(76, 20);
@@ -1715,7 +1655,7 @@
             // textBox_Cut_Start_Y
             // 
             this.textBox_Cut_Start_Y.Location = new System.Drawing.Point(33, 224);
-            this.textBox_Cut_Start_Y.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Cut_Start_Y.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Cut_Start_Y.Name = "textBox_Cut_Start_Y";
             this.textBox_Cut_Start_Y.Size = new System.Drawing.Size(76, 20);
             this.textBox_Cut_Start_Y.TabIndex = 12;
@@ -1723,7 +1663,7 @@
             // textBox_Standby_Y
             // 
             this.textBox_Standby_Y.Location = new System.Drawing.Point(385, 472);
-            this.textBox_Standby_Y.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Standby_Y.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Standby_Y.Name = "textBox_Standby_Y";
             this.textBox_Standby_Y.Size = new System.Drawing.Size(76, 20);
             this.textBox_Standby_Y.TabIndex = 64;
@@ -1731,7 +1671,7 @@
             // textBox_Cut_End_Y
             // 
             this.textBox_Cut_End_Y.Location = new System.Drawing.Point(112, 224);
-            this.textBox_Cut_End_Y.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Cut_End_Y.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Cut_End_Y.Name = "textBox_Cut_End_Y";
             this.textBox_Cut_End_Y.Size = new System.Drawing.Size(76, 20);
             this.textBox_Cut_End_Y.TabIndex = 13;
@@ -1739,7 +1679,7 @@
             // textBox_Standby_X
             // 
             this.textBox_Standby_X.Location = new System.Drawing.Point(305, 472);
-            this.textBox_Standby_X.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Standby_X.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Standby_X.Name = "textBox_Standby_X";
             this.textBox_Standby_X.Size = new System.Drawing.Size(76, 20);
             this.textBox_Standby_X.TabIndex = 63;
@@ -1747,7 +1687,7 @@
             // textBox_Cut_Start_Z
             // 
             this.textBox_Cut_Start_Z.Location = new System.Drawing.Point(33, 256);
-            this.textBox_Cut_Start_Z.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Cut_Start_Z.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Cut_Start_Z.Name = "textBox_Cut_Start_Z";
             this.textBox_Cut_Start_Z.Size = new System.Drawing.Size(76, 20);
             this.textBox_Cut_Start_Z.TabIndex = 14;
@@ -1775,7 +1715,7 @@
             // textBox_Safety_Hight
             // 
             this.textBox_Safety_Hight.Location = new System.Drawing.Point(398, 310);
-            this.textBox_Safety_Hight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Safety_Hight.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Safety_Hight.Name = "textBox_Safety_Hight";
             this.textBox_Safety_Hight.Size = new System.Drawing.Size(76, 20);
             this.textBox_Safety_Hight.TabIndex = 61;
@@ -1784,7 +1724,7 @@
             // numericUpDown_Total_Cut_Layer
             // 
             this.numericUpDown_Total_Cut_Layer.Location = new System.Drawing.Point(79, 288);
-            this.numericUpDown_Total_Cut_Layer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown_Total_Cut_Layer.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown_Total_Cut_Layer.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -1823,7 +1763,7 @@
             // textBox_Cut_Layer
             // 
             this.textBox_Cut_Layer.Location = new System.Drawing.Point(685, 232);
-            this.textBox_Cut_Layer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Cut_Layer.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Cut_Layer.Name = "textBox_Cut_Layer";
             this.textBox_Cut_Layer.ReadOnly = true;
             this.textBox_Cut_Layer.Size = new System.Drawing.Size(40, 20);
@@ -1838,7 +1778,7 @@
             0,
             131072});
             this.numericUpDown_Cut_Distance.Location = new System.Drawing.Point(79, 320);
-            this.numericUpDown_Cut_Distance.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown_Cut_Distance.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown_Cut_Distance.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -1866,7 +1806,7 @@
             // textBox_Move_Speed_Z
             // 
             this.textBox_Move_Speed_Z.Location = new System.Drawing.Point(465, 440);
-            this.textBox_Move_Speed_Z.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Move_Speed_Z.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Move_Speed_Z.Name = "textBox_Move_Speed_Z";
             this.textBox_Move_Speed_Z.Size = new System.Drawing.Size(76, 20);
             this.textBox_Move_Speed_Z.TabIndex = 56;
@@ -1904,7 +1844,7 @@
             // textBox_Move_Speed_Y
             // 
             this.textBox_Move_Speed_Y.Location = new System.Drawing.Point(385, 440);
-            this.textBox_Move_Speed_Y.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Move_Speed_Y.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Move_Speed_Y.Name = "textBox_Move_Speed_Y";
             this.textBox_Move_Speed_Y.Size = new System.Drawing.Size(76, 20);
             this.textBox_Move_Speed_Y.TabIndex = 54;
@@ -1942,7 +1882,7 @@
             // textBox_Move_Speed_X
             // 
             this.textBox_Move_Speed_X.Location = new System.Drawing.Point(305, 440);
-            this.textBox_Move_Speed_X.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Move_Speed_X.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Move_Speed_X.Name = "textBox_Move_Speed_X";
             this.textBox_Move_Speed_X.Size = new System.Drawing.Size(76, 20);
             this.textBox_Move_Speed_X.TabIndex = 50;
@@ -1980,7 +1920,7 @@
             // textBox_Cut_Speed_Y
             // 
             this.textBox_Cut_Speed_Y.Location = new System.Drawing.Point(34, 426);
-            this.textBox_Cut_Speed_Y.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Cut_Speed_Y.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Cut_Speed_Y.Name = "textBox_Cut_Speed_Y";
             this.textBox_Cut_Speed_Y.Size = new System.Drawing.Size(76, 20);
             this.textBox_Cut_Speed_Y.TabIndex = 44;
@@ -1988,7 +1928,7 @@
             // textBox_Scan_Start_X
             // 
             this.textBox_Scan_Start_X.Location = new System.Drawing.Point(649, 85);
-            this.textBox_Scan_Start_X.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Scan_Start_X.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Scan_Start_X.Name = "textBox_Scan_Start_X";
             this.textBox_Scan_Start_X.Size = new System.Drawing.Size(76, 20);
             this.textBox_Scan_Start_X.TabIndex = 27;
@@ -1996,7 +1936,7 @@
             // textBox_Cut_Speed_X
             // 
             this.textBox_Cut_Speed_X.Location = new System.Drawing.Point(34, 394);
-            this.textBox_Cut_Speed_X.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Cut_Speed_X.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Cut_Speed_X.Name = "textBox_Cut_Speed_X";
             this.textBox_Cut_Speed_X.Size = new System.Drawing.Size(76, 20);
             this.textBox_Cut_Speed_X.TabIndex = 43;
@@ -2005,7 +1945,7 @@
             // textBox_Scan_Start_Y
             // 
             this.textBox_Scan_Start_Y.Location = new System.Drawing.Point(649, 117);
-            this.textBox_Scan_Start_Y.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Scan_Start_Y.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Scan_Start_Y.Name = "textBox_Scan_Start_Y";
             this.textBox_Scan_Start_Y.Size = new System.Drawing.Size(76, 20);
             this.textBox_Scan_Start_Y.TabIndex = 29;
@@ -2023,7 +1963,7 @@
             // textBox_Scan_Start_Z
             // 
             this.textBox_Scan_Start_Z.Location = new System.Drawing.Point(649, 149);
-            this.textBox_Scan_Start_Z.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Scan_Start_Z.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Scan_Start_Z.Name = "textBox_Scan_Start_Z";
             this.textBox_Scan_Start_Z.Size = new System.Drawing.Size(76, 20);
             this.textBox_Scan_Start_Z.TabIndex = 31;
@@ -2038,7 +1978,7 @@
             0,
             131072});
             this.numericUpDown_Scan_Distance_Z.Location = new System.Drawing.Point(649, 201);
-            this.numericUpDown_Scan_Distance_Z.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown_Scan_Distance_Z.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown_Scan_Distance_Z.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -2066,23 +2006,250 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(729, 152);
+            this.label13.Location = new System.Drawing.Point(722, 152);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(68, 13);
             this.label13.TabIndex = 36;
             this.label13.Text = "(unit : 0.1um)";
             // 
-            // pictureBox_Scan_Setup
+            // groupBox5
             // 
-            this.pictureBox_Scan_Setup.Image = global::BRC.Properties.Resources.BRC;
-            this.pictureBox_Scan_Setup.Location = new System.Drawing.Point(117, 56);
-            this.pictureBox_Scan_Setup.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Scan_Setup.Name = "pictureBox_Scan_Setup";
-            this.pictureBox_Scan_Setup.Size = new System.Drawing.Size(570, 374);
-            this.pictureBox_Scan_Setup.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Scan_Setup.TabIndex = 0;
-            this.pictureBox_Scan_Setup.TabStop = false;
+            this.groupBox5.Controls.Add(this.label102);
+            this.groupBox5.Controls.Add(this.textBox_Now_FusionErrorMessage);
+            this.groupBox5.Controls.Add(this.textBox_Now_FusionState);
+            this.groupBox5.Controls.Add(this.label101);
+            this.groupBox5.Controls.Add(this.label100);
+            this.groupBox5.Controls.Add(this.btnProtocolTest);
+            this.groupBox5.Controls.Add(this.button_MoveFusion_Pos_Y);
+            this.groupBox5.Controls.Add(this.button_MoveFusion_Pos_X);
+            this.groupBox5.Controls.Add(this.textBox_Step_FusionPos_Y);
+            this.groupBox5.Controls.Add(this.textBox_Step_FusionPos_X);
+            this.groupBox5.Controls.Add(this.label99);
+            this.groupBox5.Controls.Add(this.textBox_Now_FusionPosition_Y);
+            this.groupBox5.Controls.Add(this.label93);
+            this.groupBox5.Controls.Add(this.label96);
+            this.groupBox5.Controls.Add(this.label94);
+            this.groupBox5.Controls.Add(this.label95);
+            this.groupBox5.Controls.Add(this.textBox_Cut_Start_FusionX);
+            this.groupBox5.Controls.Add(this.textBox_Now_FusionPosition_X);
+            this.groupBox5.Controls.Add(this.textBox_Cut_Start_FusionY);
+            this.groupBox5.Controls.Add(this.label97);
+            this.groupBox5.Controls.Add(this.label92);
+            this.groupBox5.Location = new System.Drawing.Point(790, 3);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.groupBox5.Size = new System.Drawing.Size(238, 395);
+            this.groupBox5.TabIndex = 167;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Fusion平台";
+            // 
+            // label102
+            // 
+            this.label102.AutoSize = true;
+            this.label102.Location = new System.Drawing.Point(4, 298);
+            this.label102.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label102.Name = "label102";
+            this.label102.Size = new System.Drawing.Size(202, 91);
+            this.label102.TabIndex = 179;
+            this.label102.Text = "#不同圖層用-區隔\r\n例如:\r\n原本Henry_40xFB_test\r\n要有切換功能\r\nHenry_40xFB_test-1\r\nHenry_40xFB_test-" +
+    "2\r\n若讀取不到將會讀取Henry_40xFB_test";
+            // 
+            // textBox_Now_FusionErrorMessage
+            // 
+            this.textBox_Now_FusionErrorMessage.Location = new System.Drawing.Point(59, 68);
+            this.textBox_Now_FusionErrorMessage.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_Now_FusionErrorMessage.Name = "textBox_Now_FusionErrorMessage";
+            this.textBox_Now_FusionErrorMessage.ReadOnly = true;
+            this.textBox_Now_FusionErrorMessage.Size = new System.Drawing.Size(83, 20);
+            this.textBox_Now_FusionErrorMessage.TabIndex = 178;
+            this.textBox_Now_FusionErrorMessage.Text = "0";
+            // 
+            // textBox_Now_FusionState
+            // 
+            this.textBox_Now_FusionState.Location = new System.Drawing.Point(59, 36);
+            this.textBox_Now_FusionState.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_Now_FusionState.Name = "textBox_Now_FusionState";
+            this.textBox_Now_FusionState.ReadOnly = true;
+            this.textBox_Now_FusionState.Size = new System.Drawing.Size(83, 20);
+            this.textBox_Now_FusionState.TabIndex = 177;
+            this.textBox_Now_FusionState.Text = "0";
+            // 
+            // label101
+            // 
+            this.label101.AutoSize = true;
+            this.label101.Location = new System.Drawing.Point(4, 70);
+            this.label101.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label101.Name = "label101";
+            this.label101.Size = new System.Drawing.Size(55, 13);
+            this.label101.TabIndex = 176;
+            this.label101.Text = "設定結果";
+            // 
+            // label100
+            // 
+            this.label100.AutoSize = true;
+            this.label100.Location = new System.Drawing.Point(5, 39);
+            this.label100.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label100.Name = "label100";
+            this.label100.Size = new System.Drawing.Size(55, 13);
+            this.label100.TabIndex = 175;
+            this.label100.Text = "現在狀態";
+            // 
+            // btnProtocolTest
+            // 
+            this.btnProtocolTest.Location = new System.Drawing.Point(8, 260);
+            this.btnProtocolTest.Margin = new System.Windows.Forms.Padding(2);
+            this.btnProtocolTest.Name = "btnProtocolTest";
+            this.btnProtocolTest.Size = new System.Drawing.Size(116, 30);
+            this.btnProtocolTest.TabIndex = 174;
+            this.btnProtocolTest.Text = "Protocol切換測試";
+            this.btnProtocolTest.UseVisualStyleBackColor = true;
+            this.btnProtocolTest.Click += new System.EventHandler(this.btnProtocolTest_Click);
+            // 
+            // button_MoveFusion_Pos_Y
+            // 
+            this.button_MoveFusion_Pos_Y.Location = new System.Drawing.Point(149, 184);
+            this.button_MoveFusion_Pos_Y.Margin = new System.Windows.Forms.Padding(2);
+            this.button_MoveFusion_Pos_Y.Name = "button_MoveFusion_Pos_Y";
+            this.button_MoveFusion_Pos_Y.Size = new System.Drawing.Size(83, 30);
+            this.button_MoveFusion_Pos_Y.TabIndex = 171;
+            this.button_MoveFusion_Pos_Y.Text = "移動";
+            this.button_MoveFusion_Pos_Y.UseVisualStyleBackColor = true;
+            this.button_MoveFusion_Pos_Y.Click += new System.EventHandler(this.button_MoveFusion_Pos_Y_Click);
+            // 
+            // button_MoveFusion_Pos_X
+            // 
+            this.button_MoveFusion_Pos_X.Location = new System.Drawing.Point(60, 184);
+            this.button_MoveFusion_Pos_X.Margin = new System.Windows.Forms.Padding(2);
+            this.button_MoveFusion_Pos_X.Name = "button_MoveFusion_Pos_X";
+            this.button_MoveFusion_Pos_X.Size = new System.Drawing.Size(82, 30);
+            this.button_MoveFusion_Pos_X.TabIndex = 170;
+            this.button_MoveFusion_Pos_X.Text = "移動";
+            this.button_MoveFusion_Pos_X.UseVisualStyleBackColor = true;
+            this.button_MoveFusion_Pos_X.Click += new System.EventHandler(this.button_MoveFusion_Pos_X_Click);
+            // 
+            // textBox_Step_FusionPos_Y
+            // 
+            this.textBox_Step_FusionPos_Y.Location = new System.Drawing.Point(149, 157);
+            this.textBox_Step_FusionPos_Y.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_Step_FusionPos_Y.Name = "textBox_Step_FusionPos_Y";
+            this.textBox_Step_FusionPos_Y.Size = new System.Drawing.Size(83, 20);
+            this.textBox_Step_FusionPos_Y.TabIndex = 169;
+            // 
+            // textBox_Step_FusionPos_X
+            // 
+            this.textBox_Step_FusionPos_X.Location = new System.Drawing.Point(60, 157);
+            this.textBox_Step_FusionPos_X.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_Step_FusionPos_X.Name = "textBox_Step_FusionPos_X";
+            this.textBox_Step_FusionPos_X.Size = new System.Drawing.Size(83, 20);
+            this.textBox_Step_FusionPos_X.TabIndex = 168;
+            // 
+            // label99
+            // 
+            this.label99.AutoSize = true;
+            this.label99.Location = new System.Drawing.Point(5, 164);
+            this.label99.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label99.Name = "label99";
+            this.label99.Size = new System.Drawing.Size(55, 13);
+            this.label99.TabIndex = 167;
+            this.label99.Text = "移動位置";
+            // 
+            // textBox_Now_FusionPosition_Y
+            // 
+            this.textBox_Now_FusionPosition_Y.Location = new System.Drawing.Point(149, 127);
+            this.textBox_Now_FusionPosition_Y.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_Now_FusionPosition_Y.Name = "textBox_Now_FusionPosition_Y";
+            this.textBox_Now_FusionPosition_Y.ReadOnly = true;
+            this.textBox_Now_FusionPosition_Y.Size = new System.Drawing.Size(83, 20);
+            this.textBox_Now_FusionPosition_Y.TabIndex = 166;
+            this.textBox_Now_FusionPosition_Y.Text = "0";
+            // 
+            // label93
+            // 
+            this.label93.AutoSize = true;
+            this.label93.Location = new System.Drawing.Point(128, 246);
+            this.label93.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label93.Name = "label93";
+            this.label93.Size = new System.Drawing.Size(14, 13);
+            this.label93.TabIndex = 138;
+            this.label93.Text = "X";
+            // 
+            // label96
+            // 
+            this.label96.AutoSize = true;
+            this.label96.Location = new System.Drawing.Point(5, 130);
+            this.label96.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label96.Name = "label96";
+            this.label96.Size = new System.Drawing.Size(55, 13);
+            this.label96.TabIndex = 163;
+            this.label96.Text = "現在位置";
+            // 
+            // label94
+            // 
+            this.label94.AutoSize = true;
+            this.label94.Location = new System.Drawing.Point(128, 279);
+            this.label94.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label94.Name = "label94";
+            this.label94.Size = new System.Drawing.Size(14, 13);
+            this.label94.TabIndex = 139;
+            this.label94.Text = "Y";
+            // 
+            // label95
+            // 
+            this.label95.AutoSize = true;
+            this.label95.Location = new System.Drawing.Point(178, 113);
+            this.label95.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label95.Name = "label95";
+            this.label95.Size = new System.Drawing.Size(14, 13);
+            this.label95.TabIndex = 165;
+            this.label95.Text = "Y";
+            // 
+            // textBox_Cut_Start_FusionX
+            // 
+            this.textBox_Cut_Start_FusionX.Location = new System.Drawing.Point(155, 239);
+            this.textBox_Cut_Start_FusionX.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_Cut_Start_FusionX.Name = "textBox_Cut_Start_FusionX";
+            this.textBox_Cut_Start_FusionX.Size = new System.Drawing.Size(76, 20);
+            this.textBox_Cut_Start_FusionX.TabIndex = 140;
+            // 
+            // textBox_Now_FusionPosition_X
+            // 
+            this.textBox_Now_FusionPosition_X.Location = new System.Drawing.Point(60, 127);
+            this.textBox_Now_FusionPosition_X.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_Now_FusionPosition_X.Name = "textBox_Now_FusionPosition_X";
+            this.textBox_Now_FusionPosition_X.ReadOnly = true;
+            this.textBox_Now_FusionPosition_X.Size = new System.Drawing.Size(83, 20);
+            this.textBox_Now_FusionPosition_X.TabIndex = 164;
+            this.textBox_Now_FusionPosition_X.Text = "0";
+            // 
+            // textBox_Cut_Start_FusionY
+            // 
+            this.textBox_Cut_Start_FusionY.Location = new System.Drawing.Point(155, 270);
+            this.textBox_Cut_Start_FusionY.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_Cut_Start_FusionY.Name = "textBox_Cut_Start_FusionY";
+            this.textBox_Cut_Start_FusionY.Size = new System.Drawing.Size(76, 20);
+            this.textBox_Cut_Start_FusionY.TabIndex = 141;
+            // 
+            // label97
+            // 
+            this.label97.AutoSize = true;
+            this.label97.Location = new System.Drawing.Point(90, 113);
+            this.label97.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label97.Name = "label97";
+            this.label97.Size = new System.Drawing.Size(14, 13);
+            this.label97.TabIndex = 162;
+            this.label97.Text = "X";
+            // 
+            // label92
+            // 
+            this.label92.AutoSize = true;
+            this.label92.Location = new System.Drawing.Point(154, 224);
+            this.label92.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label92.Name = "label92";
+            this.label92.Size = new System.Drawing.Size(86, 13);
+            this.label92.TabIndex = 137;
+            this.label92.Text = "切割Fusion起點";
             // 
             // tabPage3
             // 
@@ -2100,7 +2267,7 @@
             this.tabPage3.Controls.Add(this.groupBox_Position_Setup);
             this.tabPage3.Controls.Add(this.groupBox4);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(1039, 640);
             this.tabPage3.TabIndex = 2;
@@ -2177,7 +2344,7 @@
             // 
             this.btn_Stop_3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btn_Stop_3.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_Stop_3.Location = new System.Drawing.Point(919, 338);
+            this.btn_Stop_3.Location = new System.Drawing.Point(965, 335);
             this.btn_Stop_3.Name = "btn_Stop_3";
             this.btn_Stop_3.Size = new System.Drawing.Size(73, 200);
             this.btn_Stop_3.TabIndex = 162;
@@ -2187,6 +2354,12 @@
             // 
             // panel_Motion
             // 
+            this.panel_Motion.Controls.Add(this.label103);
+            this.panel_Motion.Controls.Add(this.num_Axis_Pulse_Z);
+            this.panel_Motion.Controls.Add(this.comboBox_Axis_Pulse_Z);
+            this.panel_Motion.Controls.Add(this.label98);
+            this.panel_Motion.Controls.Add(this.button_Move_Pulse_ZUp);
+            this.panel_Motion.Controls.Add(this.button_Move_Pulse_ZDown);
             this.panel_Motion.Controls.Add(this.button_Move_Pos_Z);
             this.panel_Motion.Controls.Add(this.button_Move_Pos_Y);
             this.panel_Motion.Controls.Add(this.button_Move_Pos_X);
@@ -2219,15 +2392,63 @@
             this.panel_Motion.Controls.Add(this.comboBox_Axis_Num_X);
             this.panel_Motion.Controls.Add(this.label69);
             this.panel_Motion.Location = new System.Drawing.Point(4, 2);
-            this.panel_Motion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel_Motion.Margin = new System.Windows.Forms.Padding(2);
             this.panel_Motion.Name = "panel_Motion";
-            this.panel_Motion.Size = new System.Drawing.Size(341, 279);
+            this.panel_Motion.Size = new System.Drawing.Size(452, 279);
             this.panel_Motion.TabIndex = 133;
+            // 
+            // label103
+            // 
+            this.label103.AutoSize = true;
+            this.label103.Location = new System.Drawing.Point(389, 119);
+            this.label103.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label103.Name = "label103";
+            this.label103.Size = new System.Drawing.Size(21, 13);
+            this.label103.TabIndex = 144;
+            this.label103.Text = "um";
+            // 
+            // num_Axis_Pulse_Z
+            // 
+            this.num_Axis_Pulse_Z.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.num_Axis_Pulse_Z.Location = new System.Drawing.Point(338, 112);
+            this.num_Axis_Pulse_Z.Margin = new System.Windows.Forms.Padding(2);
+            this.num_Axis_Pulse_Z.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.num_Axis_Pulse_Z.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.num_Axis_Pulse_Z.Name = "num_Axis_Pulse_Z";
+            this.num_Axis_Pulse_Z.Size = new System.Drawing.Size(51, 20);
+            this.num_Axis_Pulse_Z.TabIndex = 143;
+            this.num_Axis_Pulse_Z.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label98
+            // 
+            this.label98.AutoSize = true;
+            this.label98.Location = new System.Drawing.Point(335, 91);
+            this.label98.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label98.Name = "label98";
+            this.label98.Size = new System.Drawing.Size(74, 13);
+            this.label98.TabIndex = 141;
+            this.label98.Text = "Z軸吋動距離";
             // 
             // button_Move_Pos_Z
             // 
             this.button_Move_Pos_Z.Location = new System.Drawing.Point(253, 239);
-            this.button_Move_Pos_Z.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Move_Pos_Z.Margin = new System.Windows.Forms.Padding(2);
             this.button_Move_Pos_Z.Name = "button_Move_Pos_Z";
             this.button_Move_Pos_Z.Size = new System.Drawing.Size(82, 30);
             this.button_Move_Pos_Z.TabIndex = 138;
@@ -2238,7 +2459,7 @@
             // button_Move_Pos_Y
             // 
             this.button_Move_Pos_Y.Location = new System.Drawing.Point(166, 239);
-            this.button_Move_Pos_Y.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Move_Pos_Y.Margin = new System.Windows.Forms.Padding(2);
             this.button_Move_Pos_Y.Name = "button_Move_Pos_Y";
             this.button_Move_Pos_Y.Size = new System.Drawing.Size(83, 30);
             this.button_Move_Pos_Y.TabIndex = 137;
@@ -2249,7 +2470,7 @@
             // button_Move_Pos_X
             // 
             this.button_Move_Pos_X.Location = new System.Drawing.Point(80, 239);
-            this.button_Move_Pos_X.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Move_Pos_X.Margin = new System.Windows.Forms.Padding(2);
             this.button_Move_Pos_X.Name = "button_Move_Pos_X";
             this.button_Move_Pos_X.Size = new System.Drawing.Size(82, 30);
             this.button_Move_Pos_X.TabIndex = 136;
@@ -2260,7 +2481,7 @@
             // textBox_Step_Pos_Z
             // 
             this.textBox_Step_Pos_Z.Location = new System.Drawing.Point(253, 212);
-            this.textBox_Step_Pos_Z.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Step_Pos_Z.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Step_Pos_Z.Name = "textBox_Step_Pos_Z";
             this.textBox_Step_Pos_Z.Size = new System.Drawing.Size(83, 20);
             this.textBox_Step_Pos_Z.TabIndex = 135;
@@ -2268,7 +2489,7 @@
             // textBox_Step_Pos_Y
             // 
             this.textBox_Step_Pos_Y.Location = new System.Drawing.Point(166, 212);
-            this.textBox_Step_Pos_Y.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Step_Pos_Y.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Step_Pos_Y.Name = "textBox_Step_Pos_Y";
             this.textBox_Step_Pos_Y.Size = new System.Drawing.Size(83, 20);
             this.textBox_Step_Pos_Y.TabIndex = 134;
@@ -2276,7 +2497,7 @@
             // textBox_Step_Pos_X
             // 
             this.textBox_Step_Pos_X.Location = new System.Drawing.Point(80, 211);
-            this.textBox_Step_Pos_X.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Step_Pos_X.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Step_Pos_X.Name = "textBox_Step_Pos_X";
             this.textBox_Step_Pos_X.Size = new System.Drawing.Size(83, 20);
             this.textBox_Step_Pos_X.TabIndex = 133;
@@ -2301,49 +2522,10 @@
             this.label71.TabIndex = 92;
             this.label71.Text = "COM PORT";
             // 
-            // button_Move_X_P
-            // 
-            this.button_Move_X_P.BackgroundImage = global::BRC.Properties.Resources.Left;
-            this.button_Move_X_P.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_Move_X_P.Location = new System.Drawing.Point(80, 44);
-            this.button_Move_X_P.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button_Move_X_P.Name = "button_Move_X_P";
-            this.button_Move_X_P.Size = new System.Drawing.Size(38, 43);
-            this.button_Move_X_P.TabIndex = 93;
-            this.button_Move_X_P.UseVisualStyleBackColor = true;
-            this.button_Move_X_P.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_Move_X_P_MouseDown);
-            this.button_Move_X_P.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Move_X_P_MouseUp);
-            // 
-            // button_Move_X_N
-            // 
-            this.button_Move_X_N.BackgroundImage = global::BRC.Properties.Resources.Right;
-            this.button_Move_X_N.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_Move_X_N.Location = new System.Drawing.Point(124, 44);
-            this.button_Move_X_N.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button_Move_X_N.Name = "button_Move_X_N";
-            this.button_Move_X_N.Size = new System.Drawing.Size(38, 43);
-            this.button_Move_X_N.TabIndex = 95;
-            this.button_Move_X_N.UseVisualStyleBackColor = true;
-            this.button_Move_X_N.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_Move_X_N_MouseDown);
-            this.button_Move_X_N.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Move_X_N_MouseUp);
-            // 
-            // button_Move_Y_P
-            // 
-            this.button_Move_Y_P.BackgroundImage = global::BRC.Properties.Resources.Up;
-            this.button_Move_Y_P.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_Move_Y_P.Location = new System.Drawing.Point(166, 44);
-            this.button_Move_Y_P.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button_Move_Y_P.Name = "button_Move_Y_P";
-            this.button_Move_Y_P.Size = new System.Drawing.Size(38, 43);
-            this.button_Move_Y_P.TabIndex = 96;
-            this.button_Move_Y_P.UseVisualStyleBackColor = true;
-            this.button_Move_Y_P.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_Move_Y_P_MouseDown);
-            this.button_Move_Y_P.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Move_Y_P_MouseUp);
-            // 
             // button_Set_Speed
             // 
             this.button_Set_Speed.Location = new System.Drawing.Point(8, 44);
-            this.button_Set_Speed.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Set_Speed.Margin = new System.Windows.Forms.Padding(2);
             this.button_Set_Speed.Name = "button_Set_Speed";
             this.button_Set_Speed.Size = new System.Drawing.Size(66, 43);
             this.button_Set_Speed.TabIndex = 131;
@@ -2351,51 +2533,12 @@
             this.button_Set_Speed.UseVisualStyleBackColor = true;
             this.button_Set_Speed.Click += new System.EventHandler(this.button_Set_Speed_Click);
             // 
-            // button_Move_Y_N
-            // 
-            this.button_Move_Y_N.BackgroundImage = global::BRC.Properties.Resources.Down;
-            this.button_Move_Y_N.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_Move_Y_N.Location = new System.Drawing.Point(211, 44);
-            this.button_Move_Y_N.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button_Move_Y_N.Name = "button_Move_Y_N";
-            this.button_Move_Y_N.Size = new System.Drawing.Size(38, 43);
-            this.button_Move_Y_N.TabIndex = 98;
-            this.button_Move_Y_N.UseVisualStyleBackColor = true;
-            this.button_Move_Y_N.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_Move_Y_N_MouseDown);
-            this.button_Move_Y_N.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Move_Y_N_MouseUp);
-            // 
-            // button_Move_Z_P
-            // 
-            this.button_Move_Z_P.BackgroundImage = global::BRC.Properties.Resources.Up;
-            this.button_Move_Z_P.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_Move_Z_P.Location = new System.Drawing.Point(253, 44);
-            this.button_Move_Z_P.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button_Move_Z_P.Name = "button_Move_Z_P";
-            this.button_Move_Z_P.Size = new System.Drawing.Size(38, 43);
-            this.button_Move_Z_P.TabIndex = 99;
-            this.button_Move_Z_P.UseVisualStyleBackColor = true;
-            this.button_Move_Z_P.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_Move_Z_P_MouseDown);
-            this.button_Move_Z_P.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Move_Z_P_MouseUp);
-            // 
-            // button_Move_Z_N
-            // 
-            this.button_Move_Z_N.BackgroundImage = global::BRC.Properties.Resources.Down;
-            this.button_Move_Z_N.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_Move_Z_N.Location = new System.Drawing.Point(297, 44);
-            this.button_Move_Z_N.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button_Move_Z_N.Name = "button_Move_Z_N";
-            this.button_Move_Z_N.Size = new System.Drawing.Size(38, 43);
-            this.button_Move_Z_N.TabIndex = 101;
-            this.button_Move_Z_N.UseVisualStyleBackColor = true;
-            this.button_Move_Z_N.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_Move_Z_N_MouseDown);
-            this.button_Move_Z_N.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Move_Z_N_MouseUp);
-            // 
             // comboBox_COM_Port
             // 
             this.comboBox_COM_Port.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_COM_Port.FormattingEnabled = true;
             this.comboBox_COM_Port.Location = new System.Drawing.Point(88, 7);
-            this.comboBox_COM_Port.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox_COM_Port.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_COM_Port.Name = "comboBox_COM_Port";
             this.comboBox_COM_Port.Size = new System.Drawing.Size(92, 21);
             this.comboBox_COM_Port.TabIndex = 91;
@@ -2413,7 +2556,7 @@
             // textBox_Step_Speed_Z
             // 
             this.textBox_Step_Speed_Z.Location = new System.Drawing.Point(253, 183);
-            this.textBox_Step_Speed_Z.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Step_Speed_Z.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Step_Speed_Z.Name = "textBox_Step_Speed_Z";
             this.textBox_Step_Speed_Z.Size = new System.Drawing.Size(83, 20);
             this.textBox_Step_Speed_Z.TabIndex = 118;
@@ -2431,7 +2574,7 @@
             // textBox_Step_Speed_Y
             // 
             this.textBox_Step_Speed_Y.Location = new System.Drawing.Point(166, 183);
-            this.textBox_Step_Speed_Y.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Step_Speed_Y.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Step_Speed_Y.Name = "textBox_Step_Speed_Y";
             this.textBox_Step_Speed_Y.Size = new System.Drawing.Size(83, 20);
             this.textBox_Step_Speed_Y.TabIndex = 117;
@@ -2449,7 +2592,7 @@
             // textBox_Step_Speed_X
             // 
             this.textBox_Step_Speed_X.Location = new System.Drawing.Point(80, 182);
-            this.textBox_Step_Speed_X.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Step_Speed_X.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Step_Speed_X.Name = "textBox_Step_Speed_X";
             this.textBox_Step_Speed_X.Size = new System.Drawing.Size(83, 20);
             this.textBox_Step_Speed_X.TabIndex = 116;
@@ -2458,7 +2601,7 @@
             // 
             this.checkBox_Inverse_X.AutoSize = true;
             this.checkBox_Inverse_X.Location = new System.Drawing.Point(89, 96);
-            this.checkBox_Inverse_X.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBox_Inverse_X.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox_Inverse_X.Name = "checkBox_Inverse_X";
             this.checkBox_Inverse_X.Size = new System.Drawing.Size(60, 17);
             this.checkBox_Inverse_X.TabIndex = 102;
@@ -2479,7 +2622,7 @@
             // 
             this.checkBox_Inverse_Y.AutoSize = true;
             this.checkBox_Inverse_Y.Location = new System.Drawing.Point(175, 96);
-            this.checkBox_Inverse_Y.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBox_Inverse_Y.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox_Inverse_Y.Name = "checkBox_Inverse_Y";
             this.checkBox_Inverse_Y.Size = new System.Drawing.Size(60, 17);
             this.checkBox_Inverse_Y.TabIndex = 103;
@@ -2490,7 +2633,7 @@
             // 
             this.checkBox_Inverse_Z.AutoSize = true;
             this.checkBox_Inverse_Z.Location = new System.Drawing.Point(261, 96);
-            this.checkBox_Inverse_Z.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBox_Inverse_Z.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox_Inverse_Z.Name = "checkBox_Inverse_Z";
             this.checkBox_Inverse_Z.Size = new System.Drawing.Size(60, 17);
             this.checkBox_Inverse_Z.TabIndex = 104;
@@ -2505,7 +2648,7 @@
             "2",
             "3"});
             this.comboBox_Axis_Num_Z.Location = new System.Drawing.Point(253, 153);
-            this.comboBox_Axis_Num_Z.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox_Axis_Num_Z.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_Axis_Num_Z.Name = "comboBox_Axis_Num_Z";
             this.comboBox_Axis_Num_Z.Size = new System.Drawing.Size(83, 21);
             this.comboBox_Axis_Num_Z.TabIndex = 111;
@@ -2514,7 +2657,7 @@
             // 
             this.checkBox_Inverse_XY.AutoSize = true;
             this.checkBox_Inverse_XY.Location = new System.Drawing.Point(128, 122);
-            this.checkBox_Inverse_XY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBox_Inverse_XY.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox_Inverse_XY.Name = "checkBox_Inverse_XY";
             this.checkBox_Inverse_XY.Size = new System.Drawing.Size(70, 17);
             this.checkBox_Inverse_XY.TabIndex = 105;
@@ -2529,7 +2672,7 @@
             "2",
             "3"});
             this.comboBox_Axis_Num_Y.Location = new System.Drawing.Point(166, 153);
-            this.comboBox_Axis_Num_Y.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox_Axis_Num_Y.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_Axis_Num_Y.Name = "comboBox_Axis_Num_Y";
             this.comboBox_Axis_Num_Y.Size = new System.Drawing.Size(83, 21);
             this.comboBox_Axis_Num_Y.TabIndex = 110;
@@ -2542,7 +2685,7 @@
             "2",
             "3"});
             this.comboBox_Axis_Num_X.Location = new System.Drawing.Point(80, 153);
-            this.comboBox_Axis_Num_X.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox_Axis_Num_X.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_Axis_Num_X.Name = "comboBox_Axis_Num_X";
             this.comboBox_Axis_Num_X.Size = new System.Drawing.Size(83, 21);
             this.comboBox_Axis_Num_X.TabIndex = 106;
@@ -2560,7 +2703,7 @@
             // textBox_Andor_Exe_Address
             // 
             this.textBox_Andor_Exe_Address.Location = new System.Drawing.Point(10, 593);
-            this.textBox_Andor_Exe_Address.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Andor_Exe_Address.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Andor_Exe_Address.Name = "textBox_Andor_Exe_Address";
             this.textBox_Andor_Exe_Address.ReadOnly = true;
             this.textBox_Andor_Exe_Address.Size = new System.Drawing.Size(337, 20);
@@ -2580,7 +2723,7 @@
             // 
             this.button_Load_Andor.BackColor = System.Drawing.Color.Transparent;
             this.button_Load_Andor.Location = new System.Drawing.Point(350, 518);
-            this.button_Load_Andor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Load_Andor.Margin = new System.Windows.Forms.Padding(2);
             this.button_Load_Andor.Name = "button_Load_Andor";
             this.button_Load_Andor.Size = new System.Drawing.Size(112, 54);
             this.button_Load_Andor.TabIndex = 132;
@@ -2592,7 +2735,7 @@
             // 
             this.button_Auto.BackColor = System.Drawing.Color.Transparent;
             this.button_Auto.Location = new System.Drawing.Point(350, 458);
-            this.button_Auto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Auto.Margin = new System.Windows.Forms.Padding(2);
             this.button_Auto.Name = "button_Auto";
             this.button_Auto.Size = new System.Drawing.Size(112, 54);
             this.button_Auto.TabIndex = 130;
@@ -2603,8 +2746,8 @@
             // checkBox_Position_Setup
             // 
             this.checkBox_Position_Setup.AutoSize = true;
-            this.checkBox_Position_Setup.Location = new System.Drawing.Point(362, 10);
-            this.checkBox_Position_Setup.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBox_Position_Setup.Location = new System.Drawing.Point(472, 6);
+            this.checkBox_Position_Setup.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox_Position_Setup.Name = "checkBox_Position_Setup";
             this.checkBox_Position_Setup.Size = new System.Drawing.Size(74, 17);
             this.checkBox_Position_Setup.TabIndex = 115;
@@ -2631,10 +2774,10 @@
             this.groupBox_Process_Step.Controls.Add(this.button_Move_Z_Micro);
             this.groupBox_Process_Step.Controls.Add(this.button_Move_XY_Micro);
             this.groupBox_Process_Step.Controls.Add(this.button12);
-            this.groupBox_Process_Step.Location = new System.Drawing.Point(608, 13);
-            this.groupBox_Process_Step.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_Process_Step.Location = new System.Drawing.Point(718, 9);
+            this.groupBox_Process_Step.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox_Process_Step.Name = "groupBox_Process_Step";
-            this.groupBox_Process_Step.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_Process_Step.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox_Process_Step.Size = new System.Drawing.Size(242, 565);
             this.groupBox_Process_Step.TabIndex = 120;
             this.groupBox_Process_Step.TabStop = false;
@@ -2643,7 +2786,7 @@
             // button21
             // 
             this.button21.Location = new System.Drawing.Point(122, 444);
-            this.button21.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button21.Margin = new System.Windows.Forms.Padding(2);
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(112, 54);
             this.button21.TabIndex = 129;
@@ -2664,7 +2807,7 @@
             // button20
             // 
             this.button20.Location = new System.Drawing.Point(122, 385);
-            this.button20.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button20.Margin = new System.Windows.Forms.Padding(2);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(112, 54);
             this.button20.TabIndex = 127;
@@ -2695,7 +2838,7 @@
             // button_Close_Hz
             // 
             this.button_Close_Hz.Location = new System.Drawing.Point(126, 146);
-            this.button_Close_Hz.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Close_Hz.Margin = new System.Windows.Forms.Padding(2);
             this.button_Close_Hz.Name = "button_Close_Hz";
             this.button_Close_Hz.Size = new System.Drawing.Size(112, 54);
             this.button_Close_Hz.TabIndex = 125;
@@ -2706,7 +2849,7 @@
             // button18
             // 
             this.button18.Location = new System.Drawing.Point(126, 205);
-            this.button18.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button18.Margin = new System.Windows.Forms.Padding(2);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(112, 54);
             this.button18.TabIndex = 124;
@@ -2717,7 +2860,7 @@
             // button_Move_XY_Cut_End
             // 
             this.button_Move_XY_Cut_End.Location = new System.Drawing.Point(126, 86);
-            this.button_Move_XY_Cut_End.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Move_XY_Cut_End.Margin = new System.Windows.Forms.Padding(2);
             this.button_Move_XY_Cut_End.Name = "button_Move_XY_Cut_End";
             this.button_Move_XY_Cut_End.Size = new System.Drawing.Size(112, 54);
             this.button_Move_XY_Cut_End.TabIndex = 123;
@@ -2728,7 +2871,7 @@
             // button_Start_Hz
             // 
             this.button_Start_Hz.Location = new System.Drawing.Point(126, 25);
-            this.button_Start_Hz.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Start_Hz.Margin = new System.Windows.Forms.Padding(2);
             this.button_Start_Hz.Name = "button_Start_Hz";
             this.button_Start_Hz.Size = new System.Drawing.Size(112, 54);
             this.button_Start_Hz.TabIndex = 122;
@@ -2739,7 +2882,7 @@
             // button_Move_Z_Cut
             // 
             this.button_Move_Z_Cut.Location = new System.Drawing.Point(4, 504);
-            this.button_Move_Z_Cut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Move_Z_Cut.Margin = new System.Windows.Forms.Padding(2);
             this.button_Move_Z_Cut.Name = "button_Move_Z_Cut";
             this.button_Move_Z_Cut.Size = new System.Drawing.Size(112, 54);
             this.button_Move_Z_Cut.TabIndex = 121;
@@ -2750,7 +2893,7 @@
             // button_Move_XY_Cut_Start
             // 
             this.button_Move_XY_Cut_Start.Location = new System.Drawing.Point(4, 444);
-            this.button_Move_XY_Cut_Start.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Move_XY_Cut_Start.Margin = new System.Windows.Forms.Padding(2);
             this.button_Move_XY_Cut_Start.Name = "button_Move_XY_Cut_Start";
             this.button_Move_XY_Cut_Start.Size = new System.Drawing.Size(112, 54);
             this.button_Move_XY_Cut_Start.TabIndex = 120;
@@ -2771,7 +2914,7 @@
             // button8
             // 
             this.button8.Location = new System.Drawing.Point(4, 385);
-            this.button8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button8.Margin = new System.Windows.Forms.Padding(2);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(112, 54);
             this.button8.TabIndex = 117;
@@ -2782,7 +2925,7 @@
             // button_Start_Scan
             // 
             this.button_Start_Scan.Location = new System.Drawing.Point(4, 206);
-            this.button_Start_Scan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Start_Scan.Margin = new System.Windows.Forms.Padding(2);
             this.button_Start_Scan.Name = "button_Start_Scan";
             this.button_Start_Scan.Size = new System.Drawing.Size(112, 54);
             this.button_Start_Scan.TabIndex = 116;
@@ -2793,7 +2936,7 @@
             // button_Move_Z_Micro
             // 
             this.button_Move_Z_Micro.Location = new System.Drawing.Point(4, 146);
-            this.button_Move_Z_Micro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Move_Z_Micro.Margin = new System.Windows.Forms.Padding(2);
             this.button_Move_Z_Micro.Name = "button_Move_Z_Micro";
             this.button_Move_Z_Micro.Size = new System.Drawing.Size(112, 54);
             this.button_Move_Z_Micro.TabIndex = 115;
@@ -2804,7 +2947,7 @@
             // button_Move_XY_Micro
             // 
             this.button_Move_XY_Micro.Location = new System.Drawing.Point(4, 86);
-            this.button_Move_XY_Micro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Move_XY_Micro.Margin = new System.Windows.Forms.Padding(2);
             this.button_Move_XY_Micro.Name = "button_Move_XY_Micro";
             this.button_Move_XY_Micro.Size = new System.Drawing.Size(112, 54);
             this.button_Move_XY_Micro.TabIndex = 114;
@@ -2815,7 +2958,7 @@
             // button12
             // 
             this.button12.Location = new System.Drawing.Point(4, 26);
-            this.button12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button12.Margin = new System.Windows.Forms.Padding(2);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(112, 54);
             this.button12.TabIndex = 113;
@@ -2831,10 +2974,10 @@
             this.groupBox_Start_Setup.Controls.Add(this.button_X_ORG);
             this.groupBox_Start_Setup.Controls.Add(this.button_Z_ORG);
             this.groupBox_Start_Setup.Controls.Add(this.button_Connect_Motion);
-            this.groupBox_Start_Setup.Location = new System.Drawing.Point(479, 13);
-            this.groupBox_Start_Setup.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_Start_Setup.Location = new System.Drawing.Point(589, 9);
+            this.groupBox_Start_Setup.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox_Start_Setup.Name = "groupBox_Start_Setup";
-            this.groupBox_Start_Setup.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_Start_Setup.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox_Start_Setup.Size = new System.Drawing.Size(124, 392);
             this.groupBox_Start_Setup.TabIndex = 119;
             this.groupBox_Start_Setup.TabStop = false;
@@ -2843,7 +2986,7 @@
             // button_Move_Safe_High
             // 
             this.button_Move_Safe_High.Location = new System.Drawing.Point(4, 265);
-            this.button_Move_Safe_High.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Move_Safe_High.Margin = new System.Windows.Forms.Padding(2);
             this.button_Move_Safe_High.Name = "button_Move_Safe_High";
             this.button_Move_Safe_High.Size = new System.Drawing.Size(112, 54);
             this.button_Move_Safe_High.TabIndex = 118;
@@ -2854,7 +2997,7 @@
             // button_Move_Standby
             // 
             this.button_Move_Standby.Location = new System.Drawing.Point(4, 325);
-            this.button_Move_Standby.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Move_Standby.Margin = new System.Windows.Forms.Padding(2);
             this.button_Move_Standby.Name = "button_Move_Standby";
             this.button_Move_Standby.Size = new System.Drawing.Size(112, 54);
             this.button_Move_Standby.TabIndex = 117;
@@ -2865,7 +3008,7 @@
             // button_Y_ORG
             // 
             this.button_Y_ORG.Location = new System.Drawing.Point(4, 147);
-            this.button_Y_ORG.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Y_ORG.Margin = new System.Windows.Forms.Padding(2);
             this.button_Y_ORG.Name = "button_Y_ORG";
             this.button_Y_ORG.Size = new System.Drawing.Size(112, 54);
             this.button_Y_ORG.TabIndex = 116;
@@ -2876,7 +3019,7 @@
             // button_X_ORG
             // 
             this.button_X_ORG.Location = new System.Drawing.Point(4, 206);
-            this.button_X_ORG.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_X_ORG.Margin = new System.Windows.Forms.Padding(2);
             this.button_X_ORG.Name = "button_X_ORG";
             this.button_X_ORG.Size = new System.Drawing.Size(112, 54);
             this.button_X_ORG.TabIndex = 115;
@@ -2887,7 +3030,7 @@
             // button_Z_ORG
             // 
             this.button_Z_ORG.Location = new System.Drawing.Point(4, 86);
-            this.button_Z_ORG.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Z_ORG.Margin = new System.Windows.Forms.Padding(2);
             this.button_Z_ORG.Name = "button_Z_ORG";
             this.button_Z_ORG.Size = new System.Drawing.Size(112, 54);
             this.button_Z_ORG.TabIndex = 114;
@@ -2898,7 +3041,7 @@
             // button_Connect_Motion
             // 
             this.button_Connect_Motion.Location = new System.Drawing.Point(4, 26);
-            this.button_Connect_Motion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Connect_Motion.Margin = new System.Windows.Forms.Padding(2);
             this.button_Connect_Motion.Name = "button_Connect_Motion";
             this.button_Connect_Motion.Size = new System.Drawing.Size(112, 54);
             this.button_Connect_Motion.TabIndex = 113;
@@ -2914,10 +3057,10 @@
             this.groupBox_Position_Setup.Controls.Add(this.button_Set_Safety_Position);
             this.groupBox_Position_Setup.Controls.Add(this.button_Set_Cut_Start);
             this.groupBox_Position_Setup.Controls.Add(this.button_Set_Cut_End);
-            this.groupBox_Position_Setup.Location = new System.Drawing.Point(350, 13);
-            this.groupBox_Position_Setup.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_Position_Setup.Location = new System.Drawing.Point(460, 9);
+            this.groupBox_Position_Setup.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox_Position_Setup.Name = "groupBox_Position_Setup";
-            this.groupBox_Position_Setup.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_Position_Setup.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox_Position_Setup.Size = new System.Drawing.Size(124, 392);
             this.groupBox_Position_Setup.TabIndex = 114;
             this.groupBox_Position_Setup.TabStop = false;
@@ -2926,7 +3069,7 @@
             // button_Set_Micro
             // 
             this.button_Set_Micro.Location = new System.Drawing.Point(4, 325);
-            this.button_Set_Micro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Set_Micro.Margin = new System.Windows.Forms.Padding(2);
             this.button_Set_Micro.Name = "button_Set_Micro";
             this.button_Set_Micro.Size = new System.Drawing.Size(112, 54);
             this.button_Set_Micro.TabIndex = 118;
@@ -2937,7 +3080,7 @@
             // button_Standby
             // 
             this.button_Standby.Location = new System.Drawing.Point(4, 206);
-            this.button_Standby.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Standby.Margin = new System.Windows.Forms.Padding(2);
             this.button_Standby.Name = "button_Standby";
             this.button_Standby.Size = new System.Drawing.Size(112, 54);
             this.button_Standby.TabIndex = 117;
@@ -2948,7 +3091,7 @@
             // button_Set_Scan_Start
             // 
             this.button_Set_Scan_Start.Location = new System.Drawing.Point(4, 265);
-            this.button_Set_Scan_Start.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Set_Scan_Start.Margin = new System.Windows.Forms.Padding(2);
             this.button_Set_Scan_Start.Name = "button_Set_Scan_Start";
             this.button_Set_Scan_Start.Size = new System.Drawing.Size(112, 54);
             this.button_Set_Scan_Start.TabIndex = 115;
@@ -2959,7 +3102,7 @@
             // button_Set_Safety_Position
             // 
             this.button_Set_Safety_Position.Location = new System.Drawing.Point(4, 146);
-            this.button_Set_Safety_Position.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Set_Safety_Position.Margin = new System.Windows.Forms.Padding(2);
             this.button_Set_Safety_Position.Name = "button_Set_Safety_Position";
             this.button_Set_Safety_Position.Size = new System.Drawing.Size(112, 54);
             this.button_Set_Safety_Position.TabIndex = 114;
@@ -2970,7 +3113,7 @@
             // button_Set_Cut_Start
             // 
             this.button_Set_Cut_Start.Location = new System.Drawing.Point(4, 26);
-            this.button_Set_Cut_Start.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Set_Cut_Start.Margin = new System.Windows.Forms.Padding(2);
             this.button_Set_Cut_Start.Name = "button_Set_Cut_Start";
             this.button_Set_Cut_Start.Size = new System.Drawing.Size(112, 54);
             this.button_Set_Cut_Start.TabIndex = 112;
@@ -2981,7 +3124,7 @@
             // button_Set_Cut_End
             // 
             this.button_Set_Cut_End.Location = new System.Drawing.Point(4, 86);
-            this.button_Set_Cut_End.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Set_Cut_End.Margin = new System.Windows.Forms.Padding(2);
             this.button_Set_Cut_End.Name = "button_Set_Cut_End";
             this.button_Set_Cut_End.Size = new System.Drawing.Size(112, 54);
             this.button_Set_Cut_End.TabIndex = 113;
@@ -3019,178 +3162,13 @@
             this.groupBox4.Controls.Add(this.label60);
             this.groupBox4.Controls.Add(this.label61);
             this.groupBox4.Location = new System.Drawing.Point(4, 374);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox4.Size = new System.Drawing.Size(340, 199);
             this.groupBox4.TabIndex = 79;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "馬達狀態";
-            // 
-            // pictureBox_Axis_Z_Alarm
-            // 
-            this.pictureBox_Axis_Z_Alarm.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Z_Alarm.Image")));
-            this.pictureBox_Axis_Z_Alarm.Location = new System.Drawing.Point(275, 174);
-            this.pictureBox_Axis_Z_Alarm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Axis_Z_Alarm.Name = "pictureBox_Axis_Z_Alarm";
-            this.pictureBox_Axis_Z_Alarm.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Axis_Z_Alarm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Axis_Z_Alarm.TabIndex = 108;
-            this.pictureBox_Axis_Z_Alarm.TabStop = false;
-            // 
-            // pictureBox_Axis_Y_Alarm
-            // 
-            this.pictureBox_Axis_Y_Alarm.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Y_Alarm.Image")));
-            this.pictureBox_Axis_Y_Alarm.Location = new System.Drawing.Point(189, 174);
-            this.pictureBox_Axis_Y_Alarm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Axis_Y_Alarm.Name = "pictureBox_Axis_Y_Alarm";
-            this.pictureBox_Axis_Y_Alarm.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Axis_Y_Alarm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Axis_Y_Alarm.TabIndex = 107;
-            this.pictureBox_Axis_Y_Alarm.TabStop = false;
-            // 
-            // pictureBox_Axis_X_Alarm
-            // 
-            this.pictureBox_Axis_X_Alarm.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_X_Alarm.Image")));
-            this.pictureBox_Axis_X_Alarm.Location = new System.Drawing.Point(103, 174);
-            this.pictureBox_Axis_X_Alarm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Axis_X_Alarm.Name = "pictureBox_Axis_X_Alarm";
-            this.pictureBox_Axis_X_Alarm.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Axis_X_Alarm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Axis_X_Alarm.TabIndex = 106;
-            this.pictureBox_Axis_X_Alarm.TabStop = false;
-            // 
-            // pictureBox_Axis_Z_ORG
-            // 
-            this.pictureBox_Axis_Z_ORG.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Z_ORG.Image")));
-            this.pictureBox_Axis_Z_ORG.Location = new System.Drawing.Point(275, 147);
-            this.pictureBox_Axis_Z_ORG.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Axis_Z_ORG.Name = "pictureBox_Axis_Z_ORG";
-            this.pictureBox_Axis_Z_ORG.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Axis_Z_ORG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Axis_Z_ORG.TabIndex = 105;
-            this.pictureBox_Axis_Z_ORG.TabStop = false;
-            // 
-            // pictureBox_Axis_Y_ORG
-            // 
-            this.pictureBox_Axis_Y_ORG.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Y_ORG.Image")));
-            this.pictureBox_Axis_Y_ORG.Location = new System.Drawing.Point(189, 147);
-            this.pictureBox_Axis_Y_ORG.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Axis_Y_ORG.Name = "pictureBox_Axis_Y_ORG";
-            this.pictureBox_Axis_Y_ORG.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Axis_Y_ORG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Axis_Y_ORG.TabIndex = 104;
-            this.pictureBox_Axis_Y_ORG.TabStop = false;
-            // 
-            // pictureBox_Axis_X_ORG
-            // 
-            this.pictureBox_Axis_X_ORG.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_X_ORG.Image")));
-            this.pictureBox_Axis_X_ORG.Location = new System.Drawing.Point(103, 147);
-            this.pictureBox_Axis_X_ORG.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Axis_X_ORG.Name = "pictureBox_Axis_X_ORG";
-            this.pictureBox_Axis_X_ORG.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Axis_X_ORG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Axis_X_ORG.TabIndex = 103;
-            this.pictureBox_Axis_X_ORG.TabStop = false;
-            // 
-            // pictureBox_Axis_Z_Limit_N
-            // 
-            this.pictureBox_Axis_Z_Limit_N.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Z_Limit_N.Image")));
-            this.pictureBox_Axis_Z_Limit_N.Location = new System.Drawing.Point(275, 120);
-            this.pictureBox_Axis_Z_Limit_N.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Axis_Z_Limit_N.Name = "pictureBox_Axis_Z_Limit_N";
-            this.pictureBox_Axis_Z_Limit_N.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Axis_Z_Limit_N.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Axis_Z_Limit_N.TabIndex = 102;
-            this.pictureBox_Axis_Z_Limit_N.TabStop = false;
-            // 
-            // pictureBox_Axis_Y_Limit_N
-            // 
-            this.pictureBox_Axis_Y_Limit_N.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Y_Limit_N.Image")));
-            this.pictureBox_Axis_Y_Limit_N.Location = new System.Drawing.Point(189, 120);
-            this.pictureBox_Axis_Y_Limit_N.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Axis_Y_Limit_N.Name = "pictureBox_Axis_Y_Limit_N";
-            this.pictureBox_Axis_Y_Limit_N.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Axis_Y_Limit_N.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Axis_Y_Limit_N.TabIndex = 101;
-            this.pictureBox_Axis_Y_Limit_N.TabStop = false;
-            // 
-            // pictureBox_Axis_X_Limit_N
-            // 
-            this.pictureBox_Axis_X_Limit_N.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_X_Limit_N.Image")));
-            this.pictureBox_Axis_X_Limit_N.Location = new System.Drawing.Point(103, 120);
-            this.pictureBox_Axis_X_Limit_N.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Axis_X_Limit_N.Name = "pictureBox_Axis_X_Limit_N";
-            this.pictureBox_Axis_X_Limit_N.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Axis_X_Limit_N.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Axis_X_Limit_N.TabIndex = 100;
-            this.pictureBox_Axis_X_Limit_N.TabStop = false;
-            // 
-            // pictureBox_Axis_Z_Limit_P
-            // 
-            this.pictureBox_Axis_Z_Limit_P.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Z_Limit_P.Image")));
-            this.pictureBox_Axis_Z_Limit_P.Location = new System.Drawing.Point(275, 94);
-            this.pictureBox_Axis_Z_Limit_P.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Axis_Z_Limit_P.Name = "pictureBox_Axis_Z_Limit_P";
-            this.pictureBox_Axis_Z_Limit_P.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Axis_Z_Limit_P.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Axis_Z_Limit_P.TabIndex = 99;
-            this.pictureBox_Axis_Z_Limit_P.TabStop = false;
-            // 
-            // pictureBox_Axis_Y_Limit_P
-            // 
-            this.pictureBox_Axis_Y_Limit_P.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Y_Limit_P.Image")));
-            this.pictureBox_Axis_Y_Limit_P.Location = new System.Drawing.Point(189, 94);
-            this.pictureBox_Axis_Y_Limit_P.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Axis_Y_Limit_P.Name = "pictureBox_Axis_Y_Limit_P";
-            this.pictureBox_Axis_Y_Limit_P.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Axis_Y_Limit_P.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Axis_Y_Limit_P.TabIndex = 98;
-            this.pictureBox_Axis_Y_Limit_P.TabStop = false;
-            // 
-            // pictureBox_Axis_X_Limit_P
-            // 
-            this.pictureBox_Axis_X_Limit_P.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_X_Limit_P.Image")));
-            this.pictureBox_Axis_X_Limit_P.Location = new System.Drawing.Point(103, 94);
-            this.pictureBox_Axis_X_Limit_P.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Axis_X_Limit_P.Name = "pictureBox_Axis_X_Limit_P";
-            this.pictureBox_Axis_X_Limit_P.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Axis_X_Limit_P.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Axis_X_Limit_P.TabIndex = 97;
-            this.pictureBox_Axis_X_Limit_P.TabStop = false;
-            // 
-            // pictureBox_Axis_Z_Busy
-            // 
-            this.pictureBox_Axis_Z_Busy.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Z_Busy.Image")));
-            this.pictureBox_Axis_Z_Busy.Location = new System.Drawing.Point(275, 66);
-            this.pictureBox_Axis_Z_Busy.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Axis_Z_Busy.Name = "pictureBox_Axis_Z_Busy";
-            this.pictureBox_Axis_Z_Busy.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Axis_Z_Busy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Axis_Z_Busy.TabIndex = 96;
-            this.pictureBox_Axis_Z_Busy.TabStop = false;
-            // 
-            // pictureBox_Axis_Y_Busy
-            // 
-            this.pictureBox_Axis_Y_Busy.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Y_Busy.Image")));
-            this.pictureBox_Axis_Y_Busy.Location = new System.Drawing.Point(189, 66);
-            this.pictureBox_Axis_Y_Busy.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Axis_Y_Busy.Name = "pictureBox_Axis_Y_Busy";
-            this.pictureBox_Axis_Y_Busy.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Axis_Y_Busy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Axis_Y_Busy.TabIndex = 95;
-            this.pictureBox_Axis_Y_Busy.TabStop = false;
-            // 
-            // pictureBox_Axis_X_Busy
-            // 
-            this.pictureBox_Axis_X_Busy.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_X_Busy.Image")));
-            this.pictureBox_Axis_X_Busy.Location = new System.Drawing.Point(103, 66);
-            this.pictureBox_Axis_X_Busy.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox_Axis_X_Busy.Name = "pictureBox_Axis_X_Busy";
-            this.pictureBox_Axis_X_Busy.Size = new System.Drawing.Size(19, 22);
-            this.pictureBox_Axis_X_Busy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Axis_X_Busy.TabIndex = 94;
-            this.pictureBox_Axis_X_Busy.TabStop = false;
             // 
             // label65
             // 
@@ -3245,7 +3223,7 @@
             // textBox_Now_Position_Z
             // 
             this.textBox_Now_Position_Z.Location = new System.Drawing.Point(247, 30);
-            this.textBox_Now_Position_Z.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Now_Position_Z.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Now_Position_Z.Name = "textBox_Now_Position_Z";
             this.textBox_Now_Position_Z.ReadOnly = true;
             this.textBox_Now_Position_Z.Size = new System.Drawing.Size(83, 20);
@@ -3265,7 +3243,7 @@
             // textBox_Now_Position_Y
             // 
             this.textBox_Now_Position_Y.Location = new System.Drawing.Point(161, 30);
-            this.textBox_Now_Position_Y.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Now_Position_Y.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Now_Position_Y.Name = "textBox_Now_Position_Y";
             this.textBox_Now_Position_Y.ReadOnly = true;
             this.textBox_Now_Position_Y.Size = new System.Drawing.Size(83, 20);
@@ -3285,7 +3263,7 @@
             // textBox_Now_Position_X
             // 
             this.textBox_Now_Position_X.Location = new System.Drawing.Point(74, 30);
-            this.textBox_Now_Position_X.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Now_Position_X.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Now_Position_X.Name = "textBox_Now_Position_X";
             this.textBox_Now_Position_X.ReadOnly = true;
             this.textBox_Now_Position_X.Size = new System.Drawing.Size(83, 20);
@@ -3332,6 +3310,421 @@
             // 
             this.timer_Andor.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // backgroundWorker_FusionRest
+            // 
+            this.backgroundWorker_FusionRest.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_FusionRest_DoWork);
+            // 
+            // button_Move_Z_Pos_Down
+            // 
+            this.button_Move_Z_Pos_Down.BackgroundImage = global::BRC.Properties.Resources.Down;
+            this.button_Move_Z_Pos_Down.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button_Move_Z_Pos_Down.Location = new System.Drawing.Point(260, 151);
+            this.button_Move_Z_Pos_Down.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Move_Z_Pos_Down.Name = "button_Move_Z_Pos_Down";
+            this.button_Move_Z_Pos_Down.Size = new System.Drawing.Size(57, 43);
+            this.button_Move_Z_Pos_Down.TabIndex = 160;
+            this.button_Move_Z_Pos_Down.UseVisualStyleBackColor = true;
+            this.button_Move_Z_Pos_Down.Click += new System.EventHandler(this.button_Move_Z_Pos_Down_Click);
+            // 
+            // button_Move_Z_Pos_Up
+            // 
+            this.button_Move_Z_Pos_Up.BackgroundImage = global::BRC.Properties.Resources.Up;
+            this.button_Move_Z_Pos_Up.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button_Move_Z_Pos_Up.Location = new System.Drawing.Point(260, 19);
+            this.button_Move_Z_Pos_Up.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Move_Z_Pos_Up.Name = "button_Move_Z_Pos_Up";
+            this.button_Move_Z_Pos_Up.Size = new System.Drawing.Size(57, 43);
+            this.button_Move_Z_Pos_Up.TabIndex = 159;
+            this.button_Move_Z_Pos_Up.UseVisualStyleBackColor = true;
+            this.button_Move_Z_Pos_Up.Click += new System.EventHandler(this.button_Move_Z_Pos_Up_Click);
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImage = global::BRC.Properties.Resources.Up;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button3.Location = new System.Drawing.Point(195, 19);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(57, 43);
+            this.button3.TabIndex = 138;
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_Move_Z_P_MouseDown);
+            this.button3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Move_Z_P_MouseUp);
+            // 
+            // button4
+            // 
+            this.button4.BackgroundImage = global::BRC.Properties.Resources.Down;
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button4.Location = new System.Drawing.Point(195, 151);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(57, 43);
+            this.button4.TabIndex = 139;
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_Move_Z_N_MouseDown);
+            this.button4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Move_Z_N_MouseUp);
+            // 
+            // pictureBox_Moving_Z_Main
+            // 
+            this.pictureBox_Moving_Z_Main.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Moving_Z_Main.Image")));
+            this.pictureBox_Moving_Z_Main.Location = new System.Drawing.Point(231, 80);
+            this.pictureBox_Moving_Z_Main.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Moving_Z_Main.Name = "pictureBox_Moving_Z_Main";
+            this.pictureBox_Moving_Z_Main.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Moving_Z_Main.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Moving_Z_Main.TabIndex = 80;
+            this.pictureBox_Moving_Z_Main.TabStop = false;
+            // 
+            // pictureBox_Moving_Y_Main
+            // 
+            this.pictureBox_Moving_Y_Main.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Moving_Y_Main.Image")));
+            this.pictureBox_Moving_Y_Main.Location = new System.Drawing.Point(165, 80);
+            this.pictureBox_Moving_Y_Main.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Moving_Y_Main.Name = "pictureBox_Moving_Y_Main";
+            this.pictureBox_Moving_Y_Main.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Moving_Y_Main.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Moving_Y_Main.TabIndex = 79;
+            this.pictureBox_Moving_Y_Main.TabStop = false;
+            // 
+            // pictureBox_Moving_X_Main
+            // 
+            this.pictureBox_Moving_X_Main.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Moving_X_Main.Image")));
+            this.pictureBox_Moving_X_Main.Location = new System.Drawing.Point(97, 80);
+            this.pictureBox_Moving_X_Main.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Moving_X_Main.Name = "pictureBox_Moving_X_Main";
+            this.pictureBox_Moving_X_Main.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Moving_X_Main.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Moving_X_Main.TabIndex = 78;
+            this.pictureBox_Moving_X_Main.TabStop = false;
+            // 
+            // pictureBox_Cut
+            // 
+            this.pictureBox_Cut.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Cut.Image")));
+            this.pictureBox_Cut.Location = new System.Drawing.Point(535, 218);
+            this.pictureBox_Cut.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Cut.Name = "pictureBox_Cut";
+            this.pictureBox_Cut.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Cut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Cut.TabIndex = 55;
+            this.pictureBox_Cut.TabStop = false;
+            // 
+            // pictureBox_Scanning
+            // 
+            this.pictureBox_Scanning.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Scanning.Image")));
+            this.pictureBox_Scanning.Location = new System.Drawing.Point(762, 218);
+            this.pictureBox_Scanning.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Scanning.Name = "pictureBox_Scanning";
+            this.pictureBox_Scanning.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Scanning.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Scanning.TabIndex = 54;
+            this.pictureBox_Scanning.TabStop = false;
+            // 
+            // pictureBox_Main
+            // 
+            this.pictureBox_Main.Image = global::BRC.Properties.Resources.BRC;
+            this.pictureBox_Main.Location = new System.Drawing.Point(358, 50);
+            this.pictureBox_Main.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Main.Name = "pictureBox_Main";
+            this.pictureBox_Main.Size = new System.Drawing.Size(570, 374);
+            this.pictureBox_Main.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Main.TabIndex = 1;
+            this.pictureBox_Main.TabStop = false;
+            // 
+            // pictureBox_Scan_Setup
+            // 
+            this.pictureBox_Scan_Setup.Image = global::BRC.Properties.Resources.BRC;
+            this.pictureBox_Scan_Setup.Location = new System.Drawing.Point(117, 56);
+            this.pictureBox_Scan_Setup.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Scan_Setup.Name = "pictureBox_Scan_Setup";
+            this.pictureBox_Scan_Setup.Size = new System.Drawing.Size(570, 374);
+            this.pictureBox_Scan_Setup.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Scan_Setup.TabIndex = 0;
+            this.pictureBox_Scan_Setup.TabStop = false;
+            // 
+            // button_Move_Pulse_ZUp
+            // 
+            this.button_Move_Pulse_ZUp.BackgroundImage = global::BRC.Properties.Resources.Up;
+            this.button_Move_Pulse_ZUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button_Move_Pulse_ZUp.Location = new System.Drawing.Point(411, 44);
+            this.button_Move_Pulse_ZUp.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Move_Pulse_ZUp.Name = "button_Move_Pulse_ZUp";
+            this.button_Move_Pulse_ZUp.Size = new System.Drawing.Size(38, 43);
+            this.button_Move_Pulse_ZUp.TabIndex = 139;
+            this.button_Move_Pulse_ZUp.UseVisualStyleBackColor = true;
+            this.button_Move_Pulse_ZUp.Click += new System.EventHandler(this.button_Move_Pulse_ZUp_Click);
+            // 
+            // button_Move_Pulse_ZDown
+            // 
+            this.button_Move_Pulse_ZDown.BackgroundImage = global::BRC.Properties.Resources.Down;
+            this.button_Move_Pulse_ZDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button_Move_Pulse_ZDown.Location = new System.Drawing.Point(411, 91);
+            this.button_Move_Pulse_ZDown.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Move_Pulse_ZDown.Name = "button_Move_Pulse_ZDown";
+            this.button_Move_Pulse_ZDown.Size = new System.Drawing.Size(38, 43);
+            this.button_Move_Pulse_ZDown.TabIndex = 140;
+            this.button_Move_Pulse_ZDown.UseVisualStyleBackColor = true;
+            this.button_Move_Pulse_ZDown.Click += new System.EventHandler(this.button_Move_Pulse_ZDown_Click);
+            // 
+            // button_Move_X_P
+            // 
+            this.button_Move_X_P.BackgroundImage = global::BRC.Properties.Resources.Left;
+            this.button_Move_X_P.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button_Move_X_P.Location = new System.Drawing.Point(80, 44);
+            this.button_Move_X_P.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Move_X_P.Name = "button_Move_X_P";
+            this.button_Move_X_P.Size = new System.Drawing.Size(38, 43);
+            this.button_Move_X_P.TabIndex = 93;
+            this.button_Move_X_P.UseVisualStyleBackColor = true;
+            this.button_Move_X_P.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_Move_X_P_MouseDown);
+            this.button_Move_X_P.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Move_X_P_MouseUp);
+            // 
+            // button_Move_X_N
+            // 
+            this.button_Move_X_N.BackgroundImage = global::BRC.Properties.Resources.Right;
+            this.button_Move_X_N.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button_Move_X_N.Location = new System.Drawing.Point(124, 44);
+            this.button_Move_X_N.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Move_X_N.Name = "button_Move_X_N";
+            this.button_Move_X_N.Size = new System.Drawing.Size(38, 43);
+            this.button_Move_X_N.TabIndex = 95;
+            this.button_Move_X_N.UseVisualStyleBackColor = true;
+            this.button_Move_X_N.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_Move_X_N_MouseDown);
+            this.button_Move_X_N.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Move_X_N_MouseUp);
+            // 
+            // button_Move_Y_P
+            // 
+            this.button_Move_Y_P.BackgroundImage = global::BRC.Properties.Resources.Up;
+            this.button_Move_Y_P.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button_Move_Y_P.Location = new System.Drawing.Point(166, 44);
+            this.button_Move_Y_P.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Move_Y_P.Name = "button_Move_Y_P";
+            this.button_Move_Y_P.Size = new System.Drawing.Size(38, 43);
+            this.button_Move_Y_P.TabIndex = 96;
+            this.button_Move_Y_P.UseVisualStyleBackColor = true;
+            this.button_Move_Y_P.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_Move_Y_P_MouseDown);
+            this.button_Move_Y_P.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Move_Y_P_MouseUp);
+            // 
+            // button_Move_Y_N
+            // 
+            this.button_Move_Y_N.BackgroundImage = global::BRC.Properties.Resources.Down;
+            this.button_Move_Y_N.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button_Move_Y_N.Location = new System.Drawing.Point(211, 44);
+            this.button_Move_Y_N.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Move_Y_N.Name = "button_Move_Y_N";
+            this.button_Move_Y_N.Size = new System.Drawing.Size(38, 43);
+            this.button_Move_Y_N.TabIndex = 98;
+            this.button_Move_Y_N.UseVisualStyleBackColor = true;
+            this.button_Move_Y_N.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_Move_Y_N_MouseDown);
+            this.button_Move_Y_N.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Move_Y_N_MouseUp);
+            // 
+            // button_Move_Z_P
+            // 
+            this.button_Move_Z_P.BackgroundImage = global::BRC.Properties.Resources.Up;
+            this.button_Move_Z_P.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button_Move_Z_P.Location = new System.Drawing.Point(253, 44);
+            this.button_Move_Z_P.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Move_Z_P.Name = "button_Move_Z_P";
+            this.button_Move_Z_P.Size = new System.Drawing.Size(38, 43);
+            this.button_Move_Z_P.TabIndex = 99;
+            this.button_Move_Z_P.UseVisualStyleBackColor = true;
+            this.button_Move_Z_P.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_Move_Z_P_MouseDown);
+            this.button_Move_Z_P.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Move_Z_P_MouseUp);
+            // 
+            // button_Move_Z_N
+            // 
+            this.button_Move_Z_N.BackgroundImage = global::BRC.Properties.Resources.Down;
+            this.button_Move_Z_N.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button_Move_Z_N.Location = new System.Drawing.Point(297, 44);
+            this.button_Move_Z_N.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Move_Z_N.Name = "button_Move_Z_N";
+            this.button_Move_Z_N.Size = new System.Drawing.Size(38, 43);
+            this.button_Move_Z_N.TabIndex = 101;
+            this.button_Move_Z_N.UseVisualStyleBackColor = true;
+            this.button_Move_Z_N.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_Move_Z_N_MouseDown);
+            this.button_Move_Z_N.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Move_Z_N_MouseUp);
+            // 
+            // pictureBox_Axis_Z_Alarm
+            // 
+            this.pictureBox_Axis_Z_Alarm.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Z_Alarm.Image")));
+            this.pictureBox_Axis_Z_Alarm.Location = new System.Drawing.Point(275, 174);
+            this.pictureBox_Axis_Z_Alarm.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Axis_Z_Alarm.Name = "pictureBox_Axis_Z_Alarm";
+            this.pictureBox_Axis_Z_Alarm.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Axis_Z_Alarm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Axis_Z_Alarm.TabIndex = 108;
+            this.pictureBox_Axis_Z_Alarm.TabStop = false;
+            // 
+            // pictureBox_Axis_Y_Alarm
+            // 
+            this.pictureBox_Axis_Y_Alarm.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Y_Alarm.Image")));
+            this.pictureBox_Axis_Y_Alarm.Location = new System.Drawing.Point(189, 174);
+            this.pictureBox_Axis_Y_Alarm.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Axis_Y_Alarm.Name = "pictureBox_Axis_Y_Alarm";
+            this.pictureBox_Axis_Y_Alarm.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Axis_Y_Alarm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Axis_Y_Alarm.TabIndex = 107;
+            this.pictureBox_Axis_Y_Alarm.TabStop = false;
+            // 
+            // pictureBox_Axis_X_Alarm
+            // 
+            this.pictureBox_Axis_X_Alarm.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_X_Alarm.Image")));
+            this.pictureBox_Axis_X_Alarm.Location = new System.Drawing.Point(103, 174);
+            this.pictureBox_Axis_X_Alarm.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Axis_X_Alarm.Name = "pictureBox_Axis_X_Alarm";
+            this.pictureBox_Axis_X_Alarm.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Axis_X_Alarm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Axis_X_Alarm.TabIndex = 106;
+            this.pictureBox_Axis_X_Alarm.TabStop = false;
+            // 
+            // pictureBox_Axis_Z_ORG
+            // 
+            this.pictureBox_Axis_Z_ORG.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Z_ORG.Image")));
+            this.pictureBox_Axis_Z_ORG.Location = new System.Drawing.Point(275, 147);
+            this.pictureBox_Axis_Z_ORG.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Axis_Z_ORG.Name = "pictureBox_Axis_Z_ORG";
+            this.pictureBox_Axis_Z_ORG.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Axis_Z_ORG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Axis_Z_ORG.TabIndex = 105;
+            this.pictureBox_Axis_Z_ORG.TabStop = false;
+            // 
+            // pictureBox_Axis_Y_ORG
+            // 
+            this.pictureBox_Axis_Y_ORG.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Y_ORG.Image")));
+            this.pictureBox_Axis_Y_ORG.Location = new System.Drawing.Point(189, 147);
+            this.pictureBox_Axis_Y_ORG.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Axis_Y_ORG.Name = "pictureBox_Axis_Y_ORG";
+            this.pictureBox_Axis_Y_ORG.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Axis_Y_ORG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Axis_Y_ORG.TabIndex = 104;
+            this.pictureBox_Axis_Y_ORG.TabStop = false;
+            // 
+            // pictureBox_Axis_X_ORG
+            // 
+            this.pictureBox_Axis_X_ORG.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_X_ORG.Image")));
+            this.pictureBox_Axis_X_ORG.Location = new System.Drawing.Point(103, 147);
+            this.pictureBox_Axis_X_ORG.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Axis_X_ORG.Name = "pictureBox_Axis_X_ORG";
+            this.pictureBox_Axis_X_ORG.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Axis_X_ORG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Axis_X_ORG.TabIndex = 103;
+            this.pictureBox_Axis_X_ORG.TabStop = false;
+            // 
+            // pictureBox_Axis_Z_Limit_N
+            // 
+            this.pictureBox_Axis_Z_Limit_N.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Z_Limit_N.Image")));
+            this.pictureBox_Axis_Z_Limit_N.Location = new System.Drawing.Point(275, 120);
+            this.pictureBox_Axis_Z_Limit_N.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Axis_Z_Limit_N.Name = "pictureBox_Axis_Z_Limit_N";
+            this.pictureBox_Axis_Z_Limit_N.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Axis_Z_Limit_N.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Axis_Z_Limit_N.TabIndex = 102;
+            this.pictureBox_Axis_Z_Limit_N.TabStop = false;
+            // 
+            // pictureBox_Axis_Y_Limit_N
+            // 
+            this.pictureBox_Axis_Y_Limit_N.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Y_Limit_N.Image")));
+            this.pictureBox_Axis_Y_Limit_N.Location = new System.Drawing.Point(189, 120);
+            this.pictureBox_Axis_Y_Limit_N.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Axis_Y_Limit_N.Name = "pictureBox_Axis_Y_Limit_N";
+            this.pictureBox_Axis_Y_Limit_N.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Axis_Y_Limit_N.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Axis_Y_Limit_N.TabIndex = 101;
+            this.pictureBox_Axis_Y_Limit_N.TabStop = false;
+            // 
+            // pictureBox_Axis_X_Limit_N
+            // 
+            this.pictureBox_Axis_X_Limit_N.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_X_Limit_N.Image")));
+            this.pictureBox_Axis_X_Limit_N.Location = new System.Drawing.Point(103, 120);
+            this.pictureBox_Axis_X_Limit_N.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Axis_X_Limit_N.Name = "pictureBox_Axis_X_Limit_N";
+            this.pictureBox_Axis_X_Limit_N.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Axis_X_Limit_N.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Axis_X_Limit_N.TabIndex = 100;
+            this.pictureBox_Axis_X_Limit_N.TabStop = false;
+            // 
+            // pictureBox_Axis_Z_Limit_P
+            // 
+            this.pictureBox_Axis_Z_Limit_P.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Z_Limit_P.Image")));
+            this.pictureBox_Axis_Z_Limit_P.Location = new System.Drawing.Point(275, 94);
+            this.pictureBox_Axis_Z_Limit_P.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Axis_Z_Limit_P.Name = "pictureBox_Axis_Z_Limit_P";
+            this.pictureBox_Axis_Z_Limit_P.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Axis_Z_Limit_P.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Axis_Z_Limit_P.TabIndex = 99;
+            this.pictureBox_Axis_Z_Limit_P.TabStop = false;
+            // 
+            // pictureBox_Axis_Y_Limit_P
+            // 
+            this.pictureBox_Axis_Y_Limit_P.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Y_Limit_P.Image")));
+            this.pictureBox_Axis_Y_Limit_P.Location = new System.Drawing.Point(189, 94);
+            this.pictureBox_Axis_Y_Limit_P.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Axis_Y_Limit_P.Name = "pictureBox_Axis_Y_Limit_P";
+            this.pictureBox_Axis_Y_Limit_P.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Axis_Y_Limit_P.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Axis_Y_Limit_P.TabIndex = 98;
+            this.pictureBox_Axis_Y_Limit_P.TabStop = false;
+            // 
+            // pictureBox_Axis_X_Limit_P
+            // 
+            this.pictureBox_Axis_X_Limit_P.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_X_Limit_P.Image")));
+            this.pictureBox_Axis_X_Limit_P.Location = new System.Drawing.Point(103, 94);
+            this.pictureBox_Axis_X_Limit_P.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Axis_X_Limit_P.Name = "pictureBox_Axis_X_Limit_P";
+            this.pictureBox_Axis_X_Limit_P.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Axis_X_Limit_P.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Axis_X_Limit_P.TabIndex = 97;
+            this.pictureBox_Axis_X_Limit_P.TabStop = false;
+            // 
+            // pictureBox_Axis_Z_Busy
+            // 
+            this.pictureBox_Axis_Z_Busy.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Z_Busy.Image")));
+            this.pictureBox_Axis_Z_Busy.Location = new System.Drawing.Point(275, 66);
+            this.pictureBox_Axis_Z_Busy.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Axis_Z_Busy.Name = "pictureBox_Axis_Z_Busy";
+            this.pictureBox_Axis_Z_Busy.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Axis_Z_Busy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Axis_Z_Busy.TabIndex = 96;
+            this.pictureBox_Axis_Z_Busy.TabStop = false;
+            // 
+            // pictureBox_Axis_Y_Busy
+            // 
+            this.pictureBox_Axis_Y_Busy.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_Y_Busy.Image")));
+            this.pictureBox_Axis_Y_Busy.Location = new System.Drawing.Point(189, 66);
+            this.pictureBox_Axis_Y_Busy.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Axis_Y_Busy.Name = "pictureBox_Axis_Y_Busy";
+            this.pictureBox_Axis_Y_Busy.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Axis_Y_Busy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Axis_Y_Busy.TabIndex = 95;
+            this.pictureBox_Axis_Y_Busy.TabStop = false;
+            // 
+            // pictureBox_Axis_X_Busy
+            // 
+            this.pictureBox_Axis_X_Busy.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Axis_X_Busy.Image")));
+            this.pictureBox_Axis_X_Busy.Location = new System.Drawing.Point(103, 66);
+            this.pictureBox_Axis_X_Busy.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_Axis_X_Busy.Name = "pictureBox_Axis_X_Busy";
+            this.pictureBox_Axis_X_Busy.Size = new System.Drawing.Size(19, 22);
+            this.pictureBox_Axis_X_Busy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Axis_X_Busy.TabIndex = 94;
+            this.pictureBox_Axis_X_Busy.TabStop = false;
+            // 
+            // comboBox_Axis_Pulse_Z
+            // 
+            this.comboBox_Axis_Pulse_Z.FormattingEnabled = true;
+            this.comboBox_Axis_Pulse_Z.Items.AddRange(new object[] {
+            "1",
+            "10",
+            "100",
+            "1000"});
+            this.comboBox_Axis_Pulse_Z.Location = new System.Drawing.Point(338, 136);
+            this.comboBox_Axis_Pulse_Z.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox_Axis_Pulse_Z.Name = "comboBox_Axis_Pulse_Z";
+            this.comboBox_Axis_Pulse_Z.Size = new System.Drawing.Size(68, 21);
+            this.comboBox_Axis_Pulse_Z.TabIndex = 142;
+            this.comboBox_Axis_Pulse_Z.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3340,10 +3733,10 @@
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = " BRC-20230724";
+            this.Text = " BRC-20230808";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -3356,12 +3749,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Total_Scan_Layer)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Moving_Z_Main)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Moving_Y_Main)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Moving_X_Main)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Cut)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Scanning)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Main)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.panel_Parameter.ResumeLayout(false);
             this.panel_Parameter.PerformLayout();
@@ -3371,19 +3758,28 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Total_Cut_Layer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Cut_Distance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Scan_Distance_Z)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Scan_Setup)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel_Motion.ResumeLayout(false);
             this.panel_Motion.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Axis_Pulse_Z)).EndInit();
             this.groupBox_Process_Step.ResumeLayout(false);
             this.groupBox_Process_Step.PerformLayout();
             this.groupBox_Start_Setup.ResumeLayout(false);
             this.groupBox_Position_Setup.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Moving_Z_Main)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Moving_Y_Main)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Moving_X_Main)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Cut)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Scanning)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Main)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Scan_Setup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Axis_Z_Alarm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Axis_Y_Alarm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Axis_X_Alarm)).EndInit();
@@ -3668,6 +4064,37 @@
         private System.Windows.Forms.TextBox textBox_FrequencyMinV;
         private System.Windows.Forms.Button btn_CVstart;
         private System.Windows.Forms.Button btn_CVstop;
+        private System.Windows.Forms.Label label93;
+        private System.Windows.Forms.Label label94;
+        private System.Windows.Forms.TextBox textBox_Cut_Start_FusionX;
+        private System.Windows.Forms.TextBox textBox_Cut_Start_FusionY;
+        private System.Windows.Forms.Label label92;
+        private System.Windows.Forms.TextBox textBox_Now_FusionPosition_Y;
+        private System.Windows.Forms.Label label95;
+        private System.Windows.Forms.TextBox textBox_Now_FusionPosition_X;
+        private System.Windows.Forms.Label label96;
+        private System.Windows.Forms.Label label97;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button button_Move_Pulse_ZUp;
+        private System.Windows.Forms.Button button_Move_Pulse_ZDown;
+        private System.Windows.Forms.Label label98;
+        private System.Windows.Forms.Button btnProtocolTest;
+        private System.Windows.Forms.Button button_MoveFusion_Pos_Y;
+        private System.Windows.Forms.Button button_MoveFusion_Pos_X;
+        private System.Windows.Forms.TextBox textBox_Step_FusionPos_Y;
+        private System.Windows.Forms.TextBox textBox_Step_FusionPos_X;
+        private System.Windows.Forms.Label label99;
+        private System.ComponentModel.BackgroundWorker backgroundWorker_FusionRest;
+        private System.Windows.Forms.TextBox textBox_Now_FusionErrorMessage;
+        private System.Windows.Forms.TextBox textBox_Now_FusionState;
+        private System.Windows.Forms.Label label101;
+        private System.Windows.Forms.Label label100;
+        private System.Windows.Forms.Label label102;
+        private System.Windows.Forms.Button btnMinusLayer;
+        private System.Windows.Forms.Button btnAddLayer;
+        private System.Windows.Forms.Label label103;
+        private System.Windows.Forms.NumericUpDown num_Axis_Pulse_Z;
+        private System.Windows.Forms.ComboBox comboBox_Axis_Pulse_Z;
     }
 }
 

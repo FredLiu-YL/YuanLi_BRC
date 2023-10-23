@@ -13,6 +13,7 @@ using Automation.BDaq;
 using System.Diagnostics;
 using YuanLi_Logger;
 using System.Media;
+using BRC.Component;
 
 namespace BRC
 {
@@ -60,10 +61,36 @@ namespace BRC
 
         int motion_move_Z = 0;
         bool move_z_Step_ok = true;
+
+
+
+
+        private Rest_Fusion m_Rest_Fusion;
+        FusionWork nowWorkType = FusionWork.Default;
+        private string m_FusionParam = "";
+        private bool m_FusionIsStarted = false;
+        private bool m_FusionIsFinished = true;
+
+        enum FusionWork
+        {
+            Default = 0,
+            MoveAbs = 1,
+            SelectProtocol = 2,
+            SelectProtocolTest = 3,
+            RunProtocol = 4,
+            RunProtocolSwitch = 5,
+            Run = 6,
+            Pause = 7,
+            Stop = 8,
+            MoveAbsManual = 9
+
+        }
+
+
         #endregion
 
         #region Icon
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
             button_Start.Text = "掃  描  開  始";
             logger.Write_Logger("Start Program");
@@ -121,6 +148,14 @@ namespace BRC
 
             //初始化震動刀功能
             nIHighFrequencyCutting = new NIHighFrequencyCutting();
+
+            m_Rest_Fusion = new Rest_Fusion("localhost");
+            await m_Rest_Fusion.Initial();
+
+            if (backgroundWorker_FusionRest.IsBusy == false)
+            {
+                backgroundWorker_FusionRest.RunWorkerAsync();
+            }
         }
         private void button_Save_Parameter_Click(object sender, EventArgs e)
         {
@@ -168,6 +203,10 @@ namespace BRC
                 SW_.WriteLine("    <Setup Setup=\"FrequencyMinV\">" + Convert.ToString(textBox_FrequencyMinV.Text) + "</Setup >");//<Setup Setup="FrequencyMinV">1</Setup >
                 SW_.WriteLine("    <Setup Setup=\"FrequencyMaxV\">" + Convert.ToString(textBox_FrequencyMaxV.Text) + "</Setup >");//<Setup Setup="FrequencyMaxV">10</Setup >
                 SW_.WriteLine("    <Setup Setup=\"FrequencyOutputV\">" + Convert.ToString(textBox_FrequencyOutputV.Text) + "</Setup >");//<Setup Setup="FrequencyOutputV">5</Setup >
+
+                SW_.WriteLine("    <Setup Setup=\"Cut_Start_FusionX\">" + Convert.ToString(textBox_Cut_Start_FusionX.Text) + "</Setup >");//<Setup Setup="Cut_Start_FusionX">5</Setup >
+                SW_.WriteLine("    <Setup Setup=\"Cut_Start_FusionY\">" + Convert.ToString(textBox_Cut_Start_FusionY.Text) + "</Setup >");//<Setup Setup="Cut_Start_FusionX">5</Setup >
+
 
                 SW_.WriteLine("  </Setup_Part>");//</Setup_Part>
                 SW_.WriteLine("  <Setup_Part Setup_Part=\"Scan_Data\">");//<Setup_Part Setup_Part="Scan_Data">
@@ -507,6 +546,12 @@ namespace BRC
                     Now_Read_Status = Get_Axis_Position;
                 }
                 #endregion
+
+
+                textBox_Now_FusionPosition_X.Text =  m_Rest_Fusion.m_NowX;
+                textBox_Now_FusionPosition_Y.Text = m_Rest_Fusion.m_NowY;
+                textBox_Now_FusionState.Text = m_Rest_Fusion.State;
+                textBox_Now_FusionErrorMessage.Text =  m_Rest_Fusion.ErrorMessage;
             }
             catch (Exception error)
             {
@@ -601,12 +646,12 @@ namespace BRC
         private void numericUpDown_Cut_Dis_M_ValueChanged(object sender, EventArgs e)
         {
             Imshow_Real_Time_value("Cut_Dis_M", (double)numericUpDown_Cut_Dis_M.Value);
-            numericUpDown_Cut_Distance.Value = numericUpDown_Cut_Dis_M.Value;
+            //numericUpDown_Cut_Distance.Value = numericUpDown_Cut_Dis_M.Value;
         }
         private void numericUpDown_Scan_Dis_M_ValueChanged(object sender, EventArgs e)
         {
             Imshow_Real_Time_value("Scan_Dis_M", (double)numericUpDown_Scan_Dis_M.Value);
-            numericUpDown_Scan_Distance_Z.Value = numericUpDown_Scan_Dis_M.Value;
+            //numericUpDown_Scan_Distance_Z.Value = numericUpDown_Scan_Dis_M.Value;
         }
 
         #region Motion
@@ -1371,15 +1416,52 @@ namespace BRC
         }
         private void button_Start_Scan_Click(object sender, EventArgs e)
         {
-            logger.Write_Logger("Start Scan");
-            IO_Can_Cut = false;
-            Andor_Error_Meaasge = "";
-            andor_file_address = textBox_Andor_Exe_Address.Text;
-            Protocal_name = comboBox_Process_Name.Text;
-            backgroundWorker_Andor.RunWorkerAsync();
-            timer_Andor.Enabled = true;
+            //IO_Can_Cut = false;
+            //Andor_Error_Meaasge = "";
+            //andor_file_address = textBox_Andor_Exe_Address.Text;
+            //backgroundWorker_Andor.RunWorkerAsync();
+
+            if (m_FusionIsFinished == true)
+            {
+                Protocal_name = comboBox_Process_Name.Text;
+                int idx = Convert.ToInt32(textBox_Now_layer.Text)+1;
+                logger.Write_Logger("Start Scan");
+
+                m_FusionIsStarted = false;
+                m_FusionIsFinished = false;
+                m_FusionParam = Protocal_name + "," + idx;
+                nowWorkType = FusionWork.RunProtocolSwitch;
+            }
+            //timer_Andor.Enabled = true;
         }
         private void button_Move_XY_Cut_Start_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Move_XY_Cut_Start_Click();
+                if (m_FusionIsFinished == true)
+                {
+                    try
+                    {
+                        m_FusionParam = Convert.ToDouble(textBox_Cut_Start_FusionX.Text).ToString("#0.0000") + "," + Convert.ToDouble(textBox_Cut_Start_FusionY.Text).ToString("#0.0000");
+                    }
+                    catch (Exception)
+                    {
+                        m_FusionParam = Convert.ToDouble("0").ToString("#0.0000") + "," + Convert.ToDouble("0").ToString("#0.0000");
+                    }
+
+                    m_FusionIsStarted = false;
+                    m_FusionIsFinished = false;
+                    nowWorkType = FusionWork.MoveAbsManual;
+                }
+            }
+            catch (Exception error)
+            {
+                logger.Write_Error_Logger("Move Cut Start XY error " + Convert.ToString(error));
+                MessageBox.Show("Move Error!\n" + Convert.ToString(error));
+            }
+        }
+        private void Move_XY_Cut_Start_Click()
         {
             try
             {
@@ -1418,16 +1500,17 @@ namespace BRC
                 Data[comboBox_Axis_Num_X.SelectedIndex] = Convert.ToString(Cut_Start_X);
                 Data[comboBox_Axis_Num_Y.SelectedIndex] = Convert.ToString(Cut_Start_Y);
                 Write_Data = "A:" + Data[0] + "," + Data[1] + "," + Data[2];
+
                 logger.Write_Logger("Move Cut Start XY : " + Write_Data);
                 Write_Motion(Write_Data);
-
             }
-            catch (Exception error)
+            catch (Exception ex)
             {
-                logger.Write_Error_Logger("Move Cut Start XY error " + Convert.ToString(error));
-                MessageBox.Show("Move Error!\n" + Convert.ToString(error));
+
+                throw ex;
             }
         }
+
         private void button_Start_Hz_Click(object sender, EventArgs e)
         {
             try
@@ -1495,10 +1578,19 @@ namespace BRC
                   Write_Motion(Write_Data);*/
 
                 //
+                int totalCutLayer = 0;
+                try
+                {
+                    totalCutLayer = Convert.ToInt32(numericUpDown_Total_Cut_Layer.Text);
+                }
+                catch (Exception)
+                {
+                    totalCutLayer = 0;
+                }
                 string Write_Data = "";
                 Cut_And_Scan_Finish = false;
                 double Next_Layer = Convert.ToDouble(textBox_Now_layer.Text) + 1;
-                if (Next_Layer > Convert.ToDouble(numericUpDown_Total_Cut_Layer.Text) + 1)
+                if (Next_Layer > totalCutLayer + 1)
                 {
                     Next_Layer = 1;
                     Cut_And_Scan_Finish = true;
@@ -1794,7 +1886,9 @@ namespace BRC
                     }
                     else if (now_step == 14 &&
                         wait_delay >= wait_second * 8 &&
-                        !Z_Busy)
+                        !Z_Busy &&
+                        m_Rest_Fusion.State == "Idle" &&
+                        m_FusionIsFinished == true)
                     {
                         wait_delay = 0;
                         IO_Can_Cut = false;
@@ -1804,23 +1898,55 @@ namespace BRC
                     }
                     else if (now_step == 15 &&
                         wait_delay >= wait_second &&
-                        IO_Can_Cut && Andor_Error_Meaasge.IndexOf("success") >= 0)//7.移動到安全高度
+                        //IO_Can_Cut && Andor_Error_Meaasge.IndexOf("success") >= 0 &&
+                        m_Rest_Fusion.State == "Idle" &&
+                        m_FusionIsFinished == true
+                        )//7.移動到安全高度
                     {
                         pictureBox_Scanning.Image = Properties.Resources.Red;
                         IO_Can_Cut = false;
                         wait_delay = 0;
                         Move_Safe_High();
-                        if (Convert.ToInt32(textBox_Now_layer.Text) >= Convert.ToInt32(textBox_Cut_Layer.Text))
+                        int totalCutLayer = 0;
+                        try
+                        {
+                            totalCutLayer = Convert.ToInt32(textBox_Cut_Layer.Text);
+                        }
+                        catch (Exception)
+                        {
+                            totalCutLayer = 0;
+                        }
+                        if (Convert.ToInt32(textBox_Now_layer.Text) >= totalCutLayer)
                             now_step = 32;
                         else
                             now_step = 16;
                     }
                     else if (now_step == 16 && wait_delay >= wait_second && !Z_Busy &&
                         Convert.ToDouble(textBox_Now_Position_Z.Text) <= (Convert.ToInt32(textBox_Safety_Hight.Text) + Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_Z.Text) >= (Convert.ToInt32(textBox_Safety_Hight.Text) - Position_Range))//8. 移動到切割起點XY
+                        Convert.ToDouble(textBox_Now_Position_Z.Text) >= (Convert.ToInt32(textBox_Safety_Hight.Text) - Position_Range) &&
+                        m_FusionIsFinished == true)//8. 移動到切割起點XY
                     {
                         wait_delay = 0;
-                        button_Move_XY_Cut_Start_Click(sender, e);
+                        Move_XY_Cut_Start_Click();
+                        if (m_FusionIsFinished == true)
+                        {
+                            double FusionPos_X = 0;
+                            double FusionPos_Y = 0;
+                            try
+                            {
+                                FusionPos_X = Convert.ToDouble(textBox_Cut_Start_FusionX.Text);
+                                FusionPos_Y = Convert.ToDouble(textBox_Cut_Start_FusionY.Text);
+                            }
+                            catch (Exception)
+                            {
+
+                                throw;
+                            }
+                            m_FusionParam = FusionPos_X.ToString("#0.0000") + "," + FusionPos_Y.ToString("#0.0000");
+                            m_FusionIsStarted = false;
+                            m_FusionIsFinished = false;
+                            nowWorkType = FusionWork.MoveAbs;
+                        }
                         now_step = 17;
                     }
                     else if (now_step == 17 &&
@@ -1829,7 +1955,8 @@ namespace BRC
                         Convert.ToDouble(textBox_Now_Position_X.Text) <= (Convert.ToInt32(textBox_Cut_Start_X.Text) + Position_Range) &&
                         Convert.ToDouble(textBox_Now_Position_X.Text) >= (Convert.ToInt32(textBox_Cut_Start_X.Text) - Position_Range) &&
                         Convert.ToDouble(textBox_Now_Position_Y.Text) <= (Convert.ToInt32(textBox_Cut_Start_Y.Text) + Position_Range) &&
-                        Convert.ToDouble(textBox_Now_Position_Y.Text) >= (Convert.ToInt32(textBox_Cut_Start_Y.Text) - Position_Range))//9.移動到切割區Z
+                        Convert.ToDouble(textBox_Now_Position_Y.Text) >= (Convert.ToInt32(textBox_Cut_Start_Y.Text) - Position_Range) &&
+                         m_FusionIsFinished == true)//9.移動到切割區Z
                     {
                         wait_delay = 0;
                         int now_layer = Convert.ToInt32(textBox_Now_layer.Text);
@@ -2306,6 +2433,10 @@ namespace BRC
                 textBox_Cut_End_Y.Text = Convert.ToString(Initial_Value.Cut_End_Y);
                 textBox_Cut_Speed_X.Text = Convert.ToString(Initial_Value.Cut_Speed_X);
                 textBox_Cut_Speed_Y.Text = Convert.ToString(Initial_Value.Cut_Speed_Y);
+
+                textBox_Cut_Start_FusionX.Text = Convert.ToString(Initial_Value.Cut_Start_FusionX);
+                textBox_Cut_Start_FusionY.Text = Convert.ToString(Initial_Value.Cut_Start_FusionY);
+
                 numericUpDown_Total_Cut_Layer.Value = Convert.ToDecimal(Initial_Value.Cut_Layer);
                 numericUpDown_Total_Scan_Layer.Value = Convert.ToDecimal(Initial_Value.Cut_Layer + 1);
                 numericUpDown_Cut_Distance.Value = Convert.ToDecimal(Initial_Value.Cut_Distance);
@@ -2374,6 +2505,10 @@ namespace BRC
                 textBox_Cut_End_Y.Text = Convert.ToString(100);
                 textBox_Cut_Speed_X.Text = Convert.ToString(100);
                 textBox_Cut_Speed_Y.Text = Convert.ToString(100);
+
+                textBox_Cut_Start_FusionX.Text = Convert.ToString(100);
+                textBox_Cut_Start_FusionY.Text = Convert.ToString(100);
+
                 numericUpDown_Total_Cut_Layer.Value = Convert.ToDecimal(50);
                 numericUpDown_Cut_Distance.Value = Convert.ToDecimal(1.1);
                 numericUpDown_Cut_Frequency.Value = Convert.ToDecimal(60);
@@ -2464,8 +2599,8 @@ namespace BRC
 
         private void textBox_Scan_Start_Z_TextChanged(object sender, EventArgs e)
         {
-            textBox_Z_Down.Text = textBox_Scan_Start_Z.Text;
-            textBox_Z_Up.Text = Convert.ToString(Convert.ToDouble(textBox_Z_Down.Text) + Convert.ToDouble(numericUpDown_Total_Scan_Layer.Value) * Convert.ToDouble(numericUpDown_Scan_Dis_M.Value));
+            //textBox_Z_Down.Text = textBox_Scan_Start_Z.Text;
+            //textBox_Z_Up.Text = Convert.ToString(Convert.ToDouble(textBox_Z_Down.Text) + Convert.ToDouble(numericUpDown_Total_Scan_Layer.Value) * Convert.ToDouble(numericUpDown_Scan_Dis_M.Value));
         }
 
         private void Move_Micro_Z()
@@ -2611,13 +2746,13 @@ namespace BRC
                 int Safety_X = Convert.ToInt32(Convert.ToInt32(textBox_Step_Pos_X.Text) * Movement_Ratio);
                 Data[comboBox_Axis_Num_X.SelectedIndex] = Convert.ToString(Safety_X);//移動至X位置
                 Write_Data = "A:" + Data[0] + "," + Data[1] + "," + Data[2];
-                logger.Write_Logger("Move Safe High : " + Write_Data);
+                logger.Write_Logger("Move_Pos_X : " + Write_Data);
                 Write_Motion(Write_Data);
 
             }
             catch (Exception error)
             {
-                logger.Write_Error_Logger("Move Safe High Error " + Convert.ToString(error));
+                logger.Write_Error_Logger("Move_Pos_X Error " + Convert.ToString(error));
                 MessageBox.Show("Move Error!\n" + Convert.ToString(error));
             }
         }
@@ -2659,13 +2794,13 @@ namespace BRC
                 int Safety_Y = Convert.ToInt32(Convert.ToInt32(textBox_Step_Pos_Y.Text) * Movement_Ratio);
                 Data[comboBox_Axis_Num_Y.SelectedIndex] = Convert.ToString(Safety_Y);//改變Y位置
                 Write_Data = "A:" + Data[0] + "," + Data[1] + "," + Data[2];
-                logger.Write_Logger("Move Safe High : " + Write_Data);
+                logger.Write_Logger("Move_Pos_Y : " + Write_Data);
                 Write_Motion(Write_Data);
 
             }
             catch (Exception error)
             {
-                logger.Write_Error_Logger("Move Safe High Error " + Convert.ToString(error));
+                logger.Write_Error_Logger("Move_Pos_Y Error " + Convert.ToString(error));
                 MessageBox.Show("Move Error!\n" + Convert.ToString(error));
             }
         }
@@ -2707,13 +2842,13 @@ namespace BRC
                 int Safety_Z = Convert.ToInt32(Convert.ToInt32(textBox_Step_Pos_Z.Text) * Movement_RatioZ);
                 Data[comboBox_Axis_Num_Z.SelectedIndex] = Convert.ToString(Safety_Z);//改變Z位置
                 Write_Data = "A:" + Data[0] + "," + Data[1] + "," + Data[2];
-                logger.Write_Logger("Move Safe High : " + Write_Data);
+                logger.Write_Logger("Move_Pos_Z : " + Write_Data);
                 Write_Motion(Write_Data);
 
             }
             catch (Exception error)
             {
-                logger.Write_Error_Logger("Move Safe High Error " + Convert.ToString(error));
+                logger.Write_Error_Logger("Move_Pos_Z Error " + Convert.ToString(error));
                 MessageBox.Show("Move Error!\n" + Convert.ToString(error));
             }
         }
@@ -3172,7 +3307,7 @@ namespace BRC
         {
             double Z_Down = Convert.ToDouble(textBox_Z_Down.Text);
             double Z_Up = Convert.ToDouble(textBox_Z_Up.Text);
-            if (Z_Up > Z_Down)
+            if (Z_Up >= Z_Down)
             {
                 double Z_Length = Z_Up - Z_Down;
                 double Z_Distance = Z_Length / Convert.ToDouble(numericUpDown_Total_Scan_Layer.Value);
@@ -3196,7 +3331,538 @@ namespace BRC
             }
         }
 
+        private void button_Move_Pulse_ZUp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                button_Move_Pulse_ZUp.Enabled = false;
+                button_Move_Pulse_ZDown.Enabled = false;
 
+                int X_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_X.Text) * Movement_Ratio);
+                int Y_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_Y.Text) * Movement_Ratio);
+                int Z_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_Z.Text) * Movement_RatioZ);
+                string Write_Data = "";
+                //X
+                Write_Data =
+                    "D:" +
+                    Convert.ToString(comboBox_Axis_Num_X.SelectedIndex) +
+                    "," + Convert.ToString(X_Speed / 4) +
+                    "," + Convert.ToString(X_Speed) + ",500";
+                Write_Motion(Write_Data);
+                //Y
+                Write_Data =
+                    "D:" +
+                    Convert.ToString(comboBox_Axis_Num_Y.SelectedIndex) +
+                    "," + Convert.ToString(Y_Speed / 4) +
+                    "," + Convert.ToString(Y_Speed) + ",500";
+                Write_Motion(Write_Data);
+                //Z
+                Write_Data =
+                    "D:" +
+                    Convert.ToString(comboBox_Axis_Num_Z.SelectedIndex) +
+                    "," + Convert.ToString(Z_Speed / 4) +
+                    "," + Convert.ToString(Z_Speed) + ",500";
+                Write_Motion(Write_Data);
+                //
+                string[] Data = new string[3];
+                Data[0] = "";
+                Data[1] = "";
+                Data[2] = "";
+                int pulse = 1;
+                //if (comboBox_Axis_Pulse_Z.SelectedIndex == 1)
+                //{
+                //    pulse = 10;
+                //}
+                //else if (comboBox_Axis_Pulse_Z.SelectedIndex == 2)
+                //{
+                //    pulse = 100;
+                //}
+                //else if (comboBox_Axis_Pulse_Z.SelectedIndex == 3)
+                //{
+                //    pulse = 1000;
+                //}
+                try
+                {
+                    pulse = Convert.ToInt32(num_Axis_Pulse_Z.Value) ;
+                }
+                catch (Exception)
+                {
+
+                    pulse = 1;
+                }
+
+                int Move_Z = Convert.ToInt32((Convert.ToInt32(textBox_Now_Position_Z.Text) + pulse) * Movement_RatioZ);
+
+                Data[comboBox_Axis_Num_Z.SelectedIndex] = Convert.ToString(Move_Z);//改變Z位置
+                Write_Data = "A:" + Data[0] + "," + Data[1] + "," + Data[2];
+                logger.Write_Logger("Move_Pulse_ZUp : " + Write_Data);
+                Write_Motion(Write_Data);
+
+            }
+            catch (Exception error)
+            {
+                logger.Write_Error_Logger("Move Move_Pulse_ZUp Error " + Convert.ToString(error));
+                MessageBox.Show("Move Error!\n" + Convert.ToString(error));
+            }
+            finally
+            {
+                button_Move_Pulse_ZUp.Enabled = true;
+                button_Move_Pulse_ZDown.Enabled = true;
+            }
+        }
+
+        private void button_Move_Pulse_ZDown_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                button_Move_Pulse_ZUp.Enabled = false;
+                button_Move_Pulse_ZDown.Enabled = false;
+
+                int X_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_X.Text) * Movement_Ratio);
+                int Y_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_Y.Text) * Movement_Ratio);
+                int Z_Speed = Convert.ToInt32(Convert.ToInt32(textBox_Move_Speed_Z.Text) * Movement_RatioZ);
+                string Write_Data = "";
+                //X
+                Write_Data =
+                    "D:" +
+                    Convert.ToString(comboBox_Axis_Num_X.SelectedIndex) +
+                    "," + Convert.ToString(X_Speed / 4) +
+                    "," + Convert.ToString(X_Speed) + ",500";
+                Write_Motion(Write_Data);
+                //Y
+                Write_Data =
+                    "D:" +
+                    Convert.ToString(comboBox_Axis_Num_Y.SelectedIndex) +
+                    "," + Convert.ToString(Y_Speed / 4) +
+                    "," + Convert.ToString(Y_Speed) + ",500";
+                Write_Motion(Write_Data);
+                //Z
+                Write_Data =
+                    "D:" +
+                    Convert.ToString(comboBox_Axis_Num_Z.SelectedIndex) +
+                    "," + Convert.ToString(Z_Speed / 4) +
+                    "," + Convert.ToString(Z_Speed) + ",500";
+                Write_Motion(Write_Data);
+                //
+                string[] Data = new string[3];
+                Data[0] = "";
+                Data[1] = "";
+                Data[2] = "";
+                int pulse = 1;
+                //if (comboBox_Axis_Pulse_Z.SelectedIndex == 1)
+                //{
+                //    pulse = 10;
+                //}
+                //else if (comboBox_Axis_Pulse_Z.SelectedIndex == 2)
+                //{
+                //    pulse = 100;
+                //}
+                //else if (comboBox_Axis_Pulse_Z.SelectedIndex == 3)
+                //{
+                //    pulse = 1000;
+                //}
+                try
+                {
+                    pulse = Convert.ToInt32(num_Axis_Pulse_Z.Value);
+                }
+                catch (Exception)
+                {
+
+                    pulse = 1;
+                }
+
+                int Move_Z = Convert.ToInt32((Convert.ToInt32(textBox_Now_Position_Z.Text) - pulse) * Movement_RatioZ);
+                Data[comboBox_Axis_Num_Z.SelectedIndex] = Convert.ToString(Move_Z);//改變Z位置
+                Write_Data = "A:" + Data[0] + "," + Data[1] + "," + Data[2];
+                logger.Write_Logger("Move_Pulse_ZDown : " + Write_Data);
+                Write_Motion(Write_Data);
+
+            }
+            catch (Exception error)
+            {
+                logger.Write_Error_Logger("Move Move_Pulse_ZDown Error " + Convert.ToString(error));
+                MessageBox.Show("Move Error!\n" + Convert.ToString(error));
+            }
+            finally
+            {
+                button_Move_Pulse_ZUp.Enabled = true;
+                button_Move_Pulse_ZDown.Enabled = true;
+            }
+        }
+
+        private async void backgroundWorker_FusionRest_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                while (1 == 1)
+                {
+                    switch (nowWorkType)
+                    {
+                        case FusionWork.MoveAbs:
+                            try
+                            {
+                                m_FusionIsStarted = true;
+                                string px = m_FusionParam.Split(',')[0];
+                                string py = m_FusionParam.Split(',')[1];
+                                await m_Rest_Fusion.ChkRunStop();
+                                await m_Rest_Fusion.MoveAbs(px, py);
+                                await m_Rest_Fusion.ChkMoveStop();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                            finally
+                            {
+                                nowWorkType = FusionWork.Default;
+                                m_FusionIsFinished = true;
+                            }
+                            break;
+                        case FusionWork.MoveAbsManual:
+                            try
+                            {
+                                m_FusionIsStarted = true;
+                                string px = m_FusionParam.Split(',')[0];
+                                string py = m_FusionParam.Split(',')[1];
+                                await m_Rest_Fusion.ChkRunStop();
+                                await m_Rest_Fusion.MoveAbs(px, py);
+                                //await m_Rest_Fusion.ChkMoveStop();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                            finally
+                            {
+                                nowWorkType = FusionWork.Default;
+                                m_FusionIsFinished = true;
+                            }
+                            break;
+                        case FusionWork.SelectProtocol:
+                            try
+                            {
+                                m_FusionIsStarted = true;
+                                await m_Rest_Fusion.ChkRunStop();
+                                await m_Rest_Fusion.Set_Selected_Protocol(m_FusionParam);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                            finally
+                            {
+                                nowWorkType = FusionWork.Default;
+                                m_FusionIsFinished = true;
+                            }
+
+                            break;
+                        case FusionWork.SelectProtocolTest:
+                            try
+                            {
+                                m_FusionIsStarted = true;
+                                string ProtocolName = m_FusionParam.Split(',')[0];
+                                int Totalcount = Convert.ToInt32(m_FusionParam.Split(',')[1]);
+                                ProtocolLog = new List<string>();
+                                orgProtocol = false;
+                                await m_Rest_Fusion.ChkRunStop();
+                                await m_Rest_Fusion.Set_Selected_Protocol(ProtocolName);
+                                if (m_Rest_Fusion.ErrorMessage != "Error")
+                                {
+                                    orgProtocol = true;
+                                    //ProtocolLog.Add(ProtocolName + "，讀取不到!");
+                                }
+                                for (int i = 0; i <= Totalcount; i++)
+                                {
+                                    await m_Rest_Fusion.Set_Selected_Protocol(ProtocolName + "-" + (i + 1).ToString());
+                                    if (m_Rest_Fusion.ErrorMessage == "Error")
+                                    {
+                                        ProtocolLog.Add(ProtocolName + "-" + (i + 1).ToString() + "，讀取不到!");
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                            finally
+                            {
+                                nowWorkType = FusionWork.Default;
+                                m_FusionIsFinished = true;
+                            }
+
+                            break;
+                        case FusionWork.Run:
+                            try
+                            {
+                                m_FusionIsStarted = true;
+                                await m_Rest_Fusion.ChkRunStop();
+                                await m_Rest_Fusion.Run();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                            finally
+                            {
+                                nowWorkType = FusionWork.Default;
+                                m_FusionIsFinished = true;
+                            }
+
+                            break;
+                        case FusionWork.Stop:
+                            try
+                            {
+                                m_FusionIsStarted = true;
+                                await m_Rest_Fusion.Stop();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                            finally
+                            {
+                                nowWorkType = FusionWork.Default;
+                                m_FusionIsFinished = true;
+                            }
+
+                            break;
+                        case FusionWork.Pause:
+                            try
+                            {
+                                m_FusionIsStarted = true;
+                                await m_Rest_Fusion.Pause();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                            finally
+                            {
+                                nowWorkType = FusionWork.Default;
+                                m_FusionIsFinished = true;
+                            }
+
+                            break;
+                        case FusionWork.RunProtocol:
+                            try
+                            {
+                                m_FusionIsStarted = true;
+                                await m_Rest_Fusion.ChkRunStop();
+                                await m_Rest_Fusion.Run_protocol_completely(m_FusionParam);
+
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                            finally
+                            {
+                                nowWorkType = FusionWork.Default;
+                                m_FusionIsFinished = true;
+                            }
+                            break;
+                        case FusionWork.RunProtocolSwitch:
+                            try
+                            {
+                                m_FusionIsStarted = true;
+                                string ProtocolName = m_FusionParam.Split(',')[0];
+                                int idx = Convert.ToInt32(m_FusionParam.Split(',')[1]);
+                                await m_Rest_Fusion.ChkRunStop();
+                                await m_Rest_Fusion.Set_Selected_Protocol(ProtocolName + "-" + (idx + 1).ToString());
+                                if (m_Rest_Fusion.ErrorMessage != "Error")
+                                {
+                                    await m_Rest_Fusion.Run_protocol_completely(ProtocolName + "-" + (idx + 1).ToString());
+                                }
+                                else
+                                {
+                                    await m_Rest_Fusion.Run_protocol_completely(ProtocolName);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                            finally
+                            {
+                                nowWorkType = FusionWork.Default;
+                                m_FusionIsFinished = true;
+                            }
+                            break;
+                        default:
+                            try
+                            {
+                                await m_Rest_Fusion.Sample();
+                                await m_Rest_Fusion.Get_State();
+                                await Task.Delay(200);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async void btnProtocolTest_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                btnProtocolTest.Enabled = false;
+                int Totalcount = (int)numericUpDown_Total_Cut_Layer.Value;
+                string ProtocolName = textBox_ProcessName.Text;
+                //await ProtocolTest(ProtocolName, Totalcount);
+                if (m_FusionIsFinished == true)
+                {
+                    m_FusionParam = ProtocolName + "," + Totalcount;
+                    m_FusionIsStarted = false;
+                    m_FusionIsFinished = false;
+                    nowWorkType = FusionWork.SelectProtocolTest;
+                    await Task.Run(async () =>
+                    {
+                        while (m_FusionIsFinished == false)
+                        {
+                            await Task.Delay(50);
+                        }
+                        if (ProtocolLog.Count == 0 && orgProtocol == true)
+                        {
+                            MessageBox.Show("OK!");
+                        }
+                        else
+                        {
+                            if (orgProtocol == true)
+                            {
+                                string message = string.Join("\n", ProtocolLog);
+                                MessageBox.Show(message);
+                            }
+                            else
+                            {
+                                string message = string.Join("\n", ProtocolLog);
+                                message = "原始讀取不到:" + ProtocolName + "\n" + message;
+                                MessageBox.Show(message);
+                            }
+                        }
+                    });
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                btnProtocolTest.Enabled = true;
+            }
+        }
+
+        List<string> ProtocolLog;
+        private bool orgProtocol = false;
+        private async Task ProtocolTest(string ProtocolName, int Totalcount)
+        {
+            await Task.Run(async () =>
+            {
+                ProtocolLog = new List<string>();
+                orgProtocol = false;
+
+                await m_Rest_Fusion.ChkRunStop();
+
+                await m_Rest_Fusion.Set_Selected_Protocol(ProtocolName);
+                if (m_Rest_Fusion.ErrorMessage != "Error")
+                {
+                    orgProtocol = true;
+                    //ProtocolLog.Add(ProtocolName + "，讀取不到!");
+                }
+                for (int i = 0; i <= Totalcount; i++)
+                {
+                    await m_Rest_Fusion.Set_Selected_Protocol(ProtocolName + "-" + (i + 1).ToString());
+                    if (m_Rest_Fusion.ErrorMessage == "Error")
+                    {
+                        ProtocolLog.Add(ProtocolName + "-" + (i + 1).ToString() + "，讀取不到!");
+                    }
+                }
+            });
+        }
+
+        private void button_MoveFusion_Pos_X_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (m_FusionIsFinished == true)
+                {
+                    m_FusionParam = Convert.ToDouble(textBox_Step_FusionPos_X.Text).ToString("#0.0000") + "," + Convert.ToDouble(textBox_Now_FusionPosition_Y.Text).ToString("#0.0000");
+
+                    m_FusionIsStarted = false;
+                    m_FusionIsFinished = false;
+                    nowWorkType = FusionWork.MoveAbsManual;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button_MoveFusion_Pos_Y_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (m_FusionIsFinished == true)
+                {
+                    m_FusionParam = Convert.ToDouble(textBox_Now_FusionPosition_X.Text).ToString("#0.0000") + "," + Convert.ToDouble(textBox_Step_FusionPos_Y.Text).ToString("#0.0000");
+
+                    m_FusionIsStarted = false;
+                    m_FusionIsFinished = false;
+                    nowWorkType = FusionWork.MoveAbsManual;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnAddLayer_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (numericUpDown_Total_Cut_Layer.Value != 0 && numericUpDown_Total_Cut_Layer.Value < 10000)
+                {
+                    numericUpDown_Total_Cut_Layer.Value = numericUpDown_Total_Cut_Layer.Value + 1;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnMinusLayer_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (numericUpDown_Total_Cut_Layer.Value != 0 && numericUpDown_Total_Cut_Layer.Value < 10000)
+                {
+                    numericUpDown_Total_Cut_Layer.Value = numericUpDown_Total_Cut_Layer.Value - 1;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         private void CVStart(double firstSpeed)
         {

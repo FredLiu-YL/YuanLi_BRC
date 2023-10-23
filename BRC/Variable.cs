@@ -33,7 +33,9 @@ namespace BRC
         public int Can_Move_Port, Can_Move_Channel;
         public int Can_Next_Port, Can_Next_Channel;
         public double Micro_X, Micro_Y, Micro_Z;
-        public double Start_Scan_Z,End_Scan_Z;
+        public double Start_Scan_Z, End_Scan_Z;
+
+        public double Cut_Start_FusionX, Cut_Start_FusionY;
 
         public double FrequencyMinV { get; set; }
         public double FrequencyMaxV { get; set; }
@@ -57,14 +59,14 @@ namespace BRC
                 //顯示根目錄(A層)下第一層(B層)的所有屬性值
                 XmlNodeList Second_Node = Fist_Node.ChildNodes;
                 //
-                foreach(XmlNode  Second_Node_Each in Second_Node)
+                foreach (XmlNode Second_Node_Each in Second_Node)
 
                 {
                     XmlElement Second_Node_XmlElement = (XmlElement)Second_Node_Each;
                     String Second_Node_Data = Second_Node_XmlElement.GetAttribute("Setup_Part");
                     //顯示根目錄(B層)下第一層(C層)的所有屬性值
                     XmlNodeList Third_Node = Second_Node_XmlElement.ChildNodes;
-                    foreach(XmlNode  Third_Node_Each in Third_Node)
+                    foreach (XmlNode Third_Node_Each in Third_Node)
 
                     {
                         XmlElement Third_Node_Each_XmlElement = (XmlElement)Third_Node_Each;
@@ -91,7 +93,7 @@ namespace BRC
                                 Motion_Ratio = Convert.ToDouble(Third_Node_Each_XmlElement.InnerText);
                             else if (Third_Node_Data_1 == "RatioZ")
                                 Motion_RatioZ = Convert.ToDouble(Third_Node_Each_XmlElement.InnerText);
-                            
+
                         }
                         else if (Second_Node_Data == "Cut_Data")
                         {
@@ -121,6 +123,14 @@ namespace BRC
                                 FrequencyMaxV = Convert.ToInt32(Third_Node_Each_XmlElement.InnerText);
                             else if (Third_Node_Data_1 == "FrequencyOutputV")
                                 FrequencyOutputV = Convert.ToInt32(Third_Node_Each_XmlElement.InnerText);
+
+
+                            else if (Third_Node_Data_1 == "Cut_Start_FusionX")
+                                Cut_Start_FusionX = Convert.ToDouble(Third_Node_Each_XmlElement.InnerText);
+                            else if (Third_Node_Data_1 == "Cut_Start_FusionY")
+                                Cut_Start_FusionY = Convert.ToDouble(Third_Node_Each_XmlElement.InnerText);
+
+
                         }
                         else if (Second_Node_Data == "Scan_Data")
                         {
